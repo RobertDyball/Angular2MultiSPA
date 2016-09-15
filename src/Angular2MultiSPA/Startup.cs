@@ -61,7 +61,6 @@ namespace Angular2MultiSPA
             {
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 routes.MapWebApiRoute("defaultApi", "api/{controller}/{id?}");
-                // routes.MapRoute("fallback", "{*anything}", new { controller = "Home", action = "Index" });
                 routes.MapSpaFallbackRoute("spa-fallback", new { controller = "home", action = "index" });
             });
         }
