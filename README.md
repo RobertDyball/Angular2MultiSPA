@@ -30,3 +30,18 @@ Pull a copy of the repo, load the solution into Visual Studio, build (which will
 
 The original about and contact ASP.Net pages have now been removed, the default home/index page now loads the angular dependencies through layout, replacing the index.html in previous drop.
 To view just clone, build and browse http://localhost:7010/ to see the Angular 2 using an ASP.Net partial page, with CSHTML running razor into the Angular template.
+
+## Background
+
+Following queries from a colleague, here's a quick explanation of what happens, and a little of why.
+
+Initial drop of code was the basic ASP.Net Core web application template,
+
+Next drop added the Angular 2.0 Quickstart, with little or no change, and (for now/then) required you to navigate manually to the index.html page.
+
+Next replaced the inline angular template (or plain html that could have been used) with a partial view, this allowed use of razor server-side
+
+Next replaced index.html with the standard MVC/home/index.cshtml, updated _layout.cshtml to load the required angular dependencies.
+
+Next (this drop) replaced the off-the-shelf bootstrap 3.3.6 with bootstrap 4.0.0 Alpha 4, added Tether and jquery (required by bootstrap 4)
+

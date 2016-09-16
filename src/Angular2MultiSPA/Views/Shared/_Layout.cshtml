@@ -6,14 +6,14 @@
     <title>@ViewData["Title"] - Angular2MultiSPA</title>
 
     <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
     </environment>
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css"
+              integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj"
+              crossorigin="anonymous"
+              asp-fallback-href="/nodemodules/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
@@ -27,7 +27,9 @@
     </div>
 
     <environment names="Development">
-
+        <script src="/node_modules/jquery/dist/jquery.js"></script>
+        <script src="/node_modules/tether/dist/js/tether.js"></script>
+        <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
         <script src="/node_modules/core-js/client/shim.min.js"></script>
         <script src="/node_modules/zone.js/dist/zone.js"></script>
         <script src="/node_modules/reflect-metadata/Reflect.js"></script>
@@ -39,6 +41,14 @@
 
     </environment>
     <environment names="Staging,Production">
+        <script src="/node_modules/jquery/dist/jquery.min.js"
+                asp-fallback-src="/node_modules/tether/dist/js/tether.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.3.1/js/tether.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"
+                integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU"
+                crossorigin="anonymous"
+                asp-fallback-src="/node_modules/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"></script>
         <script src="/node_modules/core-js/client/shim.min.js"></script>
         <script src="/node_modules/zone.js/dist/zone.js"></script>
         <script src="/node_modules/reflect-metadata/Reflect.js"></script>
