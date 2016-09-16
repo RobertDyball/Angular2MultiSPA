@@ -28,5 +28,5 @@ More instructions to come.
 
 Pull a copy of the repo, load the solution into Visual Studio, build (which will restore dependencies), and hit F5 or ctrl-F5
 
-For now the original ASP.Net pages are present at the default home page, in the root directory.
-browse http://localhost:7010/index.html to see the Angular using an ASP.Net partial page, with CSHTML running razor into the Angular template.
+The original about and contact ASP.Net pages have now been removed, the default home/index page now loads the angular dependencies through layout, replacing the index.html in previous drop.
+To view just clone, build and browse http://localhost:7010/ to see the Angular 2 using an ASP.Net partial page, with CSHTML running razor into the Angular template.
