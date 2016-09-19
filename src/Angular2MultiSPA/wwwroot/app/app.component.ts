@@ -4,4 +4,7 @@ import { Component } from '@angular/core';
     selector: 'my-app',
     templateUrl: '/partial/appComponent'
 })
-export class AppComponent { }
+
+export class AppComponent {
+    testData: string[] = ['now with', 'hard-coded', 'string array', 'data values'];
+}
