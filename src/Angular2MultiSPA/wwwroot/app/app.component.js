@@ -9,16 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var testData_service_1 = require('./services/testData.service');
 var AppComponent = (function () {
-    function AppComponent() {
-        this.testData = ['now with', 'hard-coded', 'string array', 'data values'];
+    function AppComponent(testDataService) {
+        this.testDataService = testDataService;
+        this.testData = [];
     }
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.testDataService.getTestData()
+            .subscribe(function (data) { return _this.testData = data; });
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
             templateUrl: '/partial/appComponent'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [testData_service_1.TestDataService])
     ], AppComponent);
     return AppComponent;
 }());
