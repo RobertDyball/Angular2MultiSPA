@@ -1,19 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-
-import { TestDataService } from './services/testData.service';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'my-app',
     templateUrl: '/partial/appComponent'
 })
 
-export class AppComponent implements OnInit {
-    testData: string[] = [];
+export class AppComponent  {
 
-    constructor(private testDataService: TestDataService) { }
-
-    ngOnInit() {
-        this.testDataService.getTestData()
-            .subscribe((data: string[]) => this.testData = data);
-    }
 }
