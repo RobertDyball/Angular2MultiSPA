@@ -7,21 +7,16 @@ import { ContentComponent }  from './content.component';
 
 const appRoutes: Routes = [
     {
-        path: '',
-        redirectTo: '/home',
-        pathMatch: 'full'
+        path: '', redirectTo: 'home', pathMatch: 'full'
     },
     {
-        path: 'home',
-        component: HomeComponent
+        path: 'home', component: HomeComponent, data: { title: 'Home' }
     },
     {
-        path: 'content',
-        component: ContentComponent
+        path: 'content', component: ContentComponent, data: { title: 'Content' }
     },
     {
-        path: 'about',
-        component: AboutComponent
+        path: 'about', component: AboutComponent, data: { title: 'About' }
     }
 ];
 

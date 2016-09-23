@@ -1,5 +1,5 @@
 import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent }  from './app.component';
 
@@ -15,7 +15,7 @@ import { routing } from './app.routing';
 @NgModule({
     imports: [BrowserModule, FormsModule, routing, HttpModule],
     declarations: [AppComponent, AboutComponent, HomeComponent, ContentComponent],
-    providers: [TestDataService],
+    providers: [Title, TestDataService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

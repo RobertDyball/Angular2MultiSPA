@@ -25,7 +25,7 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, app_routing_1.routing, http_1.HttpModule],
             declarations: [app_component_1.AppComponent, about_component_1.AboutComponent, home_component_1.HomeComponent, content_component_1.ContentComponent],
-            providers: [testData_service_1.TestDataService],
+            providers: [platform_browser_1.Title, testData_service_1.TestDataService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
