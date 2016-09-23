@@ -1,16 +1,8 @@
 
-@{
-    // Angular 2 now with razor :)
-    string counter = "Sixth";
-}
-
-<h1>My @counter Angular {{1+1}} App</h1>
-
-<div class="alert alert-warning alert-dismissible fade in" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <strong>Now with Bootstrap 4.0.0</strong> including dismissible alerts.
-</div>
-
-<table><tr *ngFor="let data of testData"><td>{{data}}</td></tr></table>
+<h1>{{title}}</h1>
+<nav>
+    <a routerLink="/home" routerLinkActive="active">Home / Login</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
+    <a routerLink="/content" routerLinkActive="active">Content (to be secured)</a>
+</nav>
+<router-outlet></router-outlet>

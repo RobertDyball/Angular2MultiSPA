@@ -8,5 +8,11 @@ namespace Angular2MultiSPA.Controllers
     public class PartialController : Controller
     {
         public IActionResult AppComponent() => PartialView();
+
+        public IActionResult AboutComponent() => PartialView();
+
+        public IActionResult ContentComponent() => PartialView();
+
+        public IActionResult HomeComponent() => PartialView();
     }
 }
