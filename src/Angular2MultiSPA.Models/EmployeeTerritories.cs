@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Angular2MultiSPA.Models
+﻿namespace Angular2MultiSPA.Models
 {
     public partial class EmployeeTerritories
     {

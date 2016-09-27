@@ -3,6 +3,7 @@
 /// <reference path="app/app.component.js" />
 /// <reference path="app/app.module.js" />
 /// <reference path="app/app.routing.js" />
+/// <reference path="app/category.js" />
 /// <reference path="app/content.component.js" />
 /// <reference path="app/home.component.js" />
 /// <reference path="app/main.js" />

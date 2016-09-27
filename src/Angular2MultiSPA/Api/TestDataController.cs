@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Angular2MultiSPA.Models;
+using Angular2MultiSPA.Data;
 using System.Linq;
+using Angular2MultiSPA.ViewModels;
+using Angular2MultiSPA.Helpers;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,9 +21,15 @@ namespace Angular2MultiSPA.Api
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Category> Get()
         {
-            IEnumerable<string> categories = _context.Categories.Select(a => a.CategoryName);
+            var categories = _context.Categories.Select(a => new Category
+            {
+                Id = a.CategoryId,
+                Name = a.CategoryName,
+                Description = a.Description,
+                Image = a.Picture.ConvertToBase64()
+            });
             return categories;
         }
 

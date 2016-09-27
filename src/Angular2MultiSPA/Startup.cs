@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
-using Angular2MultiSPA.Models;
+using Angular2MultiSPA.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Angular2MultiSPA

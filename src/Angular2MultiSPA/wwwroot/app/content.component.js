@@ -9,9 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var platform_browser_1 = require('@angular/platform-browser');
 var testData_service_1 = require('./services/testData.service');
 var ContentComponent = (function () {
-    function ContentComponent(testDataService) {
+    function ContentComponent(_DomSanitizer, testDataService) {
+        this._DomSanitizer = _DomSanitizer;
         this.testDataService = testDataService;
         this.testData = [];
     }
@@ -25,7 +27,7 @@ var ContentComponent = (function () {
             selector: 'my-content',
             templateUrl: '/partial/contentComponent'
         }), 
-        __metadata('design:paramtypes', [testData_service_1.TestDataService])
+        __metadata('design:paramtypes', [platform_browser_1.DomSanitizer, testData_service_1.TestDataService])
     ], ContentComponent);
     return ContentComponent;
 }());

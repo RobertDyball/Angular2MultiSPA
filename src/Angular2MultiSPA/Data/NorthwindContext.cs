@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Angular2MultiSPA.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Angular2MultiSPA.Models
+namespace Angular2MultiSPA.Data
 {
     public partial class NorthwindContext : DbContext
     {

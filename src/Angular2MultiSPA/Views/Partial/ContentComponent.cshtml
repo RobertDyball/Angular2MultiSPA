@@ -16,4 +16,11 @@
 
 <p>EF Core / SQL Data, from Web API:</p>
 
-<table><tr *ngFor="let data of testData"><td>{{data}}</td></tr></table>
+<table><tr *ngFor="let dataItem of testData">
+           <td>{{dataItem.id}}</td>
+           <td>
+           <td>
+               <img [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  dataItem.image)" title="{{dataItem.description}}">
+           </td>
+           <td>{{dataItem.name}}</td>
+</tr></table>
