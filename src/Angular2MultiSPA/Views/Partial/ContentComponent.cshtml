@@ -1,16 +1,19 @@
 
 @{
-    // Angular 2 now with razor :)
-    string counter = "Sixth";
+    // example of Razor
+    string razorServerSideData = "ASP.Net Core";
 }
 
-<h1>My @counter Angular {{1+1}} App</h1>
+<h3>@razorServerSideData + Angular {{1+1}}</h3>
 
 <div class="alert alert-warning alert-dismissible fade in" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
-    <strong>Now with Bootstrap 4.0.0</strong> including dismissible alerts.
+    <!-- example of bootstrap 4 dismissable alert-->
+    <strong>Bootstrap 4.0.0</strong>
 </div>
+
+<p>EF Core / SQL Data, from Web API:</p>
 
 <table><tr *ngFor="let data of testData"><td>{{data}}</td></tr></table>
