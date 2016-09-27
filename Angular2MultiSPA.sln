@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DB4A8E9C-BA67-4186-87C5-02700B018C91}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		northwind.sql = northwind.sql
 		README.md = README.md
 	EndProjectSection
 EndProject

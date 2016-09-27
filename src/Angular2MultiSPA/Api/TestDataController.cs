@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Angular2MultiSPA.Models;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,11 +10,19 @@ namespace Angular2MultiSPA.Api
     [Route("api/[controller]")]
     public class TestDataController : Controller
     {
+        private NorthwindContext _context;
+
+        public TestDataController(NorthwindContext context)
+        {
+            _context = context;
+        }
+
         // GET: api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "now with", "Web API", "supplied", "data values" };
+            IEnumerable<string> categories = _context.Categories.Select(a => a.CategoryName);
+            return categories;
         }
 
         // GET api/values/5

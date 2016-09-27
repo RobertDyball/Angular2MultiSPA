@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Angular2MultiSPA.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Angular2MultiSPA
 {
@@ -25,6 +27,9 @@ namespace Angular2MultiSPA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<NorthwindContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("NorthwindConnection")));
+
             // Add framework services.
             services.AddMvc();
         }
