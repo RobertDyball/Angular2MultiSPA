@@ -29,13 +29,11 @@ var LoginComponent = (function () {
     LoginComponent.prototype.login = function (event, username, password) {
         var _this = this;
         event.preventDefault();
-        var grant_type = 'password';
-        var client_id = 'angular2MultiSPA';
-        var body = JSON.stringify({ grant_type: grant_type, username: username, password: password, client_id: client_id });
+        var body = 'username=' + username + '&password=' + password + '&grant_type=password';
         this.http.post('/connect/token', body, { headers: headers_1.authContentHeaders })
             .subscribe(function (response) {
-            localStorage.setItem('id_token', response.json().id_token);
-            _this.router.navigate(['/home']);
+            localStorage.setItem('access_token', response.json().access_token);
+            _this.router.navigate(['/content']);
         }, function (error) {
             alert(error.text());
             console.log(error.text());

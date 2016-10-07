@@ -25,10 +25,10 @@ export class SignupComponent {
     public signup(event: Event, username: string, password: string) {
         event.preventDefault();
         let body = JSON.stringify({ username, password });
-        this.http.post('http://localhost:5000/connect', body, { headers: contentHeaders })
+        this.http.post('http://localhost:7010/connect', body, { headers: contentHeaders })
             .subscribe(
             response => {
-                localStorage.setItem('id_token', response.json().id_token);
+                localStorage.setItem('access_token', response.json().access_token);
                 this.router.navigate(['/content']);
             },
             error => {

@@ -21,7 +21,6 @@ namespace Angular2MultiSPA.Api
         }
 
         [HttpPost("~/connect/token")]
-        [Produces("application/json")]
         public async Task<IActionResult> Exchange()
         {
             var request = HttpContext.GetOpenIdConnectRequest();
@@ -31,25 +30,30 @@ namespace Angular2MultiSPA.Api
                 var user = await _userManager.FindByNameAsync(request.Username);
                 if (user == null)
                 {
-                    return BadRequest(new OpenIdConnectResponse
+                    return Json(new OpenIdConnectResponse
                     {
-                        Error = OpenIdConnectConstants.Errors.InvalidGrant,
-                        ErrorDescription = "The username/password couple is invalid."
+                        Error = OpenIdConnectConstants.Errors.InvalidGrant
                     });
                 }
 
                 // Ensure the password is valid.
                 if (!await _userManager.CheckPasswordAsync(user, request.Password))
                 {
-                    return BadRequest(new OpenIdConnectResponse
+                    if (_userManager.SupportsUserLockout)
                     {
-                        Error = OpenIdConnectConstants.Errors.InvalidGrant,
-                        ErrorDescription = "The username/password couple is invalid."
+                        await _userManager.AccessFailedAsync(user);
+                    }
+
+                    return Json(new OpenIdConnectResponse
+                    {
+                        Error = OpenIdConnectConstants.Errors.InvalidGrant
                     });
                 }
 
-                // Note: for a more complete sample including account lockout support, visit
-                // https://github.com/openiddict/openiddict-core/blob/dev/samples/Mvc.Server/Controllers/AuthorizationController.cs
+                if (_userManager.SupportsUserLockout)
+                {
+                    await _userManager.ResetAccessFailedCountAsync(user);
+                }
 
                 var identity = await _userManager.CreateIdentityAsync(user, request.GetScopes());
 
@@ -65,13 +69,11 @@ namespace Angular2MultiSPA.Api
                 return SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
             }
 
-            return BadRequest(new OpenIdConnectResponse
+            return Json(new OpenIdConnectResponse
             {
-                Error = OpenIdConnectConstants.Errors.UnsupportedGrantType,
-                ErrorDescription = "The specified grant type is not supported."
+                Error = OpenIdConnectConstants.Errors.UnsupportedGrantType
             });
         }
-
         //    [HttpPost("~/connect/token")]
         //    [Produces("application/json")]
         //    public async Task<IActionResult> Exchange()

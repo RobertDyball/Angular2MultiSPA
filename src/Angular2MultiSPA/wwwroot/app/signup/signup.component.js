@@ -29,9 +29,9 @@ var SignupComponent = (function () {
         var _this = this;
         event.preventDefault();
         var body = JSON.stringify({ username: username, password: password });
-        this.http.post('http://localhost:5000/connect', body, { headers: headers_1.contentHeaders })
+        this.http.post('http://localhost:7010/connect', body, { headers: headers_1.contentHeaders })
             .subscribe(function (response) {
-            localStorage.setItem('id_token', response.json().id_token);
+            localStorage.setItem('access_token', response.json().access_token);
             _this.router.navigate(['/content']);
         }, function (error) {
             alert(error.text());

@@ -15,9 +15,9 @@ var AuthService = (function () {
     function AuthService(router) {
         var _this = this;
         this.router = router;
-        this.lock = new Auth0Lock('YOUR-AUTH0-CLIENT-ID', 'localhost:5000/connect');
+        this.lock = new Auth0Lock('angular2MultiSPA', 'localhost:7010/connect');
         this.lock.on('authenticated', function (authResult) {
-            localStorage.setItem('id_token', authResult.idToken);
+            localStorage.setItem('access_token', authResult.idToken);
             _this.lock.getProfile(authResult.idToken, function (error, profile) {
                 if (error) {
                     console.log(error);
@@ -34,7 +34,7 @@ var AuthService = (function () {
         // To log out, just remove the token and profile
         // from local storage
         localStorage.removeItem('profile');
-        localStorage.removeItem('id_token');
+        localStorage.removeItem('access_token');
         // Send the user back to the dashboard after logout
         this.router.navigateByUrl('/home');
     };

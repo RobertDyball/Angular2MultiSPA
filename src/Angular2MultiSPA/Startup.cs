@@ -30,6 +30,7 @@ namespace Angular2MultiSPA
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
+                //.AddJsonFile("hosting.json", optional: true)
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
@@ -118,10 +119,10 @@ namespace Angular2MultiSPA
 
             //app.UseJwtBearerAuthentication(new JwtBearerOptions
             //{
-            //    Authority = "http://localhost:5000",
+            //    Authority = "http://localhost:7010",
             //    AutomaticAuthenticate = true,
             //    AutomaticChallenge = true,
-            //    Audience = "http://localhost:5000",
+            //    Audience = "http://localhost:7010",
             //    RequireHttpsMetadata = false
             //});
 

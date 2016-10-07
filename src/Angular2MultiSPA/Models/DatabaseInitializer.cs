@@ -38,8 +38,8 @@ namespace Angular2MultiSPA.Models
                 //        Id = Guid.NewGuid(),
                 //        ClientId = "angular2MultiSPI",
                 //        DisplayName = "Angular 2 Multi SPA",
-                //        RedirectUri = "http://localhost:5000/about",
-                //        LogoutRedirectUri = "http://localhost:5000/home",
+                //        RedirectUri = "http://localhost:7010/about",
+                //        LogoutRedirectUri = "http://localhost:7010/home",
                 //        ClientSecret = Crypto.HashPassword("secret_secret_secret"),
                 //        Type = OpenIddictConstants.ClientTypes.Public
                 //    });
