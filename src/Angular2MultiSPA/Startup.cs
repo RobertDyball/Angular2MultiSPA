@@ -49,6 +49,11 @@ namespace Angular2MultiSPA
             services.AddDbContext<ApplicationDbContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbConnection")));
 
+            // follow the OpenIdDict guide here: https://github.com/openiddict/openiddict-core
+            // note also: https://github.com/openiddict/openiddict-core/pull/203
+            // very useful: http://viters.net/blog/post/uwierzytelniania-ciag-dalszy-rozmowa-angulara-2-z-asp-net-core-przy-uzyciu-tokenow-jwt/
+            // translated: http://www.microsofttranslator.com/bv.aspx?ref=SERP&br=ro&mkt=en-AU&dl=en&lp=PL_EN&a=http%3a%2f%2fviters.net%2fblog%2fpost%2fuwierzytelniania-ciag-dalszy-rozmowa-angulara-2-z-asp-net-core-przy-uzyciu-tokenow-jwt%2f
+
             // Register the Identity services.
             services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<ApplicationDbContext, Guid>()
@@ -85,7 +90,7 @@ namespace Angular2MultiSPA
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceScopeFactory scopeFactory)
         {
-
+            // logging: http://docs.asp.net/en/latest/fundamentals/logging.html 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 

@@ -20,6 +20,8 @@ namespace Angular2MultiSPA.Api
             _userManager = userManager;
         }
 
+        // now need your own token generation, see: https://github.com/openiddict/openiddict-core/issues/194
+        // more complete examples see: https://github.com/openiddict/openiddict-core/blob/dev/samples/Mvc.Server/Controllers/AuthorizationController.cs
         [HttpPost("~/connect/token")]
         public async Task<IActionResult> Exchange()
         {
