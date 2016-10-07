@@ -1,24 +1,21 @@
-﻿import { ModuleWithProviders }  from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+﻿import { Routes, RouterModule, CanActivate } from '@angular/router';
+import { AuthGuard } from './services/auth-guard.service';
 
 import { AboutComponent }   from './about.component';
 import { HomeComponent }      from './home.component';
 import { ContentComponent }  from './content.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 const appRoutes: Routes = [
-    {
-        path: '', redirectTo: 'home', pathMatch: 'full'
-    },
-    {
-        path: 'home', component: HomeComponent, data: { title: 'Home' }
-    },
-    {
-        path: 'content', component: ContentComponent, data: { title: 'Content' }
-    },
-    {
-        path: 'about', component: AboutComponent, data: { title: 'About' }
-    }
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'login', component: LoginComponent, data: { title: 'Login' } },
+    { path: 'signup', component: SignupComponent, data: { title: 'Signup' } },
+    { path: 'home', component: HomeComponent, data: { title: 'Home' } },
+    { path: 'content', component: ContentComponent, data: { title: 'Content' }, canActivate: [AuthGuard] },
+    { path: 'about', component: AboutComponent, data: { title: 'About' } }
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const routing = RouterModule.forRoot(appRoutes);
 
+export const routedComponents = [AboutComponent, LoginComponent, SignupComponent, HomeComponent, ContentComponent];

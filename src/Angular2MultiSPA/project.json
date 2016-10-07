@@ -29,7 +29,8 @@
     "AspNet.Security.OAuth.Validation": "1.0.0-alpha2-final",
     "NWebsec.AspNetCore.Middleware": "1.0.0-gamma1-15",
     "OpenIddict": "1.0.0-*",
-    "Angular2MultiSPA.Models": "1.0.0-*"
+    "Angular2MultiSPA.Models": "1.0.0-*",
+    "Microsoft.AspNetCore.Authentication.JwtBearer": "1.1.0-alpha1-21957"
   },
 
   "tools": {
