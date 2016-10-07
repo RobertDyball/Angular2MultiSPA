@@ -30,6 +30,11 @@ var LoginComponent = (function () {
         var _this = this;
         event.preventDefault();
         var body = 'username=' + username + '&password=' + password + '&grant_type=password';
+        // TODO: check scopes
+        // https://github.com/openiddict/openiddict-core/issues/181
+        // http://kerryritter.com/authorizing-your-net-core-mvc6-api-requests-with-openiddict-and-identity/
+        // see also: https://hgminerva.wordpress.com/2016/03/23/angular-2-and-asp-net-web-api-authentication/
+        // to check your returned tokens: https://jwt.io/
         this.http.post('/connect/token', body, { headers: headers_1.authContentHeaders })
             .subscribe(function (response) {
             localStorage.setItem('access_token', response.json().access_token);

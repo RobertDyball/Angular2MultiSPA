@@ -99,6 +99,11 @@ namespace Angular2MultiSPA
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
 
+                //using (var context = new ApplicationDbContext(app.ApplicationServices.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
+                //{
+                //    context.Database.EnsureCreated();
+                //}
+
                 //scopeFactory.SeedData();
             }
             else
@@ -144,11 +149,6 @@ namespace Angular2MultiSPA
             // });
 
 
-            using (var context = new ApplicationDbContext(
-                app.ApplicationServices.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
-            {
-                context.Database.EnsureCreated();
-            };
 
             app.UseMvc(routes =>
             {
