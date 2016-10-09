@@ -1,18 +1,12 @@
 import { Component } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
 import { Router } from '@angular/router';
-//import { Router, ROUTER_DIRECTIVES } from '@angular/router';
-//import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
+
 import { Http, Headers } from '@angular/http';
 import { contentHeaders, authContentHeaders } from '../services/headers';
 
-//const styles = require('./login.css');
-//const template = require('./login.html');
-
 @Component({
     selector: 'login',
-    //directives: [ ROUTER_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES ],
-//    styles: [styles],
     templateUrl: '/partial/loginComponent'
 })
 

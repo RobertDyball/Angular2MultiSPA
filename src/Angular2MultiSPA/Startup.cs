@@ -1,27 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Angular2MultiSPA.Data;
+using Angular2MultiSPA.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.FileProviders;
-using System.IO;
-using Angular2MultiSPA.Data;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
-using CryptoHelper;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using NWebsec.AspNetCore.Middleware;
-using OpenIddict;
-using Angular2MultiSPA.Models;
-using Angular2MultiSPA.Services;
-using System.Threading.Tasks;
-using AspNet.Security.OpenIdConnect.Server;
-using Microsoft.AspNetCore.Identity;
-using AspNet.Security.OpenIdConnect.Extensions;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http.Authentication;
+using System.IO;
 
 namespace Angular2MultiSPA
 {
@@ -118,37 +106,13 @@ namespace Angular2MultiSPA
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules")),
                 RequestPath = "/node_modules"
             });
-            
+
             app.UseIdentity();
 
             // Add a middleware used to validate access tokens and protect the API endpoints.
             app.UseOAuthValidation();
 
             app.UseOpenIddict();
-
-
-            //app.UseJwtBearerAuthentication(new JwtBearerOptions
-            //{
-            //    Authority = "http://localhost:7010",
-            //    AutomaticAuthenticate = true,
-            //    AutomaticChallenge = true,
-            //    Audience = "http://localhost:7010",
-            //    RequireHttpsMetadata = false
-            //});
-
-            // Alternatively, you can also use the introspection middleware.
-            // Using it is recommended if your resource server is in a different application/separated from the authorization server.
-            // 
-            // app.UseOAuthIntrospection(options => {
-            //     options.AutomaticAuthenticate = true;
-            //     options.AutomaticChallenge = true;
-            //     options.Authority = "http://localhost:54540/";
-            //     options.Audience = "resource_server";
-            //     options.ClientId = "resource_server";
-            //     options.ClientSecret = "875sqd4s5d748z78z7ds1ff8zz8814ff88ed8ea4z4zzd";
-            // });
-
-
 
             app.UseMvc(routes =>
             {

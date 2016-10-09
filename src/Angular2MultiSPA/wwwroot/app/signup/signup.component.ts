@@ -1,19 +1,15 @@
 import { Component } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
 import { Router } from '@angular/router';
-// import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
+
 import { Http } from '@angular/http';
 import { contentHeaders } from '../services/headers';
 
-// const styles = require('./signup.css');
-//const template = require('./signup.html');
-
 @Component({
     selector: 'signup',
-    // directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ],
-    // styles: [styles],
     templateUrl: '/partial/signupComponent'
 })
+
 export class SignupComponent {
     constructor(public router: Router, private titleService: Title, public http: Http) {
     }

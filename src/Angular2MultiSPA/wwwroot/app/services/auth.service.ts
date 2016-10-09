@@ -30,8 +30,7 @@ export class AuthService {
     }
 
     logout() {
-        // To log out, just remove the token and profile
-        // from local storage
+        // To log out, just remove the token and profile from local storage
         localStorage.removeItem('profile');
         localStorage.removeItem('access_token');
 

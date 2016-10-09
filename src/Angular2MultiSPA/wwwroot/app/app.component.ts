@@ -6,7 +6,7 @@ import { Title }     from '@angular/platform-browser';
     templateUrl: '/partial/appComponent'
 })
 
-export class AppComponent  {
+export class AppComponent {
     public constructor(private titleService: Title) { }
 
     public setTitle(newTitle: string) {

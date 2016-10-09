@@ -14,9 +14,6 @@ var forms_1 = require('@angular/forms');
 var app_component_1 = require('./app.component');
 var http_1 = require('@angular/http');
 var testData_service_1 = require('./services/testData.service');
-//import { AboutComponent }   from './about.component';
-//import { HomeComponent }      from './home.component';
-//import { ContentComponent }  from './content.component';
 var app_routing_1 = require('./app.routing');
 var AppModule = (function () {
     function AppModule() {
@@ -25,7 +22,6 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, app_routing_1.routing, http_1.HttpModule],
             declarations: [app_component_1.AppComponent, app_routing_1.routedComponents],
-            // declarations: [AppComponent, routedComponents, AboutComponent, HomeComponent, ContentComponent],
             providers: [platform_browser_1.Title, testData_service_1.TestDataService],
             bootstrap: [app_component_1.AppComponent]
         }), 

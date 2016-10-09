@@ -4,16 +4,13 @@
 /** Map relative paths to URLs. */
 const map: any = {
     'app': 'app',
-
     'main': 'app/main.js',
     '@angular': 'node_modules/@angular',
-    'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'rxjs': 'node_modules/rxjs',
     'angular2-jwt': 'node_modules/angular2-jwt/angular2-jwt.js'
 };
 
-// packages tells the System loader how to load when no filename and/or no
-// extension
+// packages tells the System loader how to load when no filename and/or no extension
 const packages: any = {
     'app': { main: 'main.js', defaultExtension: 'js' },
     'api': { defaultExtension: 'js' },
@@ -62,8 +59,7 @@ function packUmd(pkgName: string) {
 
 declare var System: any;
 
-// Most environments should use UMD; some (Karma) need the individual index
-// files
+// Most environments should use UMD; some (Karma) need the individual index files
 var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
 
 // Add package entries for angular packages

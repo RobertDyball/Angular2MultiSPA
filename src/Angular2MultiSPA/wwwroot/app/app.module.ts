@@ -8,10 +8,6 @@ import { AUTH_PROVIDERS } from 'angular2-jwt';
 
 import { TestDataService } from './services/testData.service';
 
-//import { AboutComponent }   from './about.component';
-//import { HomeComponent }      from './home.component';
-//import { ContentComponent }  from './content.component';
-
 import { routing, routedComponents } from './app.routing';
 
 import { AuthService } from './services/auth.service';
@@ -20,8 +16,8 @@ import { AuthGuard } from './services/auth-guard.service';
 @NgModule({
     imports: [BrowserModule, FormsModule, routing, HttpModule],
     declarations: [AppComponent, routedComponents],
-    // declarations: [AppComponent, routedComponents, AboutComponent, HomeComponent, ContentComponent],
     providers: [Title, TestDataService],
     bootstrap: [AppComponent]
 })
+
 export class AppModule { }

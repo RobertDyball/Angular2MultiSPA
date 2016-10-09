@@ -11,11 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
-// import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 var http_1 = require('@angular/http');
 var headers_1 = require('../services/headers');
-// const styles = require('./signup.css');
-//const template = require('./signup.html');
 var SignupComponent = (function () {
     function SignupComponent(router, titleService, http) {
         this.router = router;
@@ -45,8 +42,6 @@ var SignupComponent = (function () {
     SignupComponent = __decorate([
         core_1.Component({
             selector: 'signup',
-            // directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ],
-            // styles: [styles],
             templateUrl: '/partial/signupComponent'
         }), 
         __metadata('design:paramtypes', [router_1.Router, platform_browser_1.Title, http_1.Http])
