@@ -15,5 +15,20 @@ namespace Angular2MultiSPA.Models {
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+
+        public DbSet<OpenIddictApplication> Applications { get; set; }
+
+        public DbSet<OpenIddictAuthorization> Authorizations { get; set; }
+
+        public DbSet<OpenIddictScope> Scopes { get; set; }
+
+        public DbSet<OpenIddictToken> Tokens { get; set; }
+
+        internal void Seed()
+        {
+            //TODO move seed methods here.
+            throw new NotImplementedException();
+        }
     }
 }

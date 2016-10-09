@@ -4,17 +4,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent }  from './app.component';
 
 import { HttpModule} from '@angular/http';
+import { AUTH_PROVIDERS } from 'angular2-jwt';
+
 import { TestDataService } from './services/testData.service';
 
-import { AboutComponent }   from './about.component';
-import { HomeComponent }      from './home.component';
-import { ContentComponent }  from './content.component';
+//import { AboutComponent }   from './about.component';
+//import { HomeComponent }      from './home.component';
+//import { ContentComponent }  from './content.component';
 
-import { routing } from './app.routing';
+import { routing, routedComponents } from './app.routing';
+
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
     imports: [BrowserModule, FormsModule, routing, HttpModule],
-    declarations: [AppComponent, AboutComponent, HomeComponent, ContentComponent],
+    declarations: [AppComponent, routedComponents],
+    // declarations: [AppComponent, routedComponents, AboutComponent, HomeComponent, ContentComponent],
     providers: [Title, TestDataService],
     bootstrap: [AppComponent]
 })

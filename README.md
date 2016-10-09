@@ -9,7 +9,7 @@ Soon to be added tag helpers and code generation from the data model.
 For further background details, see the Github Wiki here: https://github.com/RobertDyball/Angular2MultiSPA/wiki
 or follow the blog posts here: http://dyball.wordpress.com
 
-Done so far: 
+### Done so far: 
 
 - Switched from standard Angular HTML template to a template created with an ASP.Net Core partial view 
   This allows use of razor syntax, since the templates are served from CSHTML files, and anything else ASP.Net / MVC programmers are used to including tag helpers
@@ -21,9 +21,9 @@ Done so far:
 - Main data model now separated into a separate project
 - Set up an intial, separate View Model, and simple fetch of data and images from Web API through to an Angular 2 service
 - Added Code first, to create database now, go to Package Manager console, type: Update-Database
- (note no sample data this drop, get the sql data insert if neededfrom Northwind.sql for now until seeding is added)
+ (note no sample data this drop, get the sql data insert if needed from Northwind.sql for now until seeding is added)
 
-TODO 
+### TODO 
 - Setup SQL seeding and database creation from code
 
 (not necessarily in this order):
@@ -36,18 +36,35 @@ TODO
 
 ## Prerequisites
 
-Latest ASP.Net Core (currently 1.0.1) see http://asp.net
-Visual Studio 2015 Update 3, with ASP.Net core tooling updates, or Visual Studio code.
+Download and install 1.0.0-preview2-003133 to suit your platform, see ASP.Net Core downloads here: http://asp.net 
+
+If using Windows, use Visual Studio 2015 Update 3, with ASP.Net core tooling updates, 
+or alternately use Visual Studio code.
 
 Node.js and npm are essential to Angular 2 development and used by Visual Studio. 
+
+Install Typescript and Typings globally, as these will be used by the application.
+
+npm install -g typescript
+npm install -g typings 
   
 
 ## Running
 
 Pull a copy of the repo, load the solution into Visual Studio, build (which will restore dependencies), and hit F5 or ctrl-F5
 
-The original about and contact ASP.Net pages have now been removed, the default home/index page now loads the angular dependencies through layout, replacing the index.html in previous drop.
-To view just clone, build and browse http://localhost:7010/ to see the Angular 2 using an ASP.Net partial page, with CSHTML running razor into the Angular template.
+Dependencies can be installed manually, using the command:
+
+dotnet restore
+
+this command will also automatically inostall any outstanding NPM packages, saving you the need of typing
+
+npm install
+npm install --save-dev
+
+If you have any issues, try running both of these commands, in an admin command prompt, and look for any error messages.
+
+So after you build and run, browse to: http://localhost:7010/ to see the Angular 2 using an ASP.Net partial page, with CSHTML running razor into the Angular template.
 
 ## Background
 
