@@ -3,8 +3,11 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+
 import { Observable } from 'rxjs/Rx';
 import { Category } from '../category.ts';
+import { securedContentHeaders } from '../services/headers';
+
 
 @Injectable()
 export class TestDataService {
@@ -14,7 +17,7 @@ export class TestDataService {
     constructor(private http: Http) { }
 
     getTestData(): Observable<Category[]> {
-        return this.http.get(this.url + 'testData')
+        return this.http.get(this.url + 'testData', { headers: securedContentHeaders })
             .map((resp: Response) => resp.json())
             .catch(this.handleError);
     }

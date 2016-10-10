@@ -13,13 +13,14 @@ var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/catch');
 var Rx_1 = require('rxjs/Rx');
+var headers_1 = require('../services/headers');
 var TestDataService = (function () {
     function TestDataService(http) {
         this.http = http;
         this.url = 'api/';
     }
     TestDataService.prototype.getTestData = function () {
-        return this.http.get(this.url + 'testData')
+        return this.http.get(this.url + 'testData', { headers: headers_1.contentHeaders })
             .map(function (resp) { return resp.json(); })
             .catch(this.handleError);
     };

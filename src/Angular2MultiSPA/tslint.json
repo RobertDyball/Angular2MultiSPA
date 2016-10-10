@@ -21,6 +21,7 @@
     "member-access": false,
     "member-ordering": [
       true,
+      "public-before-private",
       "static-before-instance",
       "variables-before-functions"
     ],
@@ -38,7 +39,7 @@
     "no-debugger": true,
     "no-duplicate-key": true,
     "no-duplicate-variable": true,
-    "no-empty": false,
+    "no-empty": true,
     "no-eval": true,
     "no-inferrable-types": true,
     "no-shadowed-variable": true,
@@ -58,11 +59,11 @@
       "check-else",
       "check-whitespace"
     ],
+    "radix": true,
     "quotemark": [
       true,
       "single"
     ],
-    "radix": true,
     "semicolon": [
       "always"
     ],
