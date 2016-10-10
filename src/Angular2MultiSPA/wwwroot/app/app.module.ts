@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent }  from './app.component';
 
 import { HttpModule} from '@angular/http';
-import { AUTH_PROVIDERS } from 'angular2-jwt';
 
 import { TestDataService } from './services/testData.service';
 

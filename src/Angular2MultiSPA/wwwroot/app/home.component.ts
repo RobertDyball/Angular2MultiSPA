@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: '/partial/homeComponent'
 })
 
-export class HomeComponent {
-}
+export class HomeComponent { }

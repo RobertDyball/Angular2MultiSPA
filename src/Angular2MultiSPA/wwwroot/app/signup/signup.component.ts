@@ -3,7 +3,7 @@ import { Title }     from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { Http } from '@angular/http';
-import { contentHeaders } from '../services/headers';
+import { securedContentHeaders } from '../services/headers';
 
 @Component({
     selector: 'signup',
@@ -11,8 +11,7 @@ import { contentHeaders } from '../services/headers';
 })
 
 export class SignupComponent {
-    constructor(public router: Router, private titleService: Title, public http: Http) {
-    }
+    constructor(public router: Router, private titleService: Title, public http: Http) { }
 
     public setTitle(newTitle: string) {
         this.titleService.setTitle(newTitle);
@@ -21,7 +20,7 @@ export class SignupComponent {
     public signup(event: Event, username: string, password: string) {
         event.preventDefault();
         let body = JSON.stringify({ username, password });
-        this.http.post('http://localhost:7010/connect', body, { headers: contentHeaders })
+        this.http.post('http://localhost:7010/connect/signup', body, { headers: securedContentHeaders })
             .subscribe(
             response => {
                 localStorage.setItem('access_token', response.json().access_token);
@@ -38,5 +37,4 @@ export class SignupComponent {
         event.preventDefault();
         this.router.navigate(['/login']);
     }
-
 }

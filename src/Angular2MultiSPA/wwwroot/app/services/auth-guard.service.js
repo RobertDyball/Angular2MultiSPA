@@ -16,7 +16,6 @@ var AuthGuard = (function () {
         this.auth = auth;
         this.router = router;
     }
-    // see : http://jasonwatmore.com/post/2016/08/16/angular-2-jwt-authentication-example-tutorial
     AuthGuard.prototype.canActivate = function () {
         if (!this.auth.loggedIn()) {
             this.router.navigate(['']);
