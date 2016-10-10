@@ -12,13 +12,13 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var auth_service_1 = require('./auth.service');
 var AuthGuard = (function () {
-    function AuthGuard(auth, router) {
-        this.auth = auth;
+    function AuthGuard(authService, router) {
+        this.authService = authService;
         this.router = router;
     }
     AuthGuard.prototype.canActivate = function () {
-        if (!this.auth.loggedIn()) {
-            this.router.navigate(['']);
+        if (!this.authService.loggedIn()) {
+            this.router.navigate(['/login']);
             return false;
         }
         return true;

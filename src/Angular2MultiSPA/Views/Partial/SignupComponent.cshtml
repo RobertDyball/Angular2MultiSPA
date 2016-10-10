@@ -1,14 +1,25 @@
-<div class="signup center-block jumbotron">
-  <h1>Signup</h1>
-  <form role="form" (submit)="signup($event, username.value, password.value)">
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" #username class="form-control" id="username" placeholder="Username">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" #password class="form-control" id="password" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+<div class="jumbotron center-block">
+    <h1>Signup</h1>
+
+    <p>still to be implemented, please seed data to SQL manually or use: user@example.com + P@55word</p>
+
+    <form role="form" (submit)="signup($event, username.value, fistname.value, password.value)">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" #username class="form-control" id="username" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <label for="firstname">First name</label>
+            <input type="text" #username class="form-control" id="firstname" placeholder="First name">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" #password class="form-control" id="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="passwordVerify">Password Verification</label>
+            <input type="password" #password class="form-control" id="passwordVerify" placeholder="passwordVerify">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
 </div>

@@ -13,22 +13,24 @@ var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
 var http_1 = require('@angular/http');
 var headers_1 = require('../services/headers');
+var auth_service_1 = require('../services/auth.service');
 var SignupComponent = (function () {
-    function SignupComponent(router, titleService, http) {
+    function SignupComponent(router, titleService, http, authService) {
         this.router = router;
         this.titleService = titleService;
         this.http = http;
+        this.authService = authService;
     }
     SignupComponent.prototype.setTitle = function (newTitle) {
         this.titleService.setTitle(newTitle);
     };
-    SignupComponent.prototype.signup = function (event, username, password) {
+    SignupComponent.prototype.signup = function (event, username, firstname, password) {
         var _this = this;
         event.preventDefault();
-        var body = JSON.stringify({ username: username, password: password });
-        this.http.post('http://localhost:7010/connect/signup', body, { headers: headers_1.securedContentHeaders })
+        var body = 'username=' + username + '&password=' + password + '&firstname=' + firstname + '&grant_type=password';
+        this.http.post('http://localhost:7010/connect/signup', body, { headers: headers_1.contentHeaders })
             .subscribe(function (response) {
-            sessionStorage.setItem('access_token', response.json().access_token);
+            _this.authService.login(response.json().access_token);
             _this.router.navigate(['/content']);
         }, function (error) {
             alert(error.text());
@@ -44,7 +46,7 @@ var SignupComponent = (function () {
             selector: 'signup',
             templateUrl: '/partial/signupComponent'
         }), 
-        __metadata('design:paramtypes', [router_1.Router, platform_browser_1.Title, http_1.Http])
+        __metadata('design:paramtypes', [router_1.Router, platform_browser_1.Title, http_1.Http, auth_service_1.AuthService])
     ], SignupComponent);
     return SignupComponent;
 }());

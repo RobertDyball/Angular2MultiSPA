@@ -7,6 +7,7 @@
 /// <reference path="app/content.component.js" />
 /// <reference path="app/home.component.js" />
 /// <reference path="app/login/login.component.js" />
+/// <reference path="app/login/logout.component.js" />
 /// <reference path="app/main.js" />
 /// <reference path="app/services/auth.service.js" />
 /// <reference path="app/services/auth-guard.service.js" />

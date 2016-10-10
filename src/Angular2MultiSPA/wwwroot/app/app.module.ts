@@ -13,7 +13,7 @@ import { AuthGuard } from './services/auth-guard.service';
 @NgModule({
     imports: [BrowserModule, FormsModule, routing, HttpModule],
     declarations: [AppComponent, routedComponents],
-    providers: [Title, TestDataService, AuthService],
+    providers: [Title, TestDataService, AuthService, AuthGuard],
     bootstrap: [AppComponent]
 })
 

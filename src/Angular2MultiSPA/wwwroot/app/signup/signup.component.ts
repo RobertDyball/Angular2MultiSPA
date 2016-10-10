@@ -18,9 +18,9 @@ export class SignupComponent {
         this.titleService.setTitle(newTitle);
     }
 
-    public signup(event: Event, username: string, password: string) {
+    public signup(event: Event, username: string, firstname: string, password: string) {
         event.preventDefault();
-        let body = 'username=' + username + '&password=' + password + '&grant_type=password';
+        let body = 'username=' + username + '&password=' + password + '&firstname=' + firstname + '&grant_type=password';
         this.http.post('http://localhost:7010/connect/signup', body, { headers: contentHeaders })
             .subscribe(
             response => {

@@ -9,24 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AuthService = (function () {
-    function AuthService() {
+var router_1 = require('@angular/router');
+var auth_service_1 = require('../services/auth.service');
+var LogoutComponent = (function () {
+    function LogoutComponent(router, authService) {
+        this.router = router;
+        this.authService = authService;
+        this.authService.logout();
+        this.router.navigate(['']);
     }
-    AuthService.prototype.login = function (token) {
-        //localStorage.removeItem('access_token');
-        sessionStorage.setItem('access_token', token);
-    };
-    AuthService.prototype.logout = function () {
-        sessionStorage.removeItem('access_token');
-    };
-    AuthService.prototype.loggedIn = function () {
-        return !!sessionStorage.getItem('access_token');
-    };
-    AuthService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], AuthService);
-    return AuthService;
+    LogoutComponent = __decorate([
+        core_1.Component({
+            selector: 'logout',
+            template: '<p>logging off</p>'
+        }), 
+        __metadata('design:paramtypes', [router_1.Router, auth_service_1.AuthService])
+    ], LogoutComponent);
+    return LogoutComponent;
 }());
-exports.AuthService = AuthService;
-//# sourceMappingURL=auth.service.js.map
+exports.LogoutComponent = LogoutComponent;
+//# sourceMappingURL=logout.component.js.map
