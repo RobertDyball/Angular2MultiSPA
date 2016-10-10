@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
-    constructor(private router: Router) { }
+    constructor() { }
 
     login(token: string) {
-        localStorage.setItem('access_token', token);
+        //localStorage.removeItem('access_token');
+        sessionStorage.setItem('access_token', token);
     }
 
     logout() {
-        localStorage.removeItem('profile');
-        localStorage.removeItem('access_token');
-        this.router.navigateByUrl('/home');
+        sessionStorage.removeItem('access_token');
     }
 
     loggedIn() {
-        return !!localStorage.getItem('access_token');
+        return !!sessionStorage.getItem('access_token');
     }
 }

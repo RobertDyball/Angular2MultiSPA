@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { Http, Headers } from '@angular/http';
 import { securedContentHeaders, contentHeaders } from '../services/headers';
+import { AuthService } from '../services/auth.service';
 
 @Component({
     selector: 'login',
@@ -11,7 +12,7 @@ import { securedContentHeaders, contentHeaders } from '../services/headers';
 })
 
 export class LoginComponent {
-    constructor(public router: Router, private titleService: Title, public http: Http) { }
+    constructor(public router: Router, private titleService: Title, public http: Http, private authService: AuthService) { }
 
     public setTitle(newTitle: string) {
         this.titleService.setTitle(newTitle);
@@ -23,7 +24,7 @@ export class LoginComponent {
 
         this.http.post('/connect/token', body, { headers: contentHeaders })
             .subscribe(response => {
-                localStorage.setItem('access_token', response.json().access_token);
+                this.authService.login(response.json().access_token)
                 this.router.navigate(['/content']);
             },
             error => {

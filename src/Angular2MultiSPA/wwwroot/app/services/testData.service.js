@@ -20,7 +20,7 @@ var TestDataService = (function () {
         this.url = 'api/';
     }
     TestDataService.prototype.getTestData = function () {
-        return this.http.get(this.url + 'testData', { headers: headers_1.contentHeaders })
+        return this.http.get(this.url + 'testData', { headers: headers_1.securedContentHeaders })
             .map(function (resp) { return resp.json(); })
             .catch(this.handleError);
     };

@@ -15,6 +15,7 @@ var app_component_1 = require('./app.component');
 var http_1 = require('@angular/http');
 var testData_service_1 = require('./services/testData.service');
 var app_routing_1 = require('./app.routing');
+var auth_service_1 = require('./services/auth.service');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -22,7 +23,7 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, app_routing_1.routing, http_1.HttpModule],
             declarations: [app_component_1.AppComponent, app_routing_1.routedComponents],
-            providers: [platform_browser_1.Title, testData_service_1.TestDataService],
+            providers: [platform_browser_1.Title, testData_service_1.TestDataService, auth_service_1.AuthService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

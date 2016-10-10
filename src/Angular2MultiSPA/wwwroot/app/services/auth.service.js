@@ -9,25 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
+//import { Router } from '@angular/router';
 var AuthService = (function () {
-    function AuthService(router) {
-        this.router = router;
+    function AuthService() {
     }
     AuthService.prototype.login = function (token) {
-        localStorage.setItem('access_token', token);
-    };
-    AuthService.prototype.logout = function () {
         localStorage.removeItem('profile');
         localStorage.removeItem('access_token');
-        this.router.navigateByUrl('/home');
+        sessionStorage.setItem('access_token', token);
+    };
+    AuthService.prototype.logout = function () {
+        sessionStorage.removeItem('profile');
+        sessionStorage.removeItem('access_token');
+        //        this.router.navigateByUrl('/home');
     };
     AuthService.prototype.loggedIn = function () {
-        return !!localStorage.getItem('access_token');
+        return !!sessionStorage.getItem('access_token');
     };
     AuthService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [])
     ], AuthService);
     return AuthService;
 }());

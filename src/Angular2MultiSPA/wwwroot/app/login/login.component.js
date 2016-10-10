@@ -13,11 +13,13 @@ var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
 var http_1 = require('@angular/http');
 var headers_1 = require('../services/headers');
+var auth_service_1 = require('../services/auth.service');
 var LoginComponent = (function () {
-    function LoginComponent(router, titleService, http) {
+    function LoginComponent(router, titleService, http, authService) {
         this.router = router;
         this.titleService = titleService;
         this.http = http;
+        this.authService = authService;
     }
     LoginComponent.prototype.setTitle = function (newTitle) {
         this.titleService.setTitle(newTitle);
@@ -26,9 +28,12 @@ var LoginComponent = (function () {
         var _this = this;
         event.preventDefault();
         var body = 'username=' + username + '&password=' + password + '&grant_type=password';
-        this.http.post('/connect/token', body, { headers: headers_1.authContentHeaders })
+        this.http.post('/connect/token', body, { headers: headers_1.contentHeaders })
             .subscribe(function (response) {
-            localStorage.setItem('access_token', response.json().access_token);
+            //console.log(response.json().access_token)
+            //console.log(response.access_token)
+            _this.authService.login(response.json().access_token);
+            //sessionStorage.setItem('access_token', response.json().access_token);
             _this.router.navigate(['/content']);
         }, function (error) {
             alert(error.text());
@@ -44,7 +49,7 @@ var LoginComponent = (function () {
             selector: 'login',
             templateUrl: '/partial/loginComponent'
         }), 
-        __metadata('design:paramtypes', [router_1.Router, platform_browser_1.Title, http_1.Http])
+        __metadata('design:paramtypes', [router_1.Router, platform_browser_1.Title, http_1.Http, auth_service_1.AuthService])
     ], LoginComponent);
     return LoginComponent;
 }());
