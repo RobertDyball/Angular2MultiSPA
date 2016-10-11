@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { Http, Headers } from '@angular/http';
-import { securedContentHeaders, contentHeaders } from '../services/headers';
+import { Http } from '@angular/http';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -22,7 +21,7 @@ export class LoginComponent {
         event.preventDefault();
         let body = 'username=' + username + '&password=' + password + '&grant_type=password';
 
-        this.http.post('/connect/token', body, { headers: contentHeaders })
+        this.http.post('/connect/token', body, { headers: this.authService.authFormHeaders() })
             .subscribe(response => {
                 this.authService.login(response.json().access_token)
                 this.router.navigate(['/content']);

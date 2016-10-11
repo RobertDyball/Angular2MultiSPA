@@ -12,7 +12,6 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
 var http_1 = require('@angular/http');
-var headers_1 = require('../services/headers');
 var auth_service_1 = require('../services/auth.service');
 var SignupComponent = (function () {
     function SignupComponent(router, titleService, http, authService) {
@@ -28,7 +27,7 @@ var SignupComponent = (function () {
         var _this = this;
         event.preventDefault();
         var body = 'username=' + username + '&password=' + password + '&firstname=' + firstname + '&grant_type=password';
-        this.http.post('http://localhost:7010/connect/signup', body, { headers: headers_1.contentHeaders })
+        this.http.post('http://localhost:7010/connect/signup', body, { headers: this.authService.authFormHeaders() })
             .subscribe(function (response) {
             _this.authService.login(response.json().access_token);
             _this.router.navigate(['/content']);

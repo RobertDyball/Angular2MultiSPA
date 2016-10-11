@@ -2,10 +2,13 @@
 using AspNet.Security.OpenIdConnect.Extensions;
 using AspNet.Security.OpenIdConnect.Server;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict;
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -13,13 +16,25 @@ namespace Angular2MultiSPA.Api
 {
     public class AuthorisationController : Controller
     {
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private OpenIddictUserManager<ApplicationUser> _userManager;
 
-        public AuthorisationController(OpenIddictUserManager<ApplicationUser> userManager)
+        public AuthorisationController(OpenIddictUserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
+            _signInManager = signInManager;
             _userManager = userManager;
         }
 
+        [HttpGet("~/connect/logout"), HttpPost("~/connect/logout")]
+        public async Task  PostLogout()
+        {
+            var request = HttpContext.GetOpenIdConnectRequest();
+
+            await _signInManager.SignOutAsync();
+            SignOut(OpenIdConnectServerDefaults.AuthenticationScheme);
+        }
+
+        [AllowAnonymous]
         [HttpPost("~/connect/token")]
         public async Task<IActionResult> Exchange()
         {

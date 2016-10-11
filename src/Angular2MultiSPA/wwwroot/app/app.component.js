@@ -10,19 +10,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
+var router_1 = require('@angular/router');
+var http_1 = require('@angular/http');
+var auth_service_1 = require('./services/auth.service');
 var AppComponent = (function () {
-    function AppComponent(titleService) {
+    function AppComponent(router, titleService, http, authService) {
+        this.router = router;
         this.titleService = titleService;
+        this.http = http;
+        this.authService = authService;
     }
     AppComponent.prototype.setTitle = function (newTitle) {
         this.titleService.setTitle(newTitle);
+    };
+    //todo: move this to auth service
+    AppComponent.prototype.logout = function () {
+        var _this = this;
+        this.http.get('/connect/logout', { headers: this.authService.authJsonHeaders() })
+            .subscribe(function (response) {
+            _this.authService.logout();
+            _this.router.navigate(['']);
+        }, function (error) {
+            alert(error.text());
+            console.log(error.text());
+        });
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
             templateUrl: '/partial/appComponent'
         }), 
-        __metadata('design:paramtypes', [platform_browser_1.Title])
+        __metadata('design:paramtypes', [router_1.Router, platform_browser_1.Title, http_1.Http, auth_service_1.AuthService])
     ], AppComponent);
     return AppComponent;
 }());

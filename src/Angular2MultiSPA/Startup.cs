@@ -60,7 +60,7 @@ namespace Angular2MultiSPA
                 .UseJsonWebTokens()
 
                 // Allow client applications to use the grant_type=password flow.
-                .AllowPasswordFlow()
+                .AllowPasswordFlow() 
                 .AllowRefreshTokenFlow()
 
                 // During development, you can disable the HTTPS requirement.
