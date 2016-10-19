@@ -38,9 +38,8 @@ namespace Angular2MultiSPA
                         options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbConnection")));
 
             // follow the OpenIdDict guide here: https://github.com/openiddict/openiddict-core
-            // note also: https://github.com/openiddict/openiddict-core/pull/203
+            // also: https://github.com/openiddict/openiddict-core/pull/203
             // very useful: http://viters.net/blog/post/uwierzytelniania-ciag-dalszy-rozmowa-angulara-2-z-asp-net-core-przy-uzyciu-tokenow-jwt/
-            // translated: http://www.microsofttranslator.com/bv.aspx?ref=SERP&br=ro&mkt=en-AU&dl=en&lp=PL_EN&a=http%3a%2f%2fviters.net%2fblog%2fpost%2fuwierzytelniania-ciag-dalszy-rozmowa-angulara-2-z-asp-net-core-przy-uzyciu-tokenow-jwt%2f
 
             // Register the Identity services.
             services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
@@ -54,14 +53,14 @@ namespace Angular2MultiSPA
             services.AddOpenIddict<ApplicationUser, IdentityRole<Guid>, ApplicationDbContext, Guid>()
 
                 // Enable the authorization, logout, token and userinfo endpoints.
-                //.EnableAuthorizationEndpoint("/connect/authorize")
-                //.EnableLogoutEndpoint("/connect/logout")
+                .EnableAuthorizationEndpoint("/connect/authorize")
+                .EnableLogoutEndpoint("/connect/logout")
                 .EnableTokenEndpoint("/connect/token")
-                //.EnableUserinfoEndpoint("/connect/userinfo")
+                .EnableUserinfoEndpoint("/connect/userinfo")
                 .UseJsonWebTokens()
 
                 // Allow client applications to use the grant_type=password flow.
-                .AllowPasswordFlow()
+                .AllowPasswordFlow() 
                 .AllowRefreshTokenFlow()
 
                 // During development, you can disable the HTTPS requirement.

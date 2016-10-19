@@ -9,25 +9,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
+var http_1 = require('@angular/http');
 var AuthService = (function () {
-    function AuthService(router) {
-        this.router = router;
+    function AuthService() {
     }
+    AuthService.prototype.authJsonHeaders = function () {
+        var header = new http_1.Headers();
+        header.append('Content-Type', 'application/json');
+        header.append('Accept', 'application/json');
+        header.append('Authorization', 'Bearer ' + sessionStorage.getItem('access_token'));
+        return header;
+    };
+    AuthService.prototype.authFormHeaders = function () {
+        var header = new http_1.Headers();
+        header.append('Content-Type', 'application/x-www-form-urlencoded');
+        header.append('Accept', 'application/json');
+        header.append('Authorization', 'Bearer ' + sessionStorage.getItem('access_token'));
+        return header;
+    };
+    AuthService.prototype.contentHeaders = function () {
+        var header = new http_1.Headers();
+        header.append('Content-Type', 'application/x-www-form-urlencoded');
+        header.append('Accept', 'application/json');
+        return header;
+    };
     AuthService.prototype.login = function (token) {
-        localStorage.setItem('access_token', token);
+        sessionStorage.setItem('access_token', token);
     };
     AuthService.prototype.logout = function () {
-        localStorage.removeItem('profile');
-        localStorage.removeItem('access_token');
-        this.router.navigateByUrl('/home');
+        // use localstorage for persistent, browser-wide logins; session storage for per-session storage.
+        //localStorage.removeItem('access_token');
+        sessionStorage.removeItem('access_token');
     };
     AuthService.prototype.loggedIn = function () {
-        return !!localStorage.getItem('access_token');
+        return !!sessionStorage.getItem('access_token');
     };
     AuthService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [])
     ], AuthService);
     return AuthService;
 }());

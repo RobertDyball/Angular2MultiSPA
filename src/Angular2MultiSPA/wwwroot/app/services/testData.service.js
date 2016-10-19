@@ -10,17 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
+var Rx_1 = require('rxjs/Rx');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/catch');
-var Rx_1 = require('rxjs/Rx');
-var headers_1 = require('../services/headers');
+var auth_service_1 = require('./auth.service');
 var TestDataService = (function () {
-    function TestDataService(http) {
+    function TestDataService(http, authService) {
         this.http = http;
-        this.url = 'api/';
+        this.authService = authService;
     }
     TestDataService.prototype.getTestData = function () {
-        return this.http.get(this.url + 'testData', { headers: headers_1.contentHeaders })
+        return this.http.get('api/testData', { headers: this.authService.authJsonHeaders() })
             .map(function (resp) { return resp.json(); })
             .catch(this.handleError);
     };
@@ -30,7 +30,7 @@ var TestDataService = (function () {
     };
     TestDataService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, auth_service_1.AuthService])
     ], TestDataService);
     return TestDataService;
 }());

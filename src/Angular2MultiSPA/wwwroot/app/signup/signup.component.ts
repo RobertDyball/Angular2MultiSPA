@@ -3,7 +3,7 @@ import { Title }     from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { Http } from '@angular/http';
-import { securedContentHeaders } from '../services/headers';
+import { AuthService } from '../services/auth.service';
 
 @Component({
     selector: 'signup',
@@ -11,19 +11,19 @@ import { securedContentHeaders } from '../services/headers';
 })
 
 export class SignupComponent {
-    constructor(public router: Router, private titleService: Title, public http: Http) { }
+    constructor(public router: Router, private titleService: Title, public http: Http, private authService: AuthService) { }
 
     public setTitle(newTitle: string) {
         this.titleService.setTitle(newTitle);
     }
 
-    public signup(event: Event, username: string, password: string) {
+    public signup(event: Event, username: string, firstname: string, password: string) {
         event.preventDefault();
-        let body = JSON.stringify({ username, password });
-        this.http.post('http://localhost:7010/connect/signup', body, { headers: securedContentHeaders })
+        let body = 'username=' + username + '&password=' + password + '&firstname=' + firstname + '&grant_type=password';
+        this.http.post('http://localhost:7010/connect/signup', body, { headers: this.authService.authFormHeaders() })
             .subscribe(
             response => {
-                localStorage.setItem('access_token', response.json().access_token);
+                this.authService.login(response.json().access_token)
                 this.router.navigate(['/content']);
             },
             error => {

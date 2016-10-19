@@ -52,10 +52,11 @@ namespace Angular2MultiSPA.Models
                     context.SaveChanges();
                 }
 
+                // inspired by https://github.com/capesean/openiddict-test
 
                 if (!context.Users.Any())
                 {
-                    var email = "user@test.com";
+                    var email = "user@example.com";
                     ApplicationUser user;
                     if (await userManager.FindByEmailAsync(email) == null)
                     {
@@ -65,9 +66,9 @@ namespace Angular2MultiSPA.Models
                             UserName = email,
                             Email = email,
                             EmailConfirmed = true,
-                            GivenName = "Sean"
+                            GivenName = "Nobody"
                         };
-                        await userManager.CreateAsync(user, "P2ssw0rd!");
+                        await userManager.CreateAsync(user, "P@55word");
                     }
 
                     user = await userManager.FindByEmailAsync(email);
