@@ -21,11 +21,13 @@ or follow the blog posts here: http://dyball.wordpress.com
 - Main data model now separated into a separate project
 - Set up an intial, separate View Model, and simple fetch of data and images from Web API through to an Angular 2 service
 - Added Code first, to create database now, go to Package Manager console, type: Update-Database
- (note no sample data this drop, get the sql data insert if needed from Northwind.sql for now until seeding is added)
+  (note no sample data this drop, get the SQL data insert if needed from Northwind.sql for now until seeding is added)
+- Added OpenIdDict using password flow, basic authentication using JWT tokens, in memory database
+  (thanks to password flow sample from https://github.com/openiddict/openiddict-samples )
 
 #### Work in progress 
-- Setup SQL seeding and database creation from code
-- Add JWT token authentication using OpenIdDict
+- Setup SQL seeding and database creation from code for WebAPI data
+- Enhance user authentication / login, add validation & error handling.
 
 #### TODO 
 
@@ -36,7 +38,8 @@ or follow the blog posts here: http://dyball.wordpress.com
 
 #### Prerequisites
 
-Download and install 1.0.0-preview2-003133 to suit your platform, see ASP.Net Core downloads here: http://asp.net 
+Download and install latest ASP.Net Core to suit your platform, see ASP.Net Core downloads here: http://asp.net 
+  ( currently latest version is 1.0.0-preview2-003133 )
 
 If using Windows, use Visual Studio 2015 Update 3, with ASP.Net core tooling updates, 
 or alternately use Visual Studio code.
@@ -82,3 +85,4 @@ Here we hope to experiment in collaboration and produce a framework that provide
 
 We'll try and keep things using cross platform features of ASP.Net Core that is capable of being deployed to Windows or Linux servers or makeuse of Docker containers.
 
+Initially MS SQL will be used, later we'll add SQLLite and other options.

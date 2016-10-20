@@ -23,6 +23,9 @@ var AppComponent = (function () {
     AppComponent.prototype.setTitle = function (newTitle) {
         this.titleService.setTitle(newTitle);
     };
+    AppComponent.prototype.isLoggedIn = function () {
+        return this.authService.loggedIn();
+    };
     //todo: move this to auth service
     AppComponent.prototype.logout = function () {
         var _this = this;

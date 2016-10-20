@@ -16,11 +16,13 @@
 
 <p>SQL Data using EF Core, accessed from Web API, secured using OpenIdDict & JWT:</p>
 
-<table><tr *ngFor="let dataItem of testData">
-           <td>{{dataItem.id}}</td>
-           <td>
-           <td>
-               <img [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  dataItem.image)" title="{{dataItem.description}}">
-           </td>
-           <td>{{dataItem.name}}</td>
-</tr></table>
+<table>
+    <tr *ngFor="let dataItem of categories">
+        <td>{{dataItem.id}}</td>
+        <td>
+        <td>
+            <img [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  dataItem.image)" title="{{dataItem.description}}">
+        </td>
+        <td>{{dataItem.name}}</td>
+    </tr>
+</table>

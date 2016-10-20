@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Authorization;
 namespace Angular2MultiSPA.Api
 {
     [Route("api/[controller]")]
-    public class TestDataController : Controller
+    public class CategoryController : Controller
     {
         private NorthwindContext _context;
 
-        public TestDataController(NorthwindContext context)
+        public CategoryController(NorthwindContext context)
         {
             _context = context;
         }

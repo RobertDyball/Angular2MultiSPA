@@ -9,12 +9,12 @@ import { AuthService } from './auth.service';
 import { Category } from '../category.ts';
 
 @Injectable()
-export class TestDataService {
+export class CategoryService {
 
     constructor(private http: Http, private authService: AuthService) { }
 
-    getTestData(): Observable<Category[]> {
-        return this.http.get('api/testData', { headers: this.authService.authJsonHeaders() })
+    getCategories(): Observable<Category[]> {
+        return this.http.get('api/category', { headers: this.authService.authJsonHeaders() })
             .map((resp: Response) => resp.json())
             .catch(this.handleError);
     }

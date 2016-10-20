@@ -17,6 +17,10 @@ export class AppComponent {
         this.titleService.setTitle(newTitle);
     }
 
+    public isLoggedIn() {
+        return this.authService.loggedIn();
+    }
+
     //todo: move this to auth service
     public logout() {
         this.http.get('/connect/logout', { headers: this.authService.authJsonHeaders() })
