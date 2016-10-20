@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Angular2MultiSPA.ViewModels.Account {
-    public class RegisterViewModel {
+namespace Angular2MultiSPA.ViewModels.Account
+{
+    public class RegisterViewModel
+    {
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Angular2MultiSPA.Data;
-using System.Linq;
-using Angular2MultiSPA.ViewModels;
+﻿using Angular2MultiSPA.Data;
 using Angular2MultiSPA.Helpers;
-using Microsoft.AspNetCore.Authorization;
+using Angular2MultiSPA.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,6 +19,7 @@ namespace Angular2MultiSPA.Api
             _context = context;
         }
 
+        // TODO: add server side authorization, see ResourceController
         // GET: api/values
         [HttpGet]
         public IEnumerable<Category> Get()

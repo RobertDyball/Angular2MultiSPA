@@ -25,6 +25,8 @@ export class SignupComponent {
         this.http.post('http://localhost:7010/Account/Register', JSON.stringify(body), { headers: this.authService.jsonHeaders() })
             .subscribe(
             response => {
+                // TODO: add/fix error handling
+                console.log(response.status);
                 if (response.status != 200) {
                     alert(response.statusText);
                     console.log(response.statusText);
@@ -35,7 +37,8 @@ export class SignupComponent {
                     console.log(response.json().error);
                 }
                 else {
-                    this.authService.login(response.json())
+                    this.authService.login(response.json());
+                    this.router.navigate(['/login']);
                 }
             });
     }

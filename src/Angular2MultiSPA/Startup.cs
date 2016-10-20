@@ -1,11 +1,11 @@
 ﻿using Angular2MultiSPA.Data;
 using Angular2MultiSPA.Models;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using System.IO;
@@ -17,7 +17,7 @@ namespace Angular2MultiSPA
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                //.AddJsonFile("hosting.json", optional: true)
+                .AddJsonFile("hosting.json", optional: true)
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
@@ -116,8 +116,7 @@ namespace Angular2MultiSPA
                 RequestPath = "/node_modules"
             });
 
-            // Add a middleware used to validate access
-            // tokens and protect the API endpoints.
+            // Add a middleware used to validate access tokens and protect the API endpoints.
             app.UseOAuthValidation();
 
             // Alternatively, you can also use the introspection middleware.

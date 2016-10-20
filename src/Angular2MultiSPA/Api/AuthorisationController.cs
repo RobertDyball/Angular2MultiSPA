@@ -5,7 +5,6 @@
  * the license and the contributors participating to this project.
  */
 
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AspNet.Security.OpenIdConnect.Extensions;

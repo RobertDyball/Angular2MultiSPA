@@ -29,6 +29,8 @@ var SignupComponent = (function () {
         var body = { 'email': username, 'password': password };
         this.http.post('http://localhost:7010/Account/Register', JSON.stringify(body), { headers: this.authService.jsonHeaders() })
             .subscribe(function (response) {
+            // TODO: add/fix error handling
+            console.log(response.status);
             if (response.status != 200) {
                 alert(response.statusText);
                 console.log(response.statusText);
@@ -39,6 +41,7 @@ var SignupComponent = (function () {
             }
             else {
                 _this.authService.login(response.json());
+                _this.router.navigate(['/login']);
             }
         });
     };
