@@ -23,17 +23,26 @@ var SignupComponent = (function () {
     SignupComponent.prototype.setTitle = function (newTitle) {
         this.titleService.setTitle(newTitle);
     };
-    SignupComponent.prototype.signup = function (event, username, firstname, password) {
+    SignupComponent.prototype.signup = function (event, username, password) {
         var _this = this;
         event.preventDefault();
-        var body = 'username=' + username + '&password=' + password + '&firstname=' + firstname + '&grant_type=password';
-        this.http.post('http://localhost:7010/connect/signup', body, { headers: this.authService.authFormHeaders() })
+        var body = { 'email': username, 'password': password };
+        this.http.post('http://localhost:7010/Account/Register', JSON.stringify(body), { headers: this.authService.jsonHeaders() })
             .subscribe(function (response) {
-            _this.authService.login(response.json().access_token);
-            _this.router.navigate(['/content']);
-        }, function (error) {
-            alert(error.text());
-            console.log(error.text());
+            // TODO: add/fix error handling
+            console.log(response.status);
+            if (response.status != 200) {
+                alert(response.statusText);
+                console.log(response.statusText);
+            }
+            else if (response.json().error != null && response.json().error.length > 0) {
+                alert(response.json().error);
+                console.log(response.json().error);
+            }
+            else {
+                _this.authService.login(response.json());
+                _this.router.navigate(['/login']);
+            }
         });
     };
     SignupComponent.prototype.login = function (event) {

@@ -29,7 +29,7 @@ var LoginComponent = (function () {
         var body = 'username=' + username + '&password=' + password + '&grant_type=password';
         this.http.post('/connect/token', body, { headers: this.authService.authFormHeaders() })
             .subscribe(function (response) {
-            _this.authService.login(response.json().access_token);
+            _this.authService.login(response.json());
             _this.router.navigate(['/content']);
         }, function (error) {
             alert(error.text());

@@ -1,34 +1,20 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OpenIddict;
 
-namespace Angular2MultiSPA.Models {
-    public class ApplicationDbContext : OpenIddictDbContext<ApplicationUser, IdentityRole<Guid>, Guid> {
+namespace Angular2MultiSPA.Models
+{
+    public class ApplicationDbContext : OpenIddictDbContext<ApplicationUser>
+    {
         public ApplicationDbContext(DbContextOptions options)
             : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder builder) {
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
             base.OnModelCreating(builder);
 
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
-        }
-
-
-        public DbSet<OpenIddictApplication> Applications { get; set; }
-
-        public DbSet<OpenIddictAuthorization> Authorizations { get; set; }
-
-        public DbSet<OpenIddictScope> Scopes { get; set; }
-
-        public DbSet<OpenIddictToken> Tokens { get; set; }
-
-        internal void Seed()
-        {
-            //TODO move seed methods here.
-            throw new NotImplementedException();
         }
     }
 }

@@ -10,24 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
-var testData_service_1 = require('./services/testData.service');
+var Category_service_1 = require('./services/Category.service');
 var ContentComponent = (function () {
-    function ContentComponent(_DomSanitizer, testDataService) {
+    function ContentComponent(_DomSanitizer, categoryService) {
         this._DomSanitizer = _DomSanitizer;
-        this.testDataService = testDataService;
-        this.testData = [];
+        this.categoryService = categoryService;
+        this.categories = [];
     }
     ContentComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.testDataService.getTestData()
-            .subscribe(function (data) { return _this.testData = data; });
+        this.categoryService.getCategories()
+            .subscribe(function (data) { return _this.categories = data; });
     };
     ContentComponent = __decorate([
         core_1.Component({
             selector: 'my-content',
             templateUrl: '/partial/contentComponent'
         }), 
-        __metadata('design:paramtypes', [platform_browser_1.DomSanitizer, testData_service_1.TestDataService])
+        __metadata('design:paramtypes', [platform_browser_1.DomSanitizer, Category_service_1.CategoryService])
     ], ContentComponent);
     return ContentComponent;
 }());

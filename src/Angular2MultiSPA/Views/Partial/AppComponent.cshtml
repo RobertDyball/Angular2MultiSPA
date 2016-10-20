@@ -11,24 +11,23 @@
             <li class="nav-item">
                 <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [hidden]="isLoggedIn()">
                 <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [hidden]="!isLoggedIn()">
                 <a class="nav-link" routerLinkActive="active" (click)="logout()">Logout</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [hidden]="isLoggedIn()">
                 <a class="nav-link" routerLink="/signup" routerLinkActive="active">Signup</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [hidden]="!isLoggedIn()">
                 <a class="nav-link" routerLink="/content" routerLinkActive="active">Content</a>
             </li>
         </ul>
     </div>
 </nav>
-
 
 <router-outlet></router-outlet>

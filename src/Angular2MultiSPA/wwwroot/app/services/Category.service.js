@@ -14,25 +14,25 @@ var Rx_1 = require('rxjs/Rx');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/catch');
 var auth_service_1 = require('./auth.service');
-var TestDataService = (function () {
-    function TestDataService(http, authService) {
+var CategoryService = (function () {
+    function CategoryService(http, authService) {
         this.http = http;
         this.authService = authService;
     }
-    TestDataService.prototype.getTestData = function () {
-        return this.http.get('api/testData', { headers: this.authService.authJsonHeaders() })
+    CategoryService.prototype.getCategories = function () {
+        return this.http.get('api/category', { headers: this.authService.authJsonHeaders() })
             .map(function (resp) { return resp.json(); })
             .catch(this.handleError);
     };
-    TestDataService.prototype.handleError = function (error) {
+    CategoryService.prototype.handleError = function (error) {
         console.error(error);
         return Rx_1.Observable.throw(error.json().error || 'Server error');
     };
-    TestDataService = __decorate([
+    CategoryService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http, auth_service_1.AuthService])
-    ], TestDataService);
-    return TestDataService;
+    ], CategoryService);
+    return CategoryService;
 }());
-exports.TestDataService = TestDataService;
-//# sourceMappingURL=testData.service.js.map
+exports.CategoryService = CategoryService;
+//# sourceMappingURL=Category.service.js.map

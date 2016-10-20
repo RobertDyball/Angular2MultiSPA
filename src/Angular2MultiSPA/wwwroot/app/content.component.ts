@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer} from '@angular/platform-browser';
 
-import { TestDataService } from './services/testData.service';
+import { CategoryService } from './services/Category.service';
 import { Category } from './category.ts';
 
 @Component({
@@ -10,15 +10,15 @@ import { Category } from './category.ts';
 })
 
 export class ContentComponent implements OnInit {
-    testData: Category[] = [];
+    categories: Category[] = [];
 
     constructor(
         private _DomSanitizer: DomSanitizer,
-        private testDataService: TestDataService
+        private categoryService: CategoryService
     ) { }
 
     ngOnInit() {
-        this.testDataService.getTestData()
-            .subscribe((data: Category[]) => this.testData = data);
+        this.categoryService.getCategories()
+            .subscribe((data: Category[]) => this.categories = data);
     }
 }

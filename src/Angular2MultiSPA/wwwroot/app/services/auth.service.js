@@ -17,14 +17,20 @@ var AuthService = (function () {
         var header = new http_1.Headers();
         header.append('Content-Type', 'application/json');
         header.append('Accept', 'application/json');
-        header.append('Authorization', 'Bearer ' + sessionStorage.getItem('access_token'));
+        header.append('Authorization', 'Bearer ' + sessionStorage.getItem('bearer_token'));
         return header;
     };
     AuthService.prototype.authFormHeaders = function () {
         var header = new http_1.Headers();
         header.append('Content-Type', 'application/x-www-form-urlencoded');
         header.append('Accept', 'application/json');
-        header.append('Authorization', 'Bearer ' + sessionStorage.getItem('access_token'));
+        header.append('Authorization', 'Bearer ' + sessionStorage.getItem('bearer_token'));
+        return header;
+    };
+    AuthService.prototype.jsonHeaders = function () {
+        var header = new http_1.Headers();
+        header.append('Content-Type', 'application/json');
+        header.append('Accept', 'application/json');
         return header;
     };
     AuthService.prototype.contentHeaders = function () {
@@ -33,16 +39,24 @@ var AuthService = (function () {
         header.append('Accept', 'application/json');
         return header;
     };
-    AuthService.prototype.login = function (token) {
-        sessionStorage.setItem('access_token', token);
+    AuthService.prototype.login = function (responseData) {
+        var access_token = responseData.access_token;
+        var refresh_token = responseData.refresh_token;
+        var expires_in = responseData.expires_in;
+        sessionStorage.setItem('access_token', access_token);
+        sessionStorage.setItem('bearer_token', refresh_token);
+        // TODO: implement meaningful refresh, handle expiry 
+        sessionStorage.setItem('expires_in', expires_in.toString());
     };
     AuthService.prototype.logout = function () {
         // use localstorage for persistent, browser-wide logins; session storage for per-session storage.
         //localStorage.removeItem('access_token');
         sessionStorage.removeItem('access_token');
+        sessionStorage.removeItem('bearer_token');
+        sessionStorage.removeItem('expires_in');
     };
     AuthService.prototype.loggedIn = function () {
-        return !!sessionStorage.getItem('access_token');
+        return !!sessionStorage.getItem('bearer_token');
     };
     AuthService = __decorate([
         core_1.Injectable(), 
