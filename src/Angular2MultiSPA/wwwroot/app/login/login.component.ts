@@ -23,7 +23,7 @@ export class LoginComponent {
 
         this.http.post('/connect/token', body, { headers: this.authService.authFormHeaders() })
             .subscribe(response => {
-                this.authService.login(response.json())
+                this.authService.login(response.json());
                 this.router.navigate(['/content']);
             },
             error => {

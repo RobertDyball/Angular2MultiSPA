@@ -27,22 +27,18 @@ var SignupComponent = (function () {
         var _this = this;
         event.preventDefault();
         var body = { 'email': username, 'password': password };
-        this.http.post('http://localhost:7010/Account/Register', JSON.stringify(body), { headers: this.authService.jsonHeaders() })
+        this.http.post('/Account/Register', JSON.stringify(body), { headers: this.authService.jsonHeaders() })
             .subscribe(function (response) {
-            // TODO: add/fix error handling
-            console.log(response.status);
-            if (response.status != 200) {
-                alert(response.statusText);
-                console.log(response.statusText);
+            if (response.status == 200) {
+                _this.router.navigate(['/login']);
             }
-            else if (response.json().error != null && response.json().error.length > 0) {
+            else {
                 alert(response.json().error);
                 console.log(response.json().error);
             }
-            else {
-                _this.authService.login(response.json());
-                _this.router.navigate(['/login']);
-            }
+        }, function (error) {
+            alert(error.text());
+            console.log(error.text());
         });
     };
     SignupComponent.prototype.login = function (event) {

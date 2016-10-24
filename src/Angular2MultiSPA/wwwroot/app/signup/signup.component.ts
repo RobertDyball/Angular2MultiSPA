@@ -22,24 +22,18 @@ export class SignupComponent {
         event.preventDefault();
 
         let body = { 'email': username, 'password': password };
-        this.http.post('http://localhost:7010/Account/Register', JSON.stringify(body), { headers: this.authService.jsonHeaders() })
-            .subscribe(
-            response => {
-                // TODO: add/fix error handling
-                console.log(response.status);
-                if (response.status != 200) {
-                    alert(response.statusText);
-                    console.log(response.statusText);
-                }
-                else
-                if (response.json().error != null && response.json().error.length > 0) {
+        this.http.post('/Account/Register', JSON.stringify(body), { headers: this.authService.jsonHeaders() })
+            .subscribe(response => {
+                if (response.status == 200) {
+                    this.router.navigate(['/login']);
+                } else {
                     alert(response.json().error);
                     console.log(response.json().error);
                 }
-                else {
-                    this.authService.login(response.json());
-                    this.router.navigate(['/login']);
-                }
+            },
+            error => {
+                alert(error.text());
+                console.log(error.text());
             });
     }
 
