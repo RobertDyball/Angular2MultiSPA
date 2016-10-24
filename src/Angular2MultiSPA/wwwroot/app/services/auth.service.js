@@ -41,10 +41,10 @@ var AuthService = (function () {
     };
     AuthService.prototype.login = function (responseData) {
         var access_token = responseData.access_token;
-        var refresh_token = responseData.refresh_token;
+        //let refresh_token: string = responseData.refresh_token;
         var expires_in = responseData.expires_in;
         sessionStorage.setItem('access_token', access_token);
-        sessionStorage.setItem('bearer_token', refresh_token);
+        sessionStorage.setItem('bearer_token', access_token);
         // TODO: implement meaningful refresh, handle expiry 
         sessionStorage.setItem('expires_in', expires_in.toString());
     };

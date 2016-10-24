@@ -40,10 +40,10 @@ export class AuthService {
 
     login(responseData: OpenIdDictToken) {
         let access_token: string = responseData.access_token;
-        let refresh_token: string = responseData.refresh_token;
+        //let refresh_token: string = responseData.refresh_token;
         let expires_in: number = responseData.expires_in;
         sessionStorage.setItem('access_token', access_token);
-        sessionStorage.setItem('bearer_token', refresh_token);
+        sessionStorage.setItem('bearer_token', access_token);
         // TODO: implement meaningful refresh, handle expiry 
         sessionStorage.setItem('expires_in', expires_in.toString());
     }

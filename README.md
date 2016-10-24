@@ -24,10 +24,11 @@ or follow the blog posts here: http://dyball.wordpress.com
   (note no sample data this drop, get the SQL data insert if needed from Northwind.sql for now until seeding is added)
 - Added OpenIdDict using password flow, basic authentication using JWT tokens, in memory database
   (thanks to password flow sample from https://github.com/openiddict/openiddict-samples )
+- Added client side and server side authentication.
 
 #### Work in progress 
 - Setup SQL seeding and database creation from code for WebAPI data
-- Enhance user authentication / login, add validation & error handling.
+- Add further validation, error handling, toasts/messages for signup or login fail.
 
 #### TODO 
 
