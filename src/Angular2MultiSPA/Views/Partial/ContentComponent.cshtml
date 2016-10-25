@@ -1,28 +1,22 @@
 
-@{
-    // example of Razor
-    string razorServerSideData = "ASP.Net Core";
-}
 
-<h3>@razorServerSideData + Angular {{1+1}}</h3>
-
-<div class="alert alert-warning alert-dismissible fade in" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <!-- example of bootstrap 4 dismissable alert-->
-    <strong>Bootstrap 4.0.0</strong>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID #</th>
+                <th>Image</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr scope="row" *ngFor="let dataItem of categories">
+                <td>{{dataItem.id}}</td>
+                <td>
+                    <img [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  dataItem.image)" title="{{dataItem.description}}">
+                </td>
+                <td>{{dataItem.name}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-
-<p>SQL Data using EF Core, accessed from Web API, secured using OpenIdDict & JWT:</p>
-
-<table>
-    <tr *ngFor="let dataItem of categories">
-        <td>{{dataItem.id}}</td>
-        <td>
-        <td>
-            <img [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  dataItem.image)" title="{{dataItem.description}}">
-        </td>
-        <td>{{dataItem.name}}</td>
-    </tr>
-</table>
