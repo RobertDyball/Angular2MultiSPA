@@ -1,43 +1,60 @@
-<div class="jumbotron center-block">
-    <h1>About the project</h1>
-    <!-- example of public page -->
-    <p>This application is the ASP.Net Core MultiSPA project, a framework that aims to take the best of ASP.Net Core, Web API, SQL, EF Core, Angular 2 and ASOS security and use each of them in a working project that provides guidance and examples to the developer.</p>
-    <p>There are no strings attached to using the framework (and absolutely no warranties either, so use this at your own risk), but if you get something out of it, please do consider helping out on this or another open-source project.</p>
-    <p>Interested in contributing to the project? Then please let me know via my <a href="https://dyball.wordpress.com/">blog</a>.</p>
-    <div class="alert alert-warning alert-dismissible fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <!-- example of bootstrap 4 dismissable alert-->
-        <strong>OpenIdDict - OpenID + OAuth + JWT / JSON Web Tokens</strong>
+
+<div id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    About the project
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <p>NOTE: This framework is being developed as an open-source, free application. There are no strings-attached and no warranties.</p>
+            <p>There may be licensing implications for various components used, please refer to associated licenses for further information.</p>
+            <p>If you benefit from this project, consider helping out on this or other open-source projects. You can contact me via my <a href="https://dyball.wordpress.com/">blog</a>.</p>
+        </div>
     </div>
-    <p><a routerLink="/content">Content</a> page is secured, unauthorised users will be blocked and redirected to <a routerLink="/login">Login</a> page</p>
-    <p><a href="https://github.com/openiddict/openiddict-core">OpenIdDict</a> is used for security. Pages are secured client-side using auth. 'guard' code, and server-side using attributes that decribe auth. roles/requirements.</p>
-
-    <div class="alert alert-warning alert-dismissible fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <!-- example of bootstrap 4 dismissable alert-->
-        <strong>ASP.Net Core <i>and</i> Angular 2</strong>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    OpenIdDict - OpenID + OAuth + JWT / JSON Web Tokens
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+            <p><a href="https://github.com/openiddict/openiddict-core">OpenIdDict</a> is used for security. Pages are secured client-side using auth. 'guard' code, and server-side using attributes that decribe auth. roles/requirements. <a routerLink="/content">Content</a> page is secured, unauthorised users will be blocked and redirected to <a routerLink="/login">Login</a> page</p>
+        </div>
     </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    ASP.Net Core <i>and</i> Angular 2
+                </a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+            @{
+                // example of Razor
+                string razorServerSideData = "ASP.Net Core";
+            }
 
-    @{
-        // example of Razor
-        string razorServerSideData = "ASP.Net Core";
-    }
-
-    <p>Apart from serving content, active use is made of @razorServerSideData Razor code, to populate template views used by client-side Angular {{1+1}}.</p>
-    <p>At this stage there is no intention to use webpack, instead code is kept simple using conventional systemjs.config and angular boot code.</p>
-
-    <div class="alert alert-warning alert-dismissible fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <!-- example of bootstrap 4 dismissable alert-->
-        <strong>Bootstrap 4.0.0</strong>
+            <p>@razorServerSideData is used actively to generate Angular HTML templates and steer developers away from serving up flat HTML code, as this tends to create apparent short-term gains through cut and paste,but long term legacy of spaghetti code that is hard to maintain.</p>
+            <p>Instead using server-side CSHTML, Razor, Tag Helpers and single instances of key code blocks, the server side code will create the required HTML markup and Angular {{1+1}} code based on attributes on your view models.</p>
+            <p>At this stage there is no intention to use webpack, or server-side pre-rendering, tokeep the framework simple to use and easy to maintain. The idea is to minimise how much developers need to learn and allow a resourceful developer, with a willingness to learn, to be productive and get up to speed quickly.</p>
+        </div>
     </div>
-
-    <p>Styling is done using latest Bootstrap 4.0.0 release (currently Alpha 9).</p>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingFour">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Bootstrap 4.0.0
+                </a>
+            </h4>
+        </div>
+        <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+            <p>Styling is done using latest Bootstrap 4.0.0 release (currently Alpha 9).</p>
+        </div>
+    </div>
 </div>
-
