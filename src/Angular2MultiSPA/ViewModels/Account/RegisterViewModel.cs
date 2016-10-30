@@ -6,7 +6,7 @@ namespace Angular2MultiSPA.ViewModels.Account
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Username", ShortName = "Email", Prompt = "Email Address (username)")]
         public string Email { get; set; }
 
         [Required]

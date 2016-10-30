@@ -1,17 +1,29 @@
+@using Angular2MultiSPA
+@using Angular2MultiSPA.ViewModels.Account
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper "*,Angular2MultiSPA"
+@model RegisterViewModel
+
 <div class="jumbotron center-block">
     <h1>Signup</h1>
 
-    <p>Note: Currently using in-memory data. TODO: add validation, error handling, add SQL backend</p>
+    @*<form asp-controller="Demo" asp-action="RegisterAddress" method="post">
+        Email:  <input asp-for="Email" /> <br />
+        Password: <input asp-for="Password" /><br />
+        <button type="submit">Register</button>
+        </form>*@
 
-    <form role="form" (submit)="signup($event, username.value, password.value)">
-        <div class="form-group">
+    <form role="form" (submit)="signup($event, email.value, password.value)">
+        <form-entry #email for="Email"></form-entry>
+        @*<div class="form-group">
             <label for="username">Username</label>
             <input type="text" #username class="form-control" id="username" placeholder="Email Address">
-        </div>
-        <div class="form-group">
+            </div>*@
+        <form-entry #password for="Password"></form-entry>
+        @*<div class="form-group">
             <label for="password">Password</label>
             <input type="password" #password class="form-control" id="password" placeholder="Password">
-        </div>
+            </div>*@
         <div class="form-group">
             <label for="passwordVerify">Password Verification</label>
             <input type="password" #password class="form-control" id="passwordVerify" placeholder="passwordVerify">
