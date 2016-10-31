@@ -31,6 +31,7 @@ namespace Angular2MultiSPA.Helpers
             var propertyName = For.Name.Camelize();
             var labelName = ((DefaultModelMetadata)For.Metadata).Placeholder ?? ((DefaultModelMetadata)For.Metadata).DisplayName ?? For.Name.Humanize();
             var dataType = ((DefaultModelMetadata)For.Metadata).DataTypeName == "Password" ? "Password" : "Text";
+            bool isRequired = ((DefaultModelMetadata)For.Metadata).IsRequired;
 
             output.TagName = "div";
             output.Attributes.Add("class", "form-group");
@@ -45,7 +46,8 @@ namespace Angular2MultiSPA.Helpers
             input.MergeAttribute("type", dataType);
             if (!string.IsNullOrEmpty(textClass)) input.AddCssClass(textClass);
 
-            input.Attributes.Add("dummyvalue", "dummyvalue");
+            input.Attributes.Add("#" + propertyName, "dummyvalue");
+            if (isRequired) input.Attributes.Add("required", "dummyvalue");
             input.Attributes.Add("placeholder", labelName);
 
             input.TagRenderMode = TagRenderMode.StartTag;
@@ -53,7 +55,7 @@ namespace Angular2MultiSPA.Helpers
             output.PostContent.SetHtmlContent(input);
 
             var childContent = output.PostContent.GetContent();
-            output.PostContent.SetHtmlContent(Regex.Replace(childContent, @"dummyvalue=""dummyvalue""", "#" + propertyName));
+            output.PostContent.SetHtmlContent(Regex.Replace(childContent, @"=""dummyvalue""", string.Empty));
         }
     }
 }
