@@ -18,10 +18,11 @@ export class SignupComponent {
         this.titleService.setTitle(newTitle);
     }
 
-    public signup(event: Event, username: string, password: string) {
+    public signup(event: Event, email: string, password: string, verifyPassword: string) {
         event.preventDefault();
 
-        let body = { 'email': username, 'password': password };
+        let body = { 'email': email, 'password': password, 'verifyPassword': verifyPassword };
+
         this.http.post('/Account/Register', JSON.stringify(body), { headers: this.authService.jsonHeaders() })
             .subscribe(response => {
                 if (response.status == 200) {
@@ -32,6 +33,8 @@ export class SignupComponent {
                 }
             },
             error => {
+                // todo: parse error messages, generate toast popups
+                // {"Email":["The Email field is required.","The Email field is not a valid e-mail address."],"Password":["The Password field is required.","The Password must be at least 6 characters long."]}
                 alert(error.text());
                 console.log(error.text());
             });

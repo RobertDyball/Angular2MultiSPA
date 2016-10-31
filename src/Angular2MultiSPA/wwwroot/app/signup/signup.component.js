@@ -23,10 +23,10 @@ var SignupComponent = (function () {
     SignupComponent.prototype.setTitle = function (newTitle) {
         this.titleService.setTitle(newTitle);
     };
-    SignupComponent.prototype.signup = function (event, username, password) {
+    SignupComponent.prototype.signup = function (event, email, password, verifyPassword) {
         var _this = this;
         event.preventDefault();
-        var body = { 'email': username, 'password': password };
+        var body = { 'email': email, 'password': password, 'verifyPassword': verifyPassword };
         this.http.post('/Account/Register', JSON.stringify(body), { headers: this.authService.jsonHeaders() })
             .subscribe(function (response) {
             if (response.status == 200) {
@@ -37,6 +37,8 @@ var SignupComponent = (function () {
                 console.log(response.json().error);
             }
         }, function (error) {
+            // todo: parse error messages, generate toast popups
+            // {"Email":["The Email field is required.","The Email field is not a valid e-mail address."],"Password":["The Password field is required.","The Password must be at least 6 characters long."]}
             alert(error.text());
             console.log(error.text());
         });
