@@ -23,11 +23,13 @@ var LoginComponent = (function () {
     LoginComponent.prototype.setTitle = function (newTitle) {
         this.titleService.setTitle(newTitle);
     };
-    LoginComponent.prototype.login = function (event, username, password) {
+    LoginComponent.prototype.login = function (event, email, password) {
         var _this = this;
         event.preventDefault();
-        var body = 'username=' + username + '&password=' + password + '&grant_type=password';
-        this.http.post('/connect/token', body, { headers: this.authService.authFormHeaders() })
+        var body = 'username=' + email + '&password=' + password + '&grant_type=password';
+        //let body = { 'email': email, 'password': password, 'grantType': 'password'};
+        //this.http.post('/connect/token', body, { headers: this.authService.authFormHeaders() })
+        this.http.post('/connect/token', body, { headers: this.authService.contentHeaders() })
             .subscribe(function (response) {
             _this.authService.login(response.json());
             _this.router.navigate(['/content']);

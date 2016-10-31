@@ -45,8 +45,7 @@ namespace Angular2MultiSPA
             // Register the OpenIddict services, including the default Entity Framework stores.
             services.AddOpenIddict<ApplicationDbContext>()
                 // Register the ASP.NET Core MVC binder used by OpenIddict.
-                // Note: if you don't call this method, you won't be able to
-                // bind OpenIdConnectRequest or OpenIdConnectResponse parameters.
+                // Note: if you don't call this method, you won't be able to bind OpenIdConnectRequest or OpenIdConnectResponse parameters.
                 .AddMvcBinders()
 
                 // Enable the token endpoint.
@@ -59,9 +58,8 @@ namespace Angular2MultiSPA
                 // During development, you can disable the HTTPS requirement.
                 .DisableHttpsRequirement()
 
-                // Register a new ephemeral key, that is discarded when the application
-                // shuts down. Tokens signed using this key are automatically invalidated.
-                // This method should only be used during development.
+                // Register a new ephemeral key, that is discarded when the application shuts down. Tokens signed using this 
+                // key are automatically invalidated. This method should only be used during development.
                 .AddEphemeralSigningKey();
 
             // Note: if you don't explicitly register a signing key, one is automatically generated and

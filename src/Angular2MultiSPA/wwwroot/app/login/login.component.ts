@@ -17,11 +17,13 @@ export class LoginComponent {
         this.titleService.setTitle(newTitle);
     }
 
-    public login(event: Event, username: string, password: string) {
+    public login(event: Event, email: string, password: string) {
         event.preventDefault();
-        let body = 'username=' + username + '&password=' + password + '&grant_type=password';
+        let body = 'username=' + email + '&password=' + password + '&grant_type=password';
+        //let body = { 'email': email, 'password': password, 'grantType': 'password'};
 
-        this.http.post('/connect/token', body, { headers: this.authService.authFormHeaders() })
+        //this.http.post('/connect/token', body, { headers: this.authService.authFormHeaders() })
+        this.http.post('/connect/token', body, { headers: this.authService.contentHeaders() })
             .subscribe(response => {
                 this.authService.login(response.json());
                 this.router.navigate(['/content']);

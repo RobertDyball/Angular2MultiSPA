@@ -18,10 +18,11 @@ export class SignupComponent {
         this.titleService.setTitle(newTitle);
     }
 
-    public signup(event: Event, email: string, password: string) {
+    public signup(event: Event, email: string, password: string, verifyPassword: string) {
         event.preventDefault();
 
-        let body = { 'email': email, 'password': password };
+        let body = { 'email': email, 'password': password, 'verifyPassword': verifyPassword };
+
         this.http.post('/Account/Register', JSON.stringify(body), { headers: this.authService.jsonHeaders() })
             .subscribe(response => {
                 if (response.status == 200) {

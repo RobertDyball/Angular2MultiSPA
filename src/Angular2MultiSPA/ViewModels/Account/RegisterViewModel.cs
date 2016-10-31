@@ -2,17 +2,12 @@
 
 namespace Angular2MultiSPA.ViewModels.Account
 {
-    public class RegisterViewModel
+    public class RegisterViewModel : LoginViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Username", ShortName = "Email", Prompt = "Email Address (username)")]
-        public string Email { get; set; }
-
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+        [Display(Name = "Password Verification")]
+        public string VerifyPassword { get; set; }
     }
 }

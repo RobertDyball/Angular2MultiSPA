@@ -35,7 +35,7 @@
     "Angular2MultiSPA.Models": "1.0.0-*",
     "Microsoft.AspNetCore.Authentication.JwtBearer": "1.0.0-*",
     "BundlerMinifier.Core": "2.2.281",
-    "Humanizer": "2.1.0"
+    "Humanizer.xproj": "2.1.0"
   },
 
   "tools": {

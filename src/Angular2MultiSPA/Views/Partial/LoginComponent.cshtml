@@ -1,14 +1,15 @@
+@using Angular2MultiSPA
+@using Angular2MultiSPA.ViewModels.Account
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper "*,Angular2MultiSPA"
+@model LoginViewModel
+
 <div class="jumbotron center-block">
     <h1>Login</h1>
-    <form role="form" (submit)="login($event, username.value, password.value)">
-        <div class="form-group">
-            <label for="username">username</label>
-            <input type="text" #username class="form-control" id="username" placeholder="username">
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" #password class="form-control" id="password" placeholder="Password">
-        </div>
+
+    <form role="form" (submit)="login($event, email.value, password.value)">
+        <form-entry for="Email"></form-entry>
+        <form-entry for="Password"></form-entry>
         <button type="submit" class="btn btn-default">Submit</button>
         <a [routerLink]="['/signup']">Click here to Signup</a>
     </form>

@@ -23,10 +23,10 @@ var SignupComponent = (function () {
     SignupComponent.prototype.setTitle = function (newTitle) {
         this.titleService.setTitle(newTitle);
     };
-    SignupComponent.prototype.signup = function (event, email, password) {
+    SignupComponent.prototype.signup = function (event, email, password, verifyPassword) {
         var _this = this;
         event.preventDefault();
-        var body = { 'email': email, 'password': password };
+        var body = { 'email': email, 'password': password, 'verifyPassword': verifyPassword };
         this.http.post('/Account/Register', JSON.stringify(body), { headers: this.authService.jsonHeaders() })
             .subscribe(function (response) {
             if (response.status == 200) {
