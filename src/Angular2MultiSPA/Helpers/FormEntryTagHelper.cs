@@ -50,6 +50,16 @@ namespace Angular2MultiSPA.Helpers
 
             input.Attributes.Add("#" + propertyName, "dummyvalue");
 
+            if (((DefaultModelMetadata)For.Metadata).HasMinLengthValidation())
+            {
+                input.Attributes.Add("minLength", ((DefaultModelMetadata)For.Metadata).MinLength().ToString());
+            }
+
+            if (((DefaultModelMetadata)For.Metadata).HasMaxLengthValidation())
+            {
+                input.Attributes.Add("maxLength", ((DefaultModelMetadata)For.Metadata).MaxLength().ToString());
+            }
+
             if (((DefaultModelMetadata)For.Metadata).IsRequired)
             {
                 input.Attributes.Add("required", "dummyvalue");
