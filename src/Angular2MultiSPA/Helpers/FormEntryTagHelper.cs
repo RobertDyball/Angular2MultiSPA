@@ -31,7 +31,6 @@ namespace Angular2MultiSPA.Helpers
             var propertyName = For.Name.Camelize();
             var labelName = ((DefaultModelMetadata)For.Metadata).Placeholder ?? ((DefaultModelMetadata)For.Metadata).DisplayName ?? For.Name.Humanize();
             var dataType = ((DefaultModelMetadata)For.Metadata).DataTypeName == "Password" ? "Password" : "Text";
-            bool isRequired = ((DefaultModelMetadata)For.Metadata).IsRequired;
 
             output.TagName = "div";
             output.Attributes.Add("class", "form-group");
@@ -44,10 +43,23 @@ namespace Angular2MultiSPA.Helpers
             var input = new TagBuilder("input");
             input.MergeAttribute("id", propertyName);
             input.MergeAttribute("type", dataType);
-            if (!string.IsNullOrEmpty(textClass)) input.AddCssClass(textClass);
+            if (!string.IsNullOrEmpty(textClass))
+            {
+                input.AddCssClass(textClass);
+            }
 
             input.Attributes.Add("#" + propertyName, "dummyvalue");
-            if (isRequired) input.Attributes.Add("required", "dummyvalue");
+
+            if (((DefaultModelMetadata)For.Metadata).IsRequired)
+            {
+                input.Attributes.Add("required", "dummyvalue");
+            }
+
+            if (For.Metadata.HasRegexValidation())
+            {
+                input.Attributes.Add("pattern", For.Metadata.RegexExpression());
+            }
+
             input.Attributes.Add("placeholder", labelName);
 
             input.TagRenderMode = TagRenderMode.StartTag;

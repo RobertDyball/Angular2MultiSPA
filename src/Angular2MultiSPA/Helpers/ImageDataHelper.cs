@@ -2,7 +2,7 @@
 
 namespace Angular2MultiSPA.Helpers
 {
-    public static class ImageHelper
+    public static class ImageDataHelper
     {
         /// <summary>
         /// Convert images from byte array used MS Access/Northwind to a Base64 string, to allow easy display
