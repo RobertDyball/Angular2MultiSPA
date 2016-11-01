@@ -3,11 +3,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
-using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace Angular2MultiSPA.Helpers
@@ -36,22 +31,6 @@ namespace Angular2MultiSPA.Helpers
             var propertyName = For.Name.Camelize();
             var labelName = ((DefaultModelMetadata)For.Metadata).Placeholder ?? ((DefaultModelMetadata)For.Metadata).DisplayName ?? For.Name.Humanize();
             var dataType = ((DefaultModelMetadata)For.Metadata).DataTypeName == "Password" ? "Password" : "Text";
-            bool isRequired = ((DefaultModelMetadata)For.Metadata).IsRequired;
-
-
-
-
-            //var x = For.Metadata.ValidatorMetadata.Items.First(a => a.Pattern != null);
-            //((System.ComponentModel.DataAnnotations.RegularExpressionAttribute)new System.Collections
-            //.Generic.Mscorlib_CollectionDebugView<object>
-            //(((Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadata)For.Metadata)
-            //.ValidationMetadata.ValidatorMetadata).Items[1]).Pattern
-
-            //((System.ComponentModel.DataAnnotations.ValidationAttribute)new System.Collections
-            //.Generic.Mscorlib_CollectionDebugView<object>
-            //(((Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadata)For.Metadata)
-            //.ValidationMetadata.ValidatorMetadata).Items[1]).ErrorMessageString
-
 
             output.TagName = "div";
             output.Attributes.Add("class", "form-group");
@@ -64,22 +43,22 @@ namespace Angular2MultiSPA.Helpers
             var input = new TagBuilder("input");
             input.MergeAttribute("id", propertyName);
             input.MergeAttribute("type", dataType);
-            if (!string.IsNullOrEmpty(textClass)) input.AddCssClass(textClass);
-
-            input.Attributes.Add("#" + propertyName, "dummyvalue");
-            if (isRequired) input.Attributes.Add("required", "dummyvalue");
-
-            var items = (((DefaultModelMetadata)For.Metadata).ValidationMetadata.ValidatorMetadata);
-            if (items.Any())
+            if (!string.IsNullOrEmpty(textClass))
             {
-                var regexExpression = items.DefaultIfEmpty(null).FirstOrDefault(a => (a as ValidationAttribute).GetType().ToString().Contains("RegularExpressionAttribute"));
-                if (regexExpression != null)
-                {
-                    var regex = (regexExpression as RegularExpressionAttribute).Pattern;
-                    input.Attributes.Add("pattern", regex);
-                }
+                input.AddCssClass(textClass);
             }
 
+            input.Attributes.Add("#" + propertyName, "dummyvalue");
+
+            if (((DefaultModelMetadata)For.Metadata).IsRequired)
+            {
+                input.Attributes.Add("required", "dummyvalue");
+            }
+
+            if (For.Metadata.HasRegexValidation())
+            {
+                input.Attributes.Add("pattern", For.Metadata.RegexExpression());
+            }
 
             input.Attributes.Add("placeholder", labelName);
 
