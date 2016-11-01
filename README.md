@@ -26,6 +26,7 @@ or follow the blog posts here: http://dyball.wordpress.com
   (thanks to password flow sample from https://github.com/openiddict/openiddict-samples )
 - Added client side and server side authentication.
 - Added initial Tag Helpers to automatically create boiler-plate client code based on view models, attributes decorating view model properties will generate code directly, from one place in the code.
+- Added required field and regular expression validation to Tag Helpers, dynmically added from view model
 
 #### Work in progress 
 - Setup SQL seeding and database creation from code for WebAPI data
