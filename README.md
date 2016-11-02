@@ -27,7 +27,8 @@ or follow the blog posts here: http://dyball.wordpress.com
 - Added client side and server side authentication.
 - Added initial Tag Helpers to automatically create boiler-plate client code based on view models, attributes decorating view model properties will generate code directly, from one place in the code.
 - Added required field and regular expression validation to Tag Helpers, dynamically added from view model
-- Added minlength and maxlength validation to Tag Helpers, dynamically added from view model
+- Added minlength, maxlength validation to Tag Helpers, dynamically added from view model
+- Added required (tag attribute or data annotation attribute) and hidden (tag attribute)
 
 #### Work in progress 
 - Setup SQL seeding and database creation from code for WebAPI data
