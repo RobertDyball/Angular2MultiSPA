@@ -20,6 +20,18 @@ namespace Angular2MultiSPA.Helpers
         public string TextBoxClass { get; set; } = "form-control";
 
         /// <summary>
+        /// Hidden attribute
+        /// </summary>
+        [HtmlAttributeName("hidden")]
+        public string Hidden { get; set; } = null;
+
+        /// <summary>
+        /// Hidden attribute
+        /// </summary>
+        [HtmlAttributeName("readonly")]
+        public string Readonly { get; set; } = null;
+
+        /// <summary>
         /// ViewModel name
         /// </summary>
         [HtmlAttributeName("for")]
@@ -31,6 +43,21 @@ namespace Angular2MultiSPA.Helpers
             var propertyName = For.Name.Camelize();
             var labelName = ((DefaultModelMetadata)For.Metadata).Placeholder ?? ((DefaultModelMetadata)For.Metadata).DisplayName ?? For.Name.Humanize();
             var dataType = ((DefaultModelMetadata)For.Metadata).DataTypeName == "Password" ? "Password" : "Text";
+
+            // HTML5 input type="" to be supported
+            //color
+            //date
+            //datetime
+            //datetime-local
+            //email
+            //month
+            //number
+            //range
+            //search
+            //tel
+            //time
+            //url
+            //week
 
             output.TagName = "div";
             output.Attributes.Add("class", "form-group");
@@ -48,6 +75,17 @@ namespace Angular2MultiSPA.Helpers
                 input.AddCssClass(textClass);
             }
 
+            if (!string.IsNullOrEmpty(Hidden))
+            {
+                output.Attributes.Add("hidden", "hidden");
+                input.Attributes.Add("hidden", "hidden");
+            }
+
+            if (!string.IsNullOrEmpty(Readonly) || For.Metadata.IsReadOnly)
+            {
+                input.Attributes.Add("readonly", "readonly");
+            }
+
             input.Attributes.Add("#" + propertyName, "dummyvalue");
 
             if (((DefaultModelMetadata)For.Metadata).HasMinLengthValidation())
@@ -62,7 +100,7 @@ namespace Angular2MultiSPA.Helpers
 
             if (((DefaultModelMetadata)For.Metadata).IsRequired)
             {
-                input.Attributes.Add("required", "dummyvalue");
+                input.Attributes.Add("required", "required");
             }
 
             if (For.Metadata.HasRegexValidation())
@@ -81,3 +119,5 @@ namespace Angular2MultiSPA.Helpers
         }
     }
 }
+ 
+ 
