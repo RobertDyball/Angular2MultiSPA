@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer} from '@angular/platform-browser';
 
 import { CategoryService } from './services/Category.service';
-import { Category } from './category.ts';
+import { Category } from './models/Category.ts';
 
 @Component({
     selector: 'my-content',

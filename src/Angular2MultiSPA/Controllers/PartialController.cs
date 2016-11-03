@@ -13,6 +13,8 @@ namespace Angular2MultiSPA.Controllers
 
         public IActionResult ContentComponent() => PartialView();
 
+        public IActionResult EmployeeComponent() => PartialView();
+
         public IActionResult HomeComponent() => PartialView();
 
         public IActionResult LoginComponent() => PartialView();
