@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Angular2MultiSPA.Helpers
@@ -42,7 +43,8 @@ namespace Angular2MultiSPA.Helpers
             string textClass = "form-control"; //TextBoxClass;
             var propertyName = For.Name.Camelize();
             var labelName = ((DefaultModelMetadata)For.Metadata).Placeholder ?? ((DefaultModelMetadata)For.Metadata).DisplayName ?? For.Name.Humanize();
-            var dataType = ((DefaultModelMetadata)For.Metadata).DataTypeName == "Password" ? "Password" : "Text";
+            var dataType = ((DefaultModelMetadata)For.Metadata).DataTypeName;
+            var inputType = dataType == "Password" ? "Password" : "Text";
 
             // HTML5 input type="" to be supported
             //color
@@ -65,7 +67,7 @@ namespace Angular2MultiSPA.Helpers
             var label = new TagBuilder("label");
             label.MergeAttribute("for", propertyName);
             label.InnerHtml.AppendHtml(labelName);
-            output.Content.SetHtmlContent(label);
+            output.PostContent.SetHtmlContent(label);
 
             var input = new TagBuilder("input");
             input.MergeAttribute("id", propertyName);
@@ -112,12 +114,29 @@ namespace Angular2MultiSPA.Helpers
 
             input.TagRenderMode = TagRenderMode.StartTag;
 
-            output.PostContent.SetHtmlContent(input);
+            if (dataType == "Currency")
+            {
+                //<div class="input-group">
+                var divInputGroup = new TagBuilder("div");
+                divInputGroup.MergeAttribute("class", "input-group");
+
+                // <span class="input-group-addon">$</span>
+                var spanInputGroupAddon = new TagBuilder("span");
+                spanInputGroupAddon.MergeAttribute("class", "input-group-addon");
+                spanInputGroupAddon.InnerHtml.Append("$");
+                divInputGroup.InnerHtml.AppendHtml(spanInputGroupAddon);
+                divInputGroup.InnerHtml.AppendHtml(input);
+
+                output.PostContent.SetHtmlContent(divInputGroup);
+            }
+            else
+            {
+                output.PostContent.SetHtmlContent(input);
+            }
 
             var childContent = output.PostContent.GetContent();
             output.PostContent.SetHtmlContent(Regex.Replace(childContent, @"=""dummyvalue""", string.Empty));
         }
     }
 }
- 
- 
+
