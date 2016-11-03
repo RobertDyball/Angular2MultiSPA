@@ -5,8 +5,8 @@ import { AboutComponent }   from './about.component';
 import { HomeComponent }      from './home.component';
 import { ContentComponent }  from './content.component';
 import { EmployeeComponent }  from './employee.component';
-import { LoginComponent } from './login.component';
-import { SignupComponent } from './signup.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
