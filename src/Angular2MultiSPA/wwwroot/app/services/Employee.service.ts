@@ -6,15 +6,15 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { AuthService } from './auth.service';
-import { Category } from '../models/category.ts';
+import { Employee } from '../models/employee.ts';
 
 @Injectable()
-export class CategoryService {
+export class EmployeeService {
 
     constructor(private http: Http, private authService: AuthService) { }
 
-    getCategories(): Observable<Category[]> {
-        return this.http.get('api/category', { headers: this.authService.authJsonHeaders() })
+    getEmployees(): Observable<Employee[]> {
+        return this.http.get('api/employee', { headers: this.authService.authJsonHeaders() })
             .map((resp: Response) => resp.json())
             .catch(this.handleError);
     }

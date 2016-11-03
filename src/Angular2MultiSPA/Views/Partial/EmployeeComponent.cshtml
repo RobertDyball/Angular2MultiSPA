@@ -1,0 +1,22 @@
+
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID #</th>
+                <th>LastName, FirstName</th>
+                <th>Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr scope="row" *ngFor="let employee of employees">
+                <td>{{employee.id}}</td>
+                <td>{{employee.lastName}}, {{employee.firstName}}</td>
+                <td>
+                    <img [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  employee.image)" title="{{employee.lastName}}, {{employee.firstName}}">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
