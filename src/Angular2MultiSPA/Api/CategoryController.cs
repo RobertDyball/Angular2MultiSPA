@@ -3,6 +3,7 @@ using Angular2MultiSPA.Helpers;
 using Angular2MultiSPA.Models;
 using Angular2MultiSPA.ViewModels;
 using AspNet.Security.OAuth.Validation;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,21 +11,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Angular2MultiSPA.Api
 {
 
     [Route("api/[controller]")]
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private NorthwindContext _context;
-
-        public CategoryController(NorthwindContext context, UserManager<ApplicationUser> userManager)
+        public CategoryController(IMediator mediator, NorthwindContext context, UserManager<ApplicationUser> userManager) : base(mediator, context, userManager)
         {
-            _userManager = userManager;
-            _context = context;
         }
 
         // GET: api/values
@@ -39,15 +33,16 @@ namespace Angular2MultiSPA.Api
                 return null;// BadRequest();
             }
 
-            var categories = _context.Categories.Select(a => new Category
-            {
-                Id = a.CategoryId,
-                Name = a.CategoryName,
-                Description = a.Description,
-                Image = a.Picture.ConvertToBase64()
-            });
+            return _mediator.Send(new GetAllCategoriesQuery(user));
+            //var categories = _context.Categories.Select(a => new Category
+            //{
+            //    Id = a.CategoryId,
+            //    Name = a.CategoryName,
+            //    Description = a.Description,
+            //    Image = a.Picture.ConvertToBase64()
+            //});
 
-            return categories;
+            //return categories;
         }
 
         // GET api/values/5

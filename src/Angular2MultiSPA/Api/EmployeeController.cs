@@ -9,22 +9,15 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+using MediatR;
 
 namespace Angular2MultiSPA.Api
 {
-
     [Route("api/[controller]")]
-    public class EmployeeController : Controller
+    public class EmployeeController : BaseController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private NorthwindContext _context;
-
-        public EmployeeController(NorthwindContext context, UserManager<ApplicationUser> userManager)
+        public EmployeeController(IMediator mediator, NorthwindContext context, UserManager<ApplicationUser> userManager) : base(mediator, context, userManager)
         {
-            _userManager = userManager;
-            _context = context;
         }
 
         // GET: api/values

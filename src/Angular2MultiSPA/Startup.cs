@@ -42,6 +42,7 @@ namespace Angular2MultiSPA
                 options.UseSqlServer(Configuration.GetConnectionString("NorthwindConnection")));
 
             services.AddMvc();
+            services.AddMediatR(typeof(Startup));
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase());
 
