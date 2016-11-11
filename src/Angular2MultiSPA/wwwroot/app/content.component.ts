@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer} from '@angular/platform-browser';
 
 import { CategoryService } from './services/Category.service';
+import { ProductService } from './services/Product.service';
 import { Category } from './models/Category.ts';
+import { Product } from './models/Product.ts';
 
 @Component({
     selector: 'my-content',
@@ -11,10 +13,12 @@ import { Category } from './models/Category.ts';
 
 export class ContentComponent implements OnInit {
     categories: Category[] = [];
+    products: Product[] = [];
     selectedCategory: Category = null;
 
     constructor(
         private _DomSanitizer: DomSanitizer,
+        private productService: ProductService,
         private categoryService: CategoryService
     ) { }
 
@@ -24,6 +28,13 @@ export class ContentComponent implements OnInit {
         this.presetToFirstItem();
     }
 
+    //getProductsForSelectedCategory(): void {
+    //    if (this.selectedCategory != null) {
+    //        this.productService.getProducts(this.selectedCategory.id)
+    //            .subscribe((data: Product[]) => this.products = data);
+    //    }
+    //}
+
     presetToFirstItem(): void {
         if (this.selectedCategory === null) {
             this.selectedCategory = this.categories.length > 0 ? this.categories[0] : null;
@@ -32,6 +43,8 @@ export class ContentComponent implements OnInit {
 
     selectCategory(category: Category): void {
         this.selectedCategory = category;
+        this.productService.getProducts(this.selectedCategory.id)
+            .subscribe((data: Product[]) => this.products = data);
     }
 
     getClass(category: Category): string {

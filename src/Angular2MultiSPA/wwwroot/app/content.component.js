@@ -11,11 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var Category_service_1 = require('./services/Category.service');
+var Product_service_1 = require('./services/Product.service');
 var ContentComponent = (function () {
-    function ContentComponent(_DomSanitizer, categoryService) {
+    function ContentComponent(_DomSanitizer, productService, categoryService) {
         this._DomSanitizer = _DomSanitizer;
+        this.productService = productService;
         this.categoryService = categoryService;
         this.categories = [];
+        this.products = [];
         this.selectedCategory = null;
     }
     ContentComponent.prototype.ngOnInit = function () {
@@ -24,6 +27,13 @@ var ContentComponent = (function () {
             .subscribe(function (data) { return _this.categories = data; });
         this.presetToFirstItem();
     };
+    ContentComponent.prototype.getProductsForSelectedCategory = function () {
+        var _this = this;
+        if (this.selectedCategory != null) {
+            this.productService.getProducts(this.selectedCategory.id)
+                .subscribe(function (data) { return _this.products = data; });
+        }
+    };
     ContentComponent.prototype.presetToFirstItem = function () {
         if (this.selectedCategory === null) {
             this.selectedCategory = this.categories.length > 0 ? this.categories[0] : null;
@@ -31,6 +41,7 @@ var ContentComponent = (function () {
     };
     ContentComponent.prototype.selectCategory = function (category) {
         this.selectedCategory = category;
+        this.getProductsForSelectedCategory();
     };
     ContentComponent.prototype.getClass = function (category) {
         this.presetToFirstItem();
@@ -41,7 +52,7 @@ var ContentComponent = (function () {
             selector: 'my-content',
             templateUrl: '/partial/contentComponent'
         }), 
-        __metadata('design:paramtypes', [platform_browser_1.DomSanitizer, Category_service_1.CategoryService])
+        __metadata('design:paramtypes', [platform_browser_1.DomSanitizer, Product_service_1.ProductService, Category_service_1.CategoryService])
     ], ContentComponent);
     return ContentComponent;
 }());

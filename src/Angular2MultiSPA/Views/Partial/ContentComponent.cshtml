@@ -24,14 +24,14 @@
 
             <div class="col-sm-10">
                 <div class="row">
-                    <div *ngFor="let categoryItem of categories">
+                    <div *ngFor="let productItem of products">
                         <!-- list of products within current seleced category -->
                         <div class="card col-md-4 col-sm-6">
                             <div class="card-block">
-                                <h4 class="card-title">{{categoryItem.name}}</h4>
+                                <h4 class="card-title">{{productItem.name}}</h4>
                                 <h6 class="card-subtitle text-muted">Support card subtitle</h6>
                             </div>
-                            <img class="img-responsive" [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  categoryItem?.image)" alt="{{categoryItem?.description}}" title="{{categoeryItem?.description}}">
+                            @*<img class="img-responsive" [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  categoryItem?.image)" alt="{{categoryItem?.description}}" title="{{categoeryItem?.description}}">*@
                             <div class="card-block">
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 <a href="#" class="card-link">Card link</a>
