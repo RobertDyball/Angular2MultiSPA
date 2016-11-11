@@ -1,22 +1,48 @@
 
 
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID #</th>
-                <th>Image</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr scope="row" *ngFor="let dataItem of categories">
-                <td>{{dataItem.id}}</td>
-                <td>
-                    <img [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  dataItem.image)" title="{{dataItem.description}}">
-                </td>
-                <td>{{dataItem.name}}</td>
-            </tr>
-        </tbody>
-    </table>
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="panel panel-default sidebar-menu">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Categories:</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <!-- current selected category -->
+                        <div class="image">
+                            <img [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  selectedCategory?.image)" title="{{selectedCategory?.description}}">
+                        </div>
+                        <!-- list of categories -->
+                        <div class="list-group" *ngFor="let categoryItem of categories">
+                            <button type="button" (click)="selectCategory(categoryItem)" class="list-group-item list-group-item-action {{ getClass(categoryItem) }}">{{categoryItem.name}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-10">
+                <div class="row">
+                    <div *ngFor="let categoryItem of categories">
+                        <!-- list of products within current seleced category -->
+                        <div class="card col-md-4 col-sm-6">
+                            <div class="card-block">
+                                <h4 class="card-title">{{categoryItem.name}}</h4>
+                                <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+                            </div>
+                            <img class="img-responsive" [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  categoryItem?.image)" alt="{{categoryItem?.description}}" title="{{categoeryItem?.description}}">
+                            <div class="card-block">
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="card-link">Card link</a>
+                                <a href="#" class="card-link">Another link</a>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

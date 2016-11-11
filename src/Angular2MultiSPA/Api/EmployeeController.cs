@@ -1,5 +1,4 @@
 ﻿using Angular2MultiSPA.Data;
-using Angular2MultiSPA.Helpers;
 using Angular2MultiSPA.Models;
 using Angular2MultiSPA.ViewModels;
 using AspNet.Security.OAuth.Validation;
@@ -10,21 +9,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Angular2MultiSPA.Api
 {
-
     [Route("api/[controller]")]
-    public class EmployeeController : Controller
+    public class EmployeeController : BaseController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private NorthwindContext _context;
-
-        public EmployeeController(NorthwindContext context, UserManager<ApplicationUser> userManager)
+        public EmployeeController(NorthwindContext context, UserManager<ApplicationUser> userManager) : base(context, userManager)
         {
-            _userManager = userManager;
-            _context = context;
         }
 
         // GET: api/values
@@ -35,27 +26,26 @@ namespace Angular2MultiSPA.Api
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                // TODO: create a more useful view model that carries request status and error messages, along with the data
-                return null;// BadRequest();
+                return null;
             }
 
-            // TODO: add automapper
-            var employees = _context.Employees.Select(a => new Employee
-            {
-                Id = a.EmployeeId,
-                FirstName = a.FirstName,
-                LastName = a.LastName,
-                Image = a.Photo.ConvertToBase64()
-            });
-
+            var employees = _context.Employees.Select(a => a.MapEmployeesToEmployee());
             return employees;
         }
 
         // GET api/values/5
+        [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<Employee> Get(int id)
         {
-            return "value";
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return null;
+            }
+
+            var employee = null as Employee;
+            return employee;
         }
 
         // POST api/values

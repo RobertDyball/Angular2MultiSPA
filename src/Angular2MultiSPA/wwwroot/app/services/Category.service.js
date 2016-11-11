@@ -20,7 +20,7 @@ var CategoryService = (function () {
         this.authService = authService;
     }
     CategoryService.prototype.getCategories = function () {
-        return this.http.get('api/category', { headers: this.authService.authJsonHeaders() })
+        return this.http.get('api/category', { headers: this.authService.jsonHeaders() })
             .map(function (resp) { return resp.json(); })
             .catch(this.handleError);
     };

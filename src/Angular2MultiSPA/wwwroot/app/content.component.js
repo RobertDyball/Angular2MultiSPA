@@ -16,11 +16,25 @@ var ContentComponent = (function () {
         this._DomSanitizer = _DomSanitizer;
         this.categoryService = categoryService;
         this.categories = [];
+        this.selectedCategory = null;
     }
     ContentComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.categoryService.getCategories()
             .subscribe(function (data) { return _this.categories = data; });
+        this.presetToFirstItem();
+    };
+    ContentComponent.prototype.presetToFirstItem = function () {
+        if (this.selectedCategory === null) {
+            this.selectedCategory = this.categories.length > 0 ? this.categories[0] : null;
+        }
+    };
+    ContentComponent.prototype.selectCategory = function (category) {
+        this.selectedCategory = category;
+    };
+    ContentComponent.prototype.getClass = function (category) {
+        this.presetToFirstItem();
+        return (this.selectedCategory != null && (this.selectedCategory.id === category.id)) ? "active" : "";
     };
     ContentComponent = __decorate([
         core_1.Component({

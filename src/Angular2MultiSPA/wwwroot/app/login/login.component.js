@@ -27,8 +27,6 @@ var LoginComponent = (function () {
         var _this = this;
         event.preventDefault();
         var body = 'username=' + email + '&password=' + password + '&grant_type=password';
-        //let body = { 'email': email, 'password': password, 'grantType': 'password'};
-        //this.http.post('/connect/token', body, { headers: this.authService.authFormHeaders() })
         this.http.post('/connect/token', body, { headers: this.authService.contentHeaders() })
             .subscribe(function (response) {
             _this.authService.login(response.json());

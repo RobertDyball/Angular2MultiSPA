@@ -13,7 +13,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent, data: { title: 'Login' } },
     { path: 'signup', component: SignupComponent, data: { title: 'Signup' } },
     { path: 'home', component: HomeComponent, data: { title: 'Home' } },
-    { path: 'content', component: ContentComponent, data: { title: 'Content' }, canActivate: [AuthGuard] },
+    { path: 'content', component: ContentComponent, data: { title: 'Content' } },
     { path: 'employee', component: EmployeeComponent, data: { title: 'Employees' }, canActivate: [AuthGuard] },
     { path: 'about', component: AboutComponent, data: { title: 'About' } }
 ];
