@@ -12,7 +12,7 @@ var appRoutes = [
     { path: 'login', component: login_component_1.LoginComponent, data: { title: 'Login' } },
     { path: 'signup', component: signup_component_1.SignupComponent, data: { title: 'Signup' } },
     { path: 'home', component: home_component_1.HomeComponent, data: { title: 'Home' } },
-    { path: 'content', component: content_component_1.ContentComponent, data: { title: 'Content' }, canActivate: [auth_guard_service_1.AuthGuard] },
+    { path: 'content', component: content_component_1.ContentComponent, data: { title: 'Content' } },
     { path: 'employee', component: employee_component_1.EmployeeComponent, data: { title: 'Employees' }, canActivate: [auth_guard_service_1.AuthGuard] },
     { path: 'about', component: about_component_1.AboutComponent, data: { title: 'About' } }
 ];

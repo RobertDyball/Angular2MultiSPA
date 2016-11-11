@@ -11,46 +11,47 @@ using System.Threading.Tasks;
 
 namespace Angular2MultiSPA.Api
 {
-    public class CategoryController : BaseController
+
+    public class ProductController : BaseController
     {
-        public CategoryController(NorthwindContext context, UserManager<ApplicationUser> userManager) : base(context, userManager)
+        public ProductController(NorthwindContext context, UserManager<ApplicationUser> userManager) : base(context, userManager)
         {
         }
 
         /// <summary>
-        /// Returns all 'Categories' objects from the database mapped into 'Category' view model objects
+        /// Returns all 'Products' objects from the database mapped into 'Product' view model objects
         /// </summary>
         /// <example>
-        /// GET api/category 
+        /// GET api/product 
         /// </example>
-        /// <returns>Category view model objects</returns>
+        /// <returns>Product view model objects</returns>
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IEnumerable<Category>> Get()
+        public async Task<IEnumerable<Product>> Get()
         {
-            var categories = _context.Categories.Select(a => a.MapCategoriesToCategory());
+            var products = _context.Products.Select(a => a.MapProductsToProduct());
 
-            return categories;
+            return products;
         }
 
         /// <summary>
-        /// Returns a single 'Categories' object from the database mapped into a 'Category' view model object
+        /// Returns one or more 'Products' objects from the database mapped into a 'Product' view model object
         /// </summary>
         /// <example>
-        /// GET api/category/5 
+        /// GET api/category/5/1
         /// </example>
         /// <param name="id">id of the record to return</param>
         /// <returns>a Category view model object</returns>
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<Category> Get(int id)
+        public async Task<IEnumerable<Product>> Get(int? productId, int? categoryId)
         {
-            var category = _context.Categories
-                                   .DefaultIfEmpty(null as Categories)
-                                   .FirstOrDefault(a => a.CategoryId == id)
-                                   .MapCategoriesToCategory();
+            var products = _context.Products
+                                   .Where(a => (productId.HasValue && a.ProductId == productId) ||
+                                               (categoryId.HasValue && a.CategoryId == categoryId))
+                                   .Select(a=>a.MapProductsToProduct());
 
-            return category;
+            return products;
         }
 
         // POST api/values

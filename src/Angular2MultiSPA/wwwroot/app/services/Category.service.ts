@@ -14,7 +14,7 @@ export class CategoryService {
     constructor(private http: Http, private authService: AuthService) { }
 
     getCategories(): Observable<Category[]> {
-        return this.http.get('api/category', { headers: this.authService.authJsonHeaders() })
+        return this.http.get('api/category', { headers: this.authService.jsonHeaders() })
             .map((resp: Response) => resp.json())
             .catch(this.handleError);
     }
