@@ -30,6 +30,7 @@ or follow the blog posts here: http://dyball.wordpress.com
 - Added minlength, maxlength validation to Tag Helpers, dynamically added from view model
 - Added required (tag attribute or data annotation attribute) and hidden (tag attribute)
 - Expanded available Web Api methods for Category, Employee; added Products
+- Added simple hierarchical categoryproduct selection. 
 
 #### Work in progress 
 - Add further validation, error handling, toasts/messages for signup or login fail.

@@ -24,7 +24,7 @@ export class LoginComponent {
         this.http.post('/connect/token', body, { headers: this.authService.contentHeaders() })
             .subscribe(response => {
                 this.authService.login(response.json());
-                this.router.navigate(['/content']);
+                this.router.navigate(['/employee']);
             },
             error => {
                 alert(error.text());

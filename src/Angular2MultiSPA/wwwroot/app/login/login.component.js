@@ -30,7 +30,7 @@ var LoginComponent = (function () {
         this.http.post('/connect/token', body, { headers: this.authService.contentHeaders() })
             .subscribe(function (response) {
             _this.authService.login(response.json());
-            _this.router.navigate(['/content']);
+            _this.router.navigate(['/employee']);
         }, function (error) {
             alert(error.text());
             console.log(error.text());
