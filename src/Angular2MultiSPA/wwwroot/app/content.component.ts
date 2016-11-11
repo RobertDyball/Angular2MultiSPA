@@ -29,8 +29,8 @@ export class ContentComponent implements OnInit {
     }
 
     presetToFirstItem(): void {
-        if (this.selectedCategory === null) {
-            this.selectedCategory = this.categories.length > 0 ? this.categories[0] : null;
+        if (this.selectedCategory === null && this.categories.length > 0) {
+            this.selectCategory(this.categories[0]);
         }
     }
 

@@ -28,8 +28,8 @@ var ContentComponent = (function () {
         this.presetToFirstItem();
     };
     ContentComponent.prototype.presetToFirstItem = function () {
-        if (this.selectedCategory === null) {
-            this.selectedCategory = this.categories.length > 0 ? this.categories[0] : null;
+        if (this.selectedCategory === null && this.categories.length > 0) {
+            this.selectCategory(this.categories[0]);
         }
     };
     ContentComponent.prototype.selectCategory = function (category) {
@@ -40,7 +40,7 @@ var ContentComponent = (function () {
             .subscribe(function (data) { return _this.products = data; });
     };
     ContentComponent.prototype.getClass = function (category) {
-        this.presetToFirstItem();
+        //this.presetToFirstItem();
         return (this.selectedCategory != null && (this.selectedCategory.id === category.id)) ? "active" : "";
     };
     ContentComponent = __decorate([
