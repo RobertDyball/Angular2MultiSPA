@@ -28,13 +28,6 @@ export class ContentComponent implements OnInit {
         this.presetToFirstItem();
     }
 
-    //getProductsForSelectedCategory(): void {
-    //    if (this.selectedCategory != null) {
-    //        this.productService.getProducts(this.selectedCategory.id)
-    //            .subscribe((data: Product[]) => this.products = data);
-    //    }
-    //}
-
     presetToFirstItem(): void {
         if (this.selectedCategory === null) {
             this.selectedCategory = this.categories.length > 0 ? this.categories[0] : null;
@@ -43,6 +36,7 @@ export class ContentComponent implements OnInit {
 
     selectCategory(category: Category): void {
         this.selectedCategory = category;
+        this.products = [];
         this.productService.getProducts(this.selectedCategory.id)
             .subscribe((data: Product[]) => this.products = data);
     }

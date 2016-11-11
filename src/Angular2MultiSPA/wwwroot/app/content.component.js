@@ -27,21 +27,17 @@ var ContentComponent = (function () {
             .subscribe(function (data) { return _this.categories = data; });
         this.presetToFirstItem();
     };
-    ContentComponent.prototype.getProductsForSelectedCategory = function () {
-        var _this = this;
-        if (this.selectedCategory != null) {
-            this.productService.getProducts(this.selectedCategory.id)
-                .subscribe(function (data) { return _this.products = data; });
-        }
-    };
     ContentComponent.prototype.presetToFirstItem = function () {
         if (this.selectedCategory === null) {
             this.selectedCategory = this.categories.length > 0 ? this.categories[0] : null;
         }
     };
     ContentComponent.prototype.selectCategory = function (category) {
+        var _this = this;
         this.selectedCategory = category;
-        this.getProductsForSelectedCategory();
+        this.products = [];
+        this.productService.getProducts(this.selectedCategory.id)
+            .subscribe(function (data) { return _this.products = data; });
     };
     ContentComponent.prototype.getClass = function (category) {
         this.presetToFirstItem();

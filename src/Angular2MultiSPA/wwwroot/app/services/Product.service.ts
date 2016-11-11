@@ -13,8 +13,8 @@ export class ProductService {
 
     constructor(private http: Http, private authService: AuthService) { }
 
-    getProducts(id: number): Observable<Product[]> {
-        return this.http.get('api/product?id=' + id.toString(), { headers: this.authService.jsonHeaders() })
+    getProducts(categoryId: number): Observable<Product[]> {
+        return this.http.get('api/product/' + categoryId.toString(), { headers: this.authService.jsonHeaders() })
             .map((resp: Response) => resp.json())
             .catch(this.handleError);
     }

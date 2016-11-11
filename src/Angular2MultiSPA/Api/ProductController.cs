@@ -19,6 +19,23 @@ namespace Angular2MultiSPA.Api
         }
 
         /// <summary>
+        /// Returns one or more 'Products' objects from the database mapped into a 'Product' view model object
+        /// </summary>
+        /// <example>
+        /// GET api/category/5/1
+        /// </example>
+        /// <param name="id">id of the record to return</param>
+        /// <returns>a Category view model object</returns>
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public async Task<IEnumerable<Product>> Get(int id)
+        {
+            var products = _context.Products.Where(a => a.CategoryId.HasValue && a.CategoryId.Value == id)
+                                   .Select(a => a.MapProductsToProduct()).ToList();
+            return products;
+        }
+
+        /// <summary>
         /// Returns all 'Products' objects from the database mapped into 'Product' view model objects
         /// </summary>
         /// <example>
@@ -30,26 +47,6 @@ namespace Angular2MultiSPA.Api
         public async Task<IEnumerable<Product>> Get()
         {
             var products = _context.Products.Select(a => a.MapProductsToProduct());
-
-            return products;
-        }
-
-        /// <summary>
-        /// Returns one or more 'Products' objects from the database mapped into a 'Product' view model object
-        /// </summary>
-        /// <example>
-        /// GET api/category/5/1
-        /// </example>
-        /// <param name="id">id of the record to return</param>
-        /// <returns>a Category view model object</returns>
-        [AllowAnonymous]
-        [HttpGet("{id}")]
-        public async Task<IEnumerable<Product>> Get(int? productId, int? categoryId)
-        {
-            var products = _context.Products
-                                   .Where(a => (productId.HasValue && a.ProductId == productId) ||
-                                               (categoryId.HasValue && a.CategoryId == categoryId))
-                                   .Select(a=>a.MapProductsToProduct());
 
             return products;
         }

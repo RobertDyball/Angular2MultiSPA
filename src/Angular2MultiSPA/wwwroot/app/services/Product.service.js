@@ -19,8 +19,8 @@ var ProductService = (function () {
         this.http = http;
         this.authService = authService;
     }
-    ProductService.prototype.getProducts = function (id) {
-        return this.http.get('api/product?id=' + id.toString(), { headers: this.authService.jsonHeaders() })
+    ProductService.prototype.getProducts = function (categoryId) {
+        return this.http.get('api/product/' + categoryId.toString(), { headers: this.authService.jsonHeaders() })
             .map(function (resp) { return resp.json(); })
             .catch(this.handleError);
     };
