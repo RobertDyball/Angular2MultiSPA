@@ -40,7 +40,7 @@ var ContentComponent = (function () {
             .subscribe(function (data) { return _this.products = data; });
     };
     ContentComponent.prototype.getClass = function (category) {
-        //this.presetToFirstItem();
+        this.presetToFirstItem();
         return (this.selectedCategory != null && (this.selectedCategory.id === category.id)) ? "active" : "";
     };
     ContentComponent = __decorate([

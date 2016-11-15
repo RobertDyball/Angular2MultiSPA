@@ -31,6 +31,8 @@ or follow the blog posts here: http://dyball.wordpress.com
 - Added required (tag attribute or data annotation attribute) and hidden (tag attribute)
 - Expanded available Web Api methods for Category, Employee; added Products
 - Added simple hierarchical categoryproduct selection. 
+- Started refactoring tag helpers; now one for form entry fields (tag-in) and another for read-only display of data (tag-da)
+- Boolean read-only data may be rendered true/false, yes/no or as checkboxes (still in progress)
 
 #### Work in progress 
 - Add further validation, error handling, toasts/messages for signup or login fail.
