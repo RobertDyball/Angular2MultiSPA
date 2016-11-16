@@ -114,9 +114,7 @@ namespace Angular2MultiSPA.Helpers
                                 cb.Attributes.Add("disabled", "true");
                             }
 
-                            // TODO need to fix checked/unchecked data binding
                             cb.Attributes.Add("[(ngModel)]", dataBindTo);
-                            //cb.Attributes.Add("[(checked)]", dataBindTo);
 
                             input.InnerHtml.AppendHtml(cb);
                             break;

@@ -52,7 +52,9 @@ namespace Angular2MultiSPA.Data
                 Id = product.ProductId,
                 CategoryId = product.CategoryId,
                 Name = product.ProductName,
-                UnitPrice = product.UnitPrice
+                UnitPrice = product.UnitPrice,
+                QuantityPerUnit = product.QuantityPerUnit,
+                Discontinued = product.Discontinued
             };
         }
 
