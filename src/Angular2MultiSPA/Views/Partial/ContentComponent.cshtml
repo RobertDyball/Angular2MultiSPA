@@ -1,4 +1,3 @@
-@using Angular2MultiSPA
 @using Angular2MultiSPA.ViewModels
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper "*,Angular2MultiSPA"
@@ -14,12 +13,13 @@
                     </div>
 
                     <div class="panel-body">
-                        <!-- current selected category -->
+                        <!-- current selected category, default to first -->
                         <div class="image">
                             <img [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  selectedCategory?.image)" title="{{selectedCategory?.description}}">
                         </div>
-                        <!-- list of categories -->
+                        <!-- list of all categories -->
                         <div class="list-group" *ngFor="let categoryItem of categories">
+                            <!-- category -->
                             <button type="button" (click)="selectCategory(categoryItem)" class="list-group-item list-group-item-action {{ getClass(categoryItem) }}">{{categoryItem.name}}</button>
                         </div>
                     </div>
@@ -28,23 +28,22 @@
 
             <div class="col-sm-10">
                 <div class="row">
+                    <!-- list of products within current selected category -->
                     <div *ngFor="let productItem of products">
-                        <!-- list of products within current seleced category -->
+                        <!-- product -->
                         <div class="card col-md-4 col-sm-6">
                             <div class="card-block">
                                 <h4 class="card-title"><tag-da bind-pa="productItem" for="Name"></tag-da></h4>
                                 <h6 class="card-subtitle text-muted">Support card subtitle</h6>
                             </div>
-                            @*<img class="img-responsive" [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' +  categoryItem?.image)" alt="{{categoryItem?.description}}" title="{{categoeryItem?.description}}">*@
                             <div class="card-block">
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <tag-da class="col-md-6" bind-pa="productItem" for="UnitPrice"></tag-da>
-                                <a class="card-link text-primary" onclick="alert('2b added to cart :)');return (false);"><i class="icon ion-ios-cart fadeIn"></i> Add to Cart</a>
-                                <tag-da class="col-md-6" bind-pa="productItem" for="Id"></tag-da>
-                                <tag-da class="col-md-6" disabled="true" rend-bool="cb" bind-pa="productItem" for="Discontinued"></tag-da>
-                                <tag-da class="col-md-6" bind-pa="productItem" for="UnitsInStock"></tag-da>
-
-                                @*<a href="#" class="card-link">Another link</a>*@
+                                <p class="card-text">{{productItem.description}}</p>
+                                <tag-da class="col-md-4" bind-pa="productItem" for="UnitPrice"></tag-da>
+                                <tag-da class="col-md-8 small" bind-pa="productItem" for="QuantityPerUnit"></tag-da>
+                                <span class="col-md-8">
+                                    <a class="text-primary" onclick="alert('2b added to cart :)');return (false);"><i class="icon ion-ios-cart fadeIn"></i> Add to Cart</a>
+                                    <span class="col-md-3 small" *ngIf="productItem.discontinued">Discontinued</span>
+                                </span>
                             </div>
                         </div>
                     </div>

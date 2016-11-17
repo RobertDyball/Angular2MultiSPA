@@ -18,5 +18,6 @@
 /// <reference path="app/services/openiddicttoken.js" />
 /// <reference path="app/services/product.service.js" />
 /// <reference path="app/signup/signup.component.js" />
+/// <reference path="app/warehouse.component.js" />
 /// <reference path="js/site.js" />
 /// <reference path="systemjs.config.js" />

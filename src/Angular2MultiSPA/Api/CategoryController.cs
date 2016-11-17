@@ -53,28 +53,31 @@ namespace Angular2MultiSPA.Api
             return categories;
         }
 
-        // POST api/values
+        // POST api/category
         [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         [Route("api/[controller]")]
         [HttpPost]
         public void Post([FromBody]Category category)
         {
+            // TODO 
         }
 
-        // PUT api/values/5
+        // PUT api/category/5
         [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         [Route("api/[controller]")]
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]Category category)
         {
+            // TODO 
         }
 
-        // DELETE api/values/5
+        // DELETE api/category/5
         [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         [Route("api/[controller]")]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            // TODO 
         }
     }
 }
