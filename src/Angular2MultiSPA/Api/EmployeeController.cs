@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Angular2MultiSPA.Api
 {
+    [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class EmployeeController : BaseController
     {
@@ -18,8 +19,7 @@ namespace Angular2MultiSPA.Api
         {
         }
 
-        // GET: api/values
-        [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
+        // GET: api/employee
         [HttpGet]
         public async Task<IEnumerable<Employee>> Get()
         {
@@ -33,8 +33,7 @@ namespace Angular2MultiSPA.Api
             return employees;
         }
 
-        // GET api/values/5
-        [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
+        // GET api/employee/5
         [HttpGet("{id}")]
         public async Task<Employee> Get(int id)
         {
@@ -44,26 +43,32 @@ namespace Angular2MultiSPA.Api
                 return null;
             }
 
-            var employee = null as Employee;
-            return employee;
+            var employee = _context.Employees
+                                   .DefaultIfEmpty(null as Employees)
+                                   .FirstOrDefault(a => a.EmployeeId == id);
+
+            return employee.MapEmployeesToEmployee();
         }
 
-        // POST api/values
+        // POST api/employee
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Employee employee)
         {
+            // TODO 
         }
 
-        // PUT api/values/5
+        // PUT api/employee/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Employee employee)
         {
+            // TODO 
         }
 
-        // DELETE api/values/5
+        // DELETE api/employee/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            // TODO 
         }
     }
 }

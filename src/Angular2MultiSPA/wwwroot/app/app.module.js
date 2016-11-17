@@ -15,6 +15,7 @@ var http_1 = require('@angular/http');
 var app_component_1 = require('./app.component');
 var app_routing_1 = require('./app.routing');
 var Category_service_1 = require('./services/Category.service');
+var Product_service_1 = require('./services/Product.service');
 var Employee_service_1 = require('./services/Employee.service');
 var auth_service_1 = require('./services/auth.service');
 var auth_guard_service_1 = require('./services/auth-guard.service');
@@ -25,7 +26,7 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, app_routing_1.routing, http_1.HttpModule],
             declarations: [app_component_1.AppComponent, app_routing_1.routedComponents],
-            providers: [platform_browser_1.Title, Category_service_1.CategoryService, Employee_service_1.EmployeeService, auth_service_1.AuthService, auth_guard_service_1.AuthGuard],
+            providers: [platform_browser_1.Title, Category_service_1.CategoryService, Product_service_1.ProductService, Employee_service_1.EmployeeService, auth_service_1.AuthService, auth_guard_service_1.AuthGuard],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

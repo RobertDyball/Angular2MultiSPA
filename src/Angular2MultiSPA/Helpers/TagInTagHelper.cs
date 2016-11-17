@@ -11,8 +11,8 @@ namespace Angular2MultiSPA.Helpers
     /// <summary>
     /// Simple tag helper that creates a label and textbox combination in easier to read HTML than the full bootstrap form-group format.
     /// </summary>
-    [HtmlTargetElement("form-entry")]
-    public class FormEntryTagHelper : TagHelper
+    [HtmlTargetElement("tag-in")]
+    public class TagInTagHelper : TagHelper
     {
         /// <summary>
         /// CSS class. Handled here so we can capture the existing class value and append the BootStrap alert class.
@@ -32,6 +32,18 @@ namespace Angular2MultiSPA.Helpers
         [HtmlAttributeName("readonly")]
         public string Readonly { get; set; } = null;
 
+
+        /// <summary>
+        /// Alternate name to set angular data-binding to
+        /// </summary>
+        [HtmlAttributeName("bind-to")]
+        public string BindTo { get; set; } = null;
+
+        /// <summary>
+        /// Alternate name to set angular parent data-binding to
+        /// </summary>
+        [HtmlAttributeName("bind-pa")]
+        public string BindPa { get; set; } = null;
         /// <summary>
         /// ViewModel name
         /// </summary>

@@ -18,22 +18,6 @@ namespace Angular2MultiSPA.Api
         }
 
         /// <summary>
-        /// Returns all 'Categories' objects from the database mapped into 'Category' view model objects
-        /// </summary>
-        /// <example>
-        /// GET api/category 
-        /// </example>
-        /// <returns>Category view model objects</returns>
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<IEnumerable<Category>> Get()
-        {
-            var categories = _context.Categories.Select(a => a.MapCategoriesToCategory());
-
-            return categories;
-        }
-
-        /// <summary>
         /// Returns a single 'Categories' object from the database mapped into a 'Category' view model object
         /// </summary>
         /// <example>
@@ -53,28 +37,47 @@ namespace Angular2MultiSPA.Api
             return category;
         }
 
-        // POST api/values
+        /// <summary>
+        /// Returns all 'Categories' objects from the database mapped into 'Category' view model objects
+        /// </summary>
+        /// <example>
+        /// GET api/category 
+        /// </example>
+        /// <returns>Category view model objects</returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IEnumerable<Category>> Get()
+        {
+            var categories = _context.Categories.Select(a => a.MapCategoriesToCategory());
+
+            return categories;
+        }
+
+        // POST api/category
         [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         [Route("api/[controller]")]
         [HttpPost]
         public void Post([FromBody]Category category)
         {
+            // TODO 
         }
 
-        // PUT api/values/5
+        // PUT api/category/5
         [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         [Route("api/[controller]")]
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]Category category)
         {
+            // TODO 
         }
 
-        // DELETE api/values/5
+        // DELETE api/category/5
         [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         [Route("api/[controller]")]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            // TODO 
         }
     }
 }

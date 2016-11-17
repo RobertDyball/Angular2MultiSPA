@@ -53,4 +53,4 @@ var ContentComponent = (function () {
     return ContentComponent;
 }());
 exports.ContentComponent = ContentComponent;
-//# sourceMappingURL=content.component.js.map
+//# sourceMappingURL=warehouse.component.js.map
