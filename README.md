@@ -33,6 +33,7 @@ or follow the blog posts here: http://dyball.wordpress.com
 - Added simple hierarchical categoryproduct selection. 
 - Started refactoring tag helpers; now one for form entry fields (tag-in) and another for read-only display of data (tag-da)
 - Boolean read-only data may be rendered true/false, yes/no or as checkboxes
+- Added order, order detail & customer services (cut down from original, to demonstrate tag helpers + ASP.Net Core, not Northwind)
 
 #### Work in progress 
 - Add further validation, error handling, toasts/messages for signup or login fail.

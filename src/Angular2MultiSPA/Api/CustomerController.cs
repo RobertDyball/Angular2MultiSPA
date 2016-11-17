@@ -12,64 +12,68 @@ using System.Threading.Tasks;
 namespace Angular2MultiSPA.Api
 {
 
-    public class ProductController : BaseController
+    public class CustomerController : BaseController
     {
-        public ProductController(NorthwindContext context, UserManager<ApplicationUser> userManager) : base(context, userManager)
+        public CustomerController(NorthwindContext context, UserManager<ApplicationUser> userManager) : base(context, userManager)
         {
         }
 
         /// <summary>
-        /// Returns one or more 'Products' objects from the database mapped into a 'Product' view model object
+        /// Returns a given 'Customers' object from the database mapped into a 'Customer' view model object
         /// </summary>
         /// <example>
-        /// GET api/category/5/1
+        /// GET api/customer/5/1
         /// </example>
         /// <param name="id">id of the record to return</param>
-        /// <returns>a Category view model object</returns>
+        /// <returns>a Customer view model object</returns>
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<IEnumerable<Product>> Get(int id)
+        public async Task<Customer> Get(string id)
         {
-            var products = _context.Products.Where(a => a.CategoryId.HasValue && a.CategoryId.Value == id)
-                                   .Select(a => a.MapProductsToProduct()).ToList();
-            return products;
+            var customer = _context.Customers
+                                   .DefaultIfEmpty(null as Customers)
+                                   .FirstOrDefault(a => a.CustomerId == id);
+
+            return customer.MapCustomersToCustomer();
         }
 
         /// <summary>
-        /// Returns all 'Products' objects from the database mapped into 'Product' view model objects
+        /// Returns all 'Customers' objects from the database mapped into 'Customer' view model objects
         /// </summary>
         /// <example>
-        /// GET api/product 
+        /// GET api/customer 
         /// </example>
-        /// <returns>Product view model objects</returns>
+        /// <returns>Customer view model objects</returns>
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IEnumerable<Product>> Get()
+        public async Task<IEnumerable<Customer>> Get()
         {
-            var products = _context.Products.Select(a => a.MapProductsToProduct());
+            var customer = _context.Customers
+                                   .Select(a => a.MapCustomersToCustomer())
+                                   .ToList();
 
-            return products;
+            return customer;
         }
 
-        // POST api/product
+        // POST api/customer
         [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         [Route("api/[controller]")]
         [HttpPost]
-        public void Post([FromBody]Product product)
+        public void Post([FromBody]Customer customer)
         {
             // TODO 
         }
 
-        // PUT api/product/5
+        // PUT api/customer/5
         [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         [Route("api/[controller]")]
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]Product product)
+        public void Put(int id, [FromBody]Customer customer)
         {
             // TODO 
         }
 
-        // DELETE api/product/5
+        // DELETE api/customer/5
         [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         [Route("api/[controller]")]
         [HttpDelete("{id}")]

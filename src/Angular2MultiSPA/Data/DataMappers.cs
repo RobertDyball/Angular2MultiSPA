@@ -1,5 +1,6 @@
 ﻿using Angular2MultiSPA.Models;
 using Angular2MultiSPA.ViewModels;
+using GenFu;
 using System;
 
 namespace Angular2MultiSPA.Data
@@ -45,17 +46,44 @@ namespace Angular2MultiSPA.Data
             };
         }
 
-        public static Product MapProductsToProduct(this Products product)
+        public static Order MapOrdersToOrder(this Orders originalOrder)
         {
-            return product == null ? null as Product : new Product
+            return new Order();
+        }
+
+        public static OrderDetail MapOrderDetailsToOrderDetail(this OrderDetails originalOrderDetails)
+        {
+            return new OrderDetail();
+        }
+
+        public static Customer MapCustomersToCustomer(this Customers originalCustomer)
+        {
+            return originalCustomer == null ? null as Customer : new Customer
             {
-                Id = product.ProductId,
-                CategoryId = product.CategoryId,
-                Name = product.ProductName,
-                UnitPrice = product.UnitPrice,
-                QuantityPerUnit = product.QuantityPerUnit,
-                Discontinued = product.Discontinued
+                Id = originalCustomer.CustomerId,
+                ContactName = originalCustomer.ContactName
             };
+        }
+
+        public static Product MapProductsToProduct(this Products originalProduct)
+        {
+            if (originalProduct == null) return null as Product;
+
+            Product product = new Product
+            {
+                Id = originalProduct.ProductId,
+                CategoryId = originalProduct.CategoryId,
+                Name = originalProduct.ProductName,
+                Description = GenFu.ValueGenerators.Lorem.Lorem.GenerateSentences(2),
+                UnitPrice = originalProduct.UnitPrice,
+                QuantityPerUnit = originalProduct.QuantityPerUnit,
+                ReorderLevel = originalProduct.ReorderLevel,
+                UnitsInStock = originalProduct.UnitsInStock,
+                UnitsOnOrder = originalProduct.UnitsOnOrder,
+                Discontinued = originalProduct.Discontinued
+            };
+
+            return product;
         }
 
         /// <summary>
