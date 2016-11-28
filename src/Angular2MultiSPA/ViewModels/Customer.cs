@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Angular2MultiSPA.ViewModels
+﻿namespace Angular2MultiSPA.ViewModels
 {
     public class Customer
     {

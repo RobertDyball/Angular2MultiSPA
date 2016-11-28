@@ -3,13 +3,12 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace Angular2MultiSPA.Helpers
 {
     /// <summary>
-    /// Simple tag helper that creates span tag contining formatted data according to the supplied viewmodel property.
+    /// Tag helper for displaying data. This tag helper creates a span tag containing formatted data according to the supplied view model property.
     /// </summary>
     [HtmlTargetElement("tag-da")]
     public class TagDaTagHelper : TagHelper
@@ -23,6 +22,11 @@ namespace Angular2MultiSPA.Helpers
         /// <summary>
         /// Alternate name to set angular parent data-binding to (default, none)
         /// </summary>
+        /// <remarks>
+        /// the string entered here will be used to prefix the property name, 
+        /// eg., if 'bind-to' property is called 'phoneNumber' and this attribute has the value 'employee' then the 
+        /// angular data binding will be set to employee.phoneNumber
+        /// </remarks>
         [HtmlAttributeName("bind-pa")]
         public string BindPa { get; set; } = null;
 
@@ -49,6 +53,8 @@ namespace Angular2MultiSPA.Helpers
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             var propertyName = For.Name.Camelize();
+            var dataBindTo = propertyName.GetDataBindVariableName(BindPa, BindTo);
+
             var labelName = ((DefaultModelMetadata)For.Metadata).Placeholder ?? ((DefaultModelMetadata)For.Metadata).DisplayName ?? For.Name.Humanize();
 
             var dataType = ((DefaultModelMetadata)For.Metadata).DataTypeName
@@ -70,7 +76,6 @@ namespace Angular2MultiSPA.Helpers
             //url
             //week
 
-            var dataBindTo = GetDataBindVariableName(BindPa, BindTo, propertyName);
 
             output.TagName = "div";
 
@@ -79,13 +84,13 @@ namespace Angular2MultiSPA.Helpers
             switch (dataType)
             {
                 case "Currency":
-                    // TODO: add smarter handling of formats; choices: localise to server, browser, or attributes/config
+                    // TODO: add smarter handling of formats; choices: localize to server, browser, or attributes/config
                     // input.InnerHtml.AppendHtml("{{" + dataBindTo + " | currency:'AUD':true:'1.2-2'}}");
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + " | currency:'USD':true:'1.2-2'}}");
                     break;
 
                 case "Date":
-                    // TODO: add smarter handling of formats; choices: localise to server, browser, or attributes/config
+                    // TODO: add smarter handling of formats; choices: localize to server, browser, or attributes/config
                     // input.InnerHtml.AppendHtml("{{" + dataBindTo + " | date:'MM/dd/yyyy'}}");
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + " | date:'dd/MM/yyyy'}}");
                     break;
@@ -128,14 +133,14 @@ namespace Angular2MultiSPA.Helpers
                             input.InnerHtml.AppendHtml("{{" + dataBindTo + " }}");
                             break;
                     }
-                    // TODO: remove or set in compiler direcive, for debugging
+                    // TODO: remove or set in compiler directive, for debugging
                     input.Attributes.Add("title", string.Format("object name: {0}", dataBindTo));
                     //input.Attributes.Add("title", string.Format("render bool as: {0}", RendBool));
                     break;
 
                 default:
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
-                    // TODO: remove or set in compiler direcive, for debugging
+                    // TODO: remove or set in compiler directive, for debugging
                     input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
                     break;
             }
@@ -147,23 +152,5 @@ namespace Angular2MultiSPA.Helpers
             output.PostContent.SetHtmlContent(Regex.Replace(childContent, @"=""dummyvalue""", string.Empty));
         }
 
-        /// <summary>
-        /// Create the angular binding variable name
-        /// </summary>
-        /// <remarks>
-        /// If bind-pa (parentname) and bind-to (property name override) are not supplied, then the name of the variable used for 
-        /// angular data-binding is taken directly from the view model property name.
-        /// If parent (bind-pa) and override name (bind-to) are both supplied the angular data-bind variable is set to bindapa.bindto
-        /// If the bind-to is supplied and bind-pa (parent) not supplied, then only the bind-to is used
-        /// </remarks>
-        /// <param name="bindPa">optional parent name</param>
-        /// <param name="bindTo">optional property name, to override model property</param>
-        /// <param name="propertyName">property name from viewModel property</param>
-        /// <returns></returns>
-        private string GetDataBindVariableName(string bindPa, string bindTo, string propertyName)
-        {
-            var varName = bindTo ?? propertyName;
-            return (bindPa != null) ? string.Format("{0}.{1}", bindPa, varName) : varName;
-        }
     }
 }

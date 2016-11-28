@@ -1,6 +1,5 @@
 ﻿using Angular2MultiSPA.Models;
 using Angular2MultiSPA.ViewModels;
-using GenFu;
 using System;
 
 namespace Angular2MultiSPA.Data

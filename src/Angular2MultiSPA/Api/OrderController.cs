@@ -19,7 +19,7 @@ namespace Angular2MultiSPA.Api
         }
 
         /// <summary>
-        /// Returns agiven order
+        /// Returns a given order
         /// </summary>
         /// <example>
         /// GET api/order/1

@@ -3,7 +3,7 @@
 namespace Angular2MultiSPA.Controllers
 {
     /// <summary>
-    /// Partial controller - delivers CSHTML partial views, used as Angular 2 templates
+    /// Deliver CSHTML partial views, used as Angular 2 templates
     /// </summary>
     public class PartialController : Controller
     {

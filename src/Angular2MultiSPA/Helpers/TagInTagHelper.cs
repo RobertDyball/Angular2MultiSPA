@@ -3,13 +3,12 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Angular2MultiSPA.Helpers
 {
     /// <summary>
-    /// Simple tag helper that creates a label and textbox combination in easier to read HTML than the full bootstrap form-group format.
+    /// Tag helper to create form input tag and label combinations, styled using bootstrap form-group format.
     /// </summary>
     [HtmlTargetElement("tag-in")]
     public class TagInTagHelper : TagHelper
@@ -52,8 +51,10 @@ namespace Angular2MultiSPA.Helpers
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            string textClass = "form-control"; //TextBoxClass;
             var propertyName = For.Name.Camelize();
+            var dataBindTo = propertyName.GetDataBindVariableName(BindPa, BindTo);
+
+            string textClass = "form-control"; //TextBoxClass;
             var labelName = ((DefaultModelMetadata)For.Metadata).Placeholder ?? ((DefaultModelMetadata)For.Metadata).DisplayName ?? For.Name.Humanize();
             var dataType = ((DefaultModelMetadata)For.Metadata).DataTypeName;
             var inputType = dataType == "Password" ? "Password" : "Text";
@@ -77,12 +78,12 @@ namespace Angular2MultiSPA.Helpers
             output.Attributes.Add("class", "form-group");
 
             var label = new TagBuilder("label");
-            label.MergeAttribute("for", propertyName);
+            label.MergeAttribute("for", dataBindTo);
             label.InnerHtml.AppendHtml(labelName);
             output.PostContent.SetHtmlContent(label);
 
             var input = new TagBuilder("input");
-            input.MergeAttribute("id", propertyName);
+            input.MergeAttribute("id", dataBindTo);
             input.MergeAttribute("type", dataType);
             if (!string.IsNullOrEmpty(textClass))
             {
@@ -100,7 +101,7 @@ namespace Angular2MultiSPA.Helpers
                 input.Attributes.Add("readonly", "readonly");
             }
 
-            input.Attributes.Add("#" + propertyName, "dummyvalue");
+            input.Attributes.Add("#" + dataBindTo, "dummyvalue");
 
             if (((DefaultModelMetadata)For.Metadata).HasMinLengthValidation())
             {
