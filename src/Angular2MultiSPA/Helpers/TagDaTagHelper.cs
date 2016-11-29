@@ -24,8 +24,8 @@ namespace Angular2MultiSPA.Helpers
         /// </summary>
         /// <remarks>
         /// the string entered here will be used to prefix the property name, 
-        /// eg., if 'bind-to' property is called 'phoneNumber' and this attribute has the value 'employee' then the 
-        /// angular data binding will be set to employee.phoneNumber
+        /// eg., if the 'bind-to' property is called, say, "phoneNumber" and this "bind-pa" attribute has the value "employee" 
+        /// then the angular data binding will be set to "employee.phoneNumber"
         /// </remarks>
         [HtmlAttributeName("bind-pa")]
         public string BindPa { get; set; } = null;
@@ -33,7 +33,8 @@ namespace Angular2MultiSPA.Helpers
         /// <summary>
         /// Option: use HTML disabled attribute, alters how boolean values should be rendered on page;
         /// </summary>
-        ///<remarks>Since this may be too greyed out, this is as option</remarks>
+        ///<remarks>Using this sets the HTML Disabled attribute but may result in rendering an HTML control that is too grey to be distinguished.
+        /// This is as option, defaults is set to off.</remarks>
         [HtmlAttributeName("disabled")]
         public string Disabled { get; set; } = null;
 
