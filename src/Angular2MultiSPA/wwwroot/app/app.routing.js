@@ -2,6 +2,7 @@
 var router_1 = require('@angular/router');
 var auth_guard_service_1 = require('./services/auth-guard.service');
 var about_component_1 = require('./about.component');
+var documentation_component_1 = require('./documentation.component');
 var home_component_1 = require('./home.component');
 var content_component_1 = require('./content.component');
 var employee_component_1 = require('./employee.component');
@@ -14,8 +15,9 @@ var appRoutes = [
     { path: 'home', component: home_component_1.HomeComponent, data: { title: 'Home' } },
     { path: 'content', component: content_component_1.ContentComponent, data: { title: 'Content' } },
     { path: 'employee', component: employee_component_1.EmployeeComponent, data: { title: 'Employees' }, canActivate: [auth_guard_service_1.AuthGuard] },
-    { path: 'about', component: about_component_1.AboutComponent, data: { title: 'About' } }
+    { path: 'about', component: about_component_1.AboutComponent, data: { title: 'About' } },
+    { path: 'documentation', component: documentation_component_1.DocumentationComponent, data: { title: 'Documentation' } }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes);
-exports.routedComponents = [about_component_1.AboutComponent, login_component_1.LoginComponent, signup_component_1.SignupComponent, home_component_1.HomeComponent, content_component_1.ContentComponent, employee_component_1.EmployeeComponent];
+exports.routedComponents = [about_component_1.AboutComponent, documentation_component_1.DocumentationComponent, login_component_1.LoginComponent, signup_component_1.SignupComponent, home_component_1.HomeComponent, content_component_1.ContentComponent, employee_component_1.EmployeeComponent];
 //# sourceMappingURL=app.routing.js.map

@@ -2,6 +2,7 @@
 import { AuthGuard } from './services/auth-guard.service';
 
 import { AboutComponent }   from './about.component';
+import { DocumentationComponent }   from './documentation.component';
 import { HomeComponent }      from './home.component';
 import { ContentComponent }  from './content.component';
 import { EmployeeComponent }  from './employee.component';
@@ -15,9 +16,10 @@ const appRoutes: Routes = [
     { path: 'home', component: HomeComponent, data: { title: 'Home' } },
     { path: 'content', component: ContentComponent, data: { title: 'Content' } },
     { path: 'employee', component: EmployeeComponent, data: { title: 'Employees' }, canActivate: [AuthGuard] },
-    { path: 'about', component: AboutComponent, data: { title: 'About' } }
+    { path: 'about', component: AboutComponent, data: { title: 'About' } },
+    { path: 'documentation', component: DocumentationComponent, data: { title: 'Documentation' } }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);
 
-export const routedComponents = [AboutComponent, LoginComponent, SignupComponent, HomeComponent, ContentComponent, EmployeeComponent];
+export const routedComponents = [AboutComponent, DocumentationComponent, LoginComponent, SignupComponent, HomeComponent, ContentComponent, EmployeeComponent];

@@ -1,0 +1,51 @@
+@using Angular2MultiSPA.ViewModels
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper "*,Angular2MultiSPA"
+@model SampleData
+
+<p> Documentation to be added here </p>
+<div class="row">
+    <div class="col-md-5">
+        <p>Server-side CSHTML before tag-helpers are applied:</p>
+        <pre class="small" style="border:1px;background-color:honeydew">
+         @{
+             // NOTE: delimitered code here for literal display; this snippet is not to be executed 
+             // Same code, but undelimitered, that is executed is further below
+             Write(@"
+    <div *ngIf=""sampleData != null"">
+        <tag-da bind-pa=""sampleData"" for=""DateTimeVar""></tag-da >
+        <tag-da bind-pa=""sampleData"" for=""Text"" ></tag-da>
+    </div>
+");
+         }
+    </pre>
+    </div>
+    <div>
+
+    </div>
+    <div class="col-md-5">
+        <p>Angular 2 generates this output into the client's browser:</p>
+        <div *ngIf="sampleData != null">
+            <tag-da bind-pa="sampleData" for="DateTimeVar"></tag-da>
+            <tag-da bind-pa="sampleData" for="Text"></tag-da>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <img src=""/>
+    </div>
+    <div class="col-md-6">
+        <p>After tag-helpers are rendered, this is the resultant HTML template code sent to the browser:</p>
+    </div>
+    <div class="col-md-12">
+        <pre class="small">
+@{ 
+    Write(@"
+<p> to be added</p>
+");
+ }
+    </pre>
+    </div>
+</div>

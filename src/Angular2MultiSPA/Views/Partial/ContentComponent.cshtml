@@ -20,7 +20,9 @@
                         <!-- list of all categories -->
                         <div class="list-group" *ngFor="let categoryItem of categories">
                             <!-- category -->
-                            <button type="button" (click)="selectCategory(categoryItem)" class="list-group-item list-group-item-action {{ getClass(categoryItem) }}">{{categoryItem.name}}</button>
+                            <button type="button" (click)="selectCategory(categoryItem)" 
+                                    title="{{categoryItem.description}}"
+                                    class="list-group-item list-group-item-action {{ getClass(categoryItem) }}">{{categoryItem.name}}</button>
                         </div>
                     </div>
                 </div>

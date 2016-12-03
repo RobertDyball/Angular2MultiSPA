@@ -12,6 +12,10 @@ namespace Angular2MultiSPA.Api
         protected readonly UserManager<ApplicationUser> _userManager;
         protected NorthwindContext _context;
 
+        public BaseController()
+        {
+        }
+
         public BaseController(NorthwindContext context, UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
