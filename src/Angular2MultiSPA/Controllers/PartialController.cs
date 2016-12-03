@@ -11,6 +11,8 @@ namespace Angular2MultiSPA.Controllers
 
         public IActionResult AboutComponent() => PartialView();
 
+        public IActionResult DocumentationComponent() => PartialView();
+
         public IActionResult ContentComponent() => PartialView();
 
         public IActionResult EmployeeComponent() => PartialView();
