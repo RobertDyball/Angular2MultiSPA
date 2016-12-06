@@ -1,135 +1,152 @@
+
 @using Angular2MultiSPA.ViewModels
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper "*,Angular2MultiSPA"
 @model SampleData
 
 <style>
-    table#code {
-        border: 0px;
+    pre.code {
+        border: 1px;
+        font-size: smaller;
+        line-height: 22px;
+        background-color: honeydew;
     }
-
-        table#code tr th {
-            font-style: normal;
-            font-size: small;
-        }
-
-        table#code tr td {
-            padding: 0px;
-            padding-left: 10px;
-            border: 0px;
-            margin: 0px;
-        }
-
-            table#code tr td pre {
-                padding: 0px;
-                padding-right: 10px;
-                border: 0px;
-                margin: 0px;
-                font-size: smaller;
-            }
 </style>
 
 <div class="row">
-    <div *ngIf="sampleData != null">
 
-        <div class="col-md-12">
-            <h4>Tag Helper For Data Input (read / write / edit), &lt;tag-in&gt;</h4>
-            <table id="code">
-                <tr>
-                    <th>Server-side CSHTML before tag-helpers are applied:<br /><br /></th>
-                    <th>Angular 2 generates this output into the client's browser:<br /><br /></th>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@"<div *ngIf=""sampleData != null"">"); }</pre></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-in bind-pa=""sampleData"" for=""DateTimeVar""></tag-in>"); }</pre></td>
-                    <td><tag-in bind-pa="sampleData" for="DateTimeVar"></tag-in></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-in bind-pa=""sampleData"" for=""DateVar""></tag-in>"); }</pre></td>
-                    <td><tag-in bind-pa="sampleData" for="DateVar"></tag-in></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-in bind-pa=""sampleData"" for=""TimeVar""></tag-in>"); }</pre></td>
-                    <td><tag-in bind-pa="sampleData" for="TimeVar"></tag-in></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-in bind-pa=""sampleData"" for=""Duration""></tag-in>"); }</pre></td>
-                    <td><tag-in bind-pa="sampleData" for="Duration"></tag-in></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-in bind-pa=""sampleData"" for=""PhoneNumber""></tag-in>"); }</pre></td>
-                    <td><tag-in bind-pa="sampleData" for="PhoneNumber"></tag-in></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-in bind-pa=""sampleData"" for=""Currency""></tag-in>"); }</pre></td>
-                    <td><tag-in bind-pa="sampleData" for="Currency"></tag-in></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-in bind-pa=""sampleData"" for=""Text""></tag-in>"); }</pre></td>
-                    <td><tag-in bind-pa="sampleData" for="Text"></tag-in></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@"</div>"); }</pre></td>
-                    <td></td>
-                </tr>
-            </table>
+    <!-- http://codepen.io/jek/pen/BoWNRy?css-preprocessor=sass  -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" href="#tagin" role="tab" data-toggle="tab">Data Entry Tag Helpers</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tagda" role="tab" data-toggle="tab">Data Input Tag Helpers</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#references" role="tab" data-toggle="tab">references</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="tagin">
+            <div class="col-md-6">
+
+                <p>snippet from server-side C# view-model, containing optional data attributes:</p>
+                <pre class="code">
+                    @{
+                        Write(@"
+    [DataType(DataType.Time)]
+    public DateTime TimeVar ( get; set; )
+    public DateTime string ( get; set; )
+    [DataType(DataType.EmailAddress)]
+    public string EmailAddress ( get; set; )
+");
+                    }
+                </pre>
+
+                <p>server-side .CSHTML view containing custom tag-helper markup:</p>
+                <pre class="code">
+                    @{
+                        // NOTE: delimitered code here for literal display; 
+                        // the following code is not executed here, actual code is further below.
+                        Write(@"
+    <div *ngIf=""sampleData != null"">
+        <tag-da bind-pa=""sampleData"" for=""DateTimeVar""></tag-da >
+        <tag-da bind-pa=""sampleData"" for=""Text""></tag-da>
+        <tag-da bind-pa=""sampleData"" for=""EmailAddress""></tag-da>
+    </div>");
+                    }
+                </pre>
+            </div>
+            <div class="col-md-6">
+                <p>Generated HTML sent to browser:</p>
+                <br />
+                <pre class="code">
+                                            @{
+                        Write(@"
+    <div *ngIf=""sampleData != null"">
+        <div><span>((sampleData.dateTimeVar | date:'dd/MM/yyyy hh:mm:ss'))</span></div>
+        <div><span>((sampleData.text))</span></div>
+    </div>");
+                    }
+                </pre>
+
+                <p>Angular 2 generates this output into the client's browser:</p>
+                <br />
+                <div *ngIf="sampleData != null">
+                    <tag-da bind-pa="sampleData" for="DateTimeVar"></tag-da>
+                    <tag-da bind-pa="sampleData" for="Text"></tag-da>
+                    @*<tag-da bind-pa="sampleData" for="EmailAddress"></tag-da>*@
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="tagda">
+            <div class="col-md-6">
+
+                <p>snippet from server-side C# view-model, containing optional data attributes:</p>
+                <pre class="code">
+                    @{
+                        Write(@"
+    [DataType(DataType.Currency)]
+    public decimal Currency ( get; set; )
+    [Required]
+    [StringLength(100, ErrorMessage = ""The (0) must be at least (2) characters long."", MinimumLength = 6)]
+    [DataType(DataType.Password)]
+    [Display(Name = ""Password"")]
+    public string Password ( get; set; )");
+                    }
+                </pre>
+
+                <p>server-side .CSHTML view containing custom tag-helper markup:</p>
+                <pre class="code">
+                    @{
+                        // NOTE: delimitered code here for literal display; 
+                        // the following code is not executed here, actual code is further below.
+                        Write(@"
+    <div *ngIf=""sampleData != null"">
+        <tag-in bind-pa=""sampleData"" for=""Currency""></tag-da >
+        <tag-in bind-pa=""sampleData"" for=""Password""></tag-da>
+    </div>");
+                    }
+                </pre>
+
+            </div>
+            <div class="col-md-6">
+                <p>This is the raw HTML sent to the server:</p>
+                <pre class="code">
+                                         @{
+                        // NOTE: delimitered code here for literal display; 
+                        // the following code is not executed here, actual code is further below.
+                        Write(@"
+    <div *ngIf=""sampleData != null"">
+        <div class=""form-group"">
+            <div class=""input-group"">
+                <span class=""input-group-addon"">$</span>
+                <input #sampleData.currency class=""form-control"" id=""sampleData.currency"" 
+                            placeholder=""Currency"" required=""required"" type=""Currency"">
+            </div>
+        </div>
+        <div class=""form-group"">
+                <input #sampleData.password class=""form-control"" id=""sampleData.password"" 
+                    maxLength=""100"" minLength=""6"" placeholder=""Password"" required=""required"" type=""Password"">
+        </div>
+    </div>");
+    }
+    </pre>
+
+                <p>Angular 2 generates this output into the client's browser:</p>
+                <br />
+                <div *ngIf="sampleData != null">
+                    <tag-in bind-pa="sampleData" for="Currency"></tag-in>
+                    <tag-in bind-pa="sampleData" for="Password"></tag-in>
+                </div>
+            </div>
         </div>
 
-    </div>
-    <div *ngIf="sampleData != null">
-
-        <div class="col-md-12">
-            <h4>Tag Helper to Display Data (read-only), &lt;tag-da&gt;</h4>
-            <table id="code">
-                <tr>
-                    <th>Server-side CSHTML before tag-helpers are applied:<br /><br /></th>
-                    <th>Angular 2 generates this output into the client's browser:<br /><br /></th>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@"<div *ngIf=""sampleData != null"">"); }</pre></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-da bind-pa=""sampleData"" for=""DateTimeVar""></tag-da>"); }</pre></td>
-                    <td><tag-da bind-pa="sampleData" for="DateTimeVar"></tag-da></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-da bind-pa=""sampleData"" for=""DateVar""></tag-da>"); }</pre></td>
-                    <td><tag-da bind-pa="sampleData" for="DateVar"></tag-da></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-da bind-pa=""sampleData"" for=""TimeVar""></tag-da>"); }</pre></td>
-                    <td><tag-da bind-pa="sampleData" for="TimeVar"></tag-da></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-da bind-pa=""sampleData"" for=""Duration""></tag-da>"); }</pre></td>
-                    <td><tag-da bind-pa="sampleData" for="Duration"></tag-da></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-da bind-pa=""sampleData"" for=""PhoneNumber""></tag-da>"); }</pre></td>
-                    <td><tag-da bind-pa="sampleData" for="PhoneNumber"></tag-da></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-da bind-pa=""sampleData"" for=""Currency""></tag-da>"); }</pre></td>
-                    <td><tag-da bind-pa="sampleData" for="Currency"></tag-da></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@" <tag-da bind-pa=""sampleData"" for=""Text""></tag-da>"); }</pre></td>
-                    <td><tag-da bind-pa="sampleData" for="Text"></tag-da></td>
-                </tr>
-                <tr>
-                    <td><pre>@{ Write(@"</div>"); }</pre></td>
-                    <td></td>
-                </tr>
-            </table>
+        <div role="tabpanel" class="tab-pane fade" id="references">
+            <p>TODO: add links to docs</p>
         </div>
-
-
-
-
     </div>
 </div>
-
