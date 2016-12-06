@@ -22,16 +22,14 @@
 </head>
 <body>
 
-    <div class="container body-content">
+    <div class="container-fluid body-content">
         @RenderBody()
-        <hr />
-        <footer class="footer">
-            <div class="container">
-                <p class="text-muted">Place sticky footer content here.</p>
-            </div>
-        </footer>
-
     </div>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Place sticky footer content here.</p>
+        </div>
+    </footer>
 
     <environment names="Development">
         <script src="/node_modules/jquery/dist/jquery.js"></script>

@@ -50,8 +50,11 @@ namespace Angular2MultiSPA.ViewModels
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
 
-        // Represent a password value.
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
+        // Represent a password value.
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         // Represents a URL value.
