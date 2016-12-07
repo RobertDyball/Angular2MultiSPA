@@ -5,6 +5,26 @@
 @model SampleData
 
 <style>
+    table.compact {
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+        table.compact tr {
+            border: 0px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+            table.compact tr td {
+                border: 0px;
+                padding: 0px;
+                margin: 0px;
+                line-height: 16px;
+                font-size: x-large;
+            }
+
     pre.code {
         border: 1px;
         font-size: smaller;
@@ -31,39 +51,82 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade in active" id="tagin">
-            <div class="col-md-6">
 
-                <p>snippet from server-side C# view-model, containing optional data attributes:</p>
-                <pre class="code">
-                    @{
-                        Write(@"
-    [DataType(DataType.Time)]
-    public DateTime TimeVar ( get; set; )
-    public DateTime string ( get; set; )
-    [DataType(DataType.EmailAddress)]
-    public string EmailAddress ( get; set; )
-");
-                    }
-                </pre>
+            <div class="row">
+                <div class="row">
+                    <div class="offset-md-1 col-md-4">
+                        <p>
+                            Snippet from C# data model,<br />
+                            containing optional data attributes:
+                        </p>
+                    </div>
+                    <div class="col-md-1"><h3>Server</h3></div>
+                    <div class="offset-md-1 col-md-5">
+                        <p>
+                            server-side .CSHTML view<br />
+                            using custom tag-helper markup:
+                        </p>
+                    </div>
+                </div>
 
-                <p>server-side .CSHTML view containing custom tag-helper markup:</p>
-                <pre class="code">
-                    @{
-                        // NOTE: delimitered code here for literal display; 
-                        // the following code is not executed here, actual code is further below.
-                        Write(@"
-    <div *ngIf=""sampleData != null"">
-        <tag-da bind-pa=""sampleData"" for=""DateTimeVar""></tag-da >
-        <tag-da bind-pa=""sampleData"" for=""Text""></tag-da>
-        <tag-da bind-pa=""sampleData"" for=""EmailAddress""></tag-da>
-    </div>");
-                    }
-                </pre>
+                <div class="row">
+                    <div class="offset-md-5 col-md-2"><span><i style="font-size:x-large" class="icon ion-md-arrow-forward fadeIn"></i></span></div>
+                </div>
+
+                <div class="col-md-6">
+                    <pre class="code" title="snippet from server-side C# data model, containing optional data attributes:">
+                        @{
+                            Write(@"
+        [DataType(DataType.Time)]
+        public DateTime TimeVar ( get; set; )
+        public DateTime string ( get; set; )
+
+        [DataType(DataType.EmailAddress)]
+        public string EmailAddress ( get; set; )
+    ");
+                        }
+                    </pre>
+                </div>
+
+                <div class="col-md-6">
+                    <pre class="code" title="server-side .CSHTML view containing custom tag-helper markup:">
+                        @{
+                            // NOTE: delimitered code here for literal display; 
+                            // the following code is not executed here, actual code is further below.
+                            Write(@"
+        <div *ngIf=""sampleData != null"">
+            <tag-da bind-pa=""sampleData"" for=""DateTimeVar""></tag-da >
+            <tag-da bind-pa=""sampleData"" for=""Text""></tag-da>
+            <tag-da bind-pa=""sampleData"" for=""EmailAddress""></tag-da>
+        </div>");
+                        }
+                    </pre>
+                </div>
             </div>
-            <div class="col-md-6">
-                <p>Generated HTML sent to browser:</p>
-                <br />
-                <pre class="code">
+
+            <div class="row">
+                <div class="offset-md-1 col-md-4"><p>Angular 2 generates this output into the client's browser:</p></div>
+                <div class="col-md-2"><h3>Browser</h3></div>
+                <div class="col-md-5"><p>Generated HTML sent to browser:</p></div>
+            </div>
+
+            <div class="row">
+                <div class="offset-md-5 col-md-2"><span><i style="font-size:x-large" class="icon ion-md-arrow-back fadeIn"></i></span></div>
+                <div class="offset-md-1 col-md-1"><i style="font-size:x-large" class="icon ion-md-arrow-down fadeIn"></i></div>
+            </div>
+
+            <div class="row">
+
+                <div class="offset-md-1 col-md-5">
+                    <div *ngIf="sampleData != null">
+                        <tag-da bind-pa="sampleData" for="DateTimeVar"></tag-da>
+                        <tag-da bind-pa="sampleData" for="Text"></tag-da>
+                        @*<tag-da bind-pa="sampleData" for="EmailAddress"></tag-da>*@
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <pre class="code">
                                             @{
                         Write(@"
     <div *ngIf=""sampleData != null"">
@@ -73,53 +136,90 @@
                     }
                 </pre>
 
-                <p>Angular 2 generates this output into the client's browser:</p>
-                <br />
-                <div *ngIf="sampleData != null">
-                    <tag-da bind-pa="sampleData" for="DateTimeVar"></tag-da>
-                    <tag-da bind-pa="sampleData" for="Text"></tag-da>
-                    @*<tag-da bind-pa="sampleData" for="EmailAddress"></tag-da>*@
                 </div>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="tagda">
-            <div class="col-md-6">
 
-                <p>snippet from server-side C# view-model, containing optional data attributes:</p>
-                <pre class="code">
-                    @{
-                        Write(@"
+        <div role="tabpanel" class="tab-pane fade" id="tagda">
+
+            <div class="row">
+                <div class="row">
+                    <div class="offset-md-1 col-md-4">
+                        <p>
+                            Snippet from C# data model,<br />
+                            containing optional data attributes:
+                        </p>
+                    </div>
+                    <div class="col-md-1"><h3>Server</h3></div>
+                    <div class="offset-md-1 col-md-5">
+                        <p>
+                            server-side .CSHTML view<br />
+                            using custom tag-helper markup:
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="offset-md-5 col-md-2"><span><i style="font-size:x-large" class="icon ion-md-arrow-forward fadeIn"></i></span></div>
+                </div>
+
+                <div class="col-md-6">
+                    <pre class="code" title="snippet from server-side C# data model, containing optional data attributes:">
+                        @{
+                            Write(@"
     [DataType(DataType.Currency)]
     public decimal Currency ( get; set; )
+
     [Required]
     [StringLength(100, ErrorMessage = ""The (0) must be at least (2) characters long."", MinimumLength = 6)]
     [DataType(DataType.Password)]
     [Display(Name = ""Password"")]
     public string Password ( get; set; )");
                     }
-                </pre>
+                    </pre>
+                </div>
 
-                <p>server-side .CSHTML view containing custom tag-helper markup:</p>
-                <pre class="code">
-                    @{
-                        // NOTE: delimitered code here for literal display; 
-                        // the following code is not executed here, actual code is further below.
-                        Write(@"
+                <div class="col-md-6">
+                    <pre class="code" title="server-side .CSHTML view containing custom tag-helper markup:">
+                        @{
+                            // NOTE: delimitered code here for literal display; 
+                            // the following code is not executed here, actual code is further below.
+                            Write(@"
     <div *ngIf=""sampleData != null"">
         <tag-in bind-pa=""sampleData"" for=""Currency""></tag-da >
         <tag-in bind-pa=""sampleData"" for=""Password""></tag-da>
     </div>");
-                    }
-                </pre>
-
+                        }
+                    </pre>
+                </div>
             </div>
-            <div class="col-md-6">
-                <p>This is the raw HTML sent to the server:</p>
-                <pre class="code">
-                                         @{
-                        // NOTE: delimitered code here for literal display; 
-                        // the following code is not executed here, actual code is further below.
-                        Write(@"
+
+            <div class="row">
+                <div class="offset-md-1 col-md-4"><p>Angular 2 generates this output into the client's browser:</p></div>
+                <div class="col-md-2"><h3>Browser</h3></div>
+                <div class="col-md-5"><p>Generated HTML sent to browser:</p></div>
+            </div>
+
+            <div class="row">
+                <div class="offset-md-5 col-md-2"><span><i style="font-size:x-large" class="icon ion-md-arrow-back fadeIn"></i></span></div>
+                <div class="offset-md-1 col-md-1"><i style="font-size:x-large" class="icon ion-md-arrow-down fadeIn"></i></div>
+            </div>
+
+            <div class="row">
+
+                <div class="offset-md-1 col-md-5">
+                    <div *ngIf="sampleData != null">
+                        <tag-in bind-pa="sampleData" for="Currency"></tag-in>
+                        <tag-in bind-pa="sampleData" for="Password"></tag-in>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <pre class="code">
+                        @{
+                            // NOTE: delimitered code here for literal display; 
+                            // the following code is not executed here, actual code is further below.
+                            Write(@"
     <div *ngIf=""sampleData != null"">
         <div class=""form-group"">
             <div class=""input-group"">
@@ -133,14 +233,8 @@
                     maxLength=""100"" minLength=""6"" placeholder=""Password"" required=""required"" type=""Password"">
         </div>
     </div>");
-    }
-    </pre>
-
-                <p>Angular 2 generates this output into the client's browser:</p>
-                <br />
-                <div *ngIf="sampleData != null">
-                    <tag-in bind-pa="sampleData" for="Currency"></tag-in>
-                    <tag-in bind-pa="sampleData" for="Password"></tag-in>
+                        }
+                    </pre>
                 </div>
             </div>
         </div>

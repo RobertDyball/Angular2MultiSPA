@@ -54,6 +54,7 @@ namespace Angular2MultiSPA.Helpers
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             var propertyName = For.Name.Camelize();
+            var idName = propertyName.Replace(".", string.Empty);
             var dataBindTo = propertyName.GetDataBindVariableName(BindPa, BindTo);
 
             var labelName = ((DefaultModelMetadata)For.Metadata).Placeholder ?? ((DefaultModelMetadata)For.Metadata).DisplayName ?? For.Name.Humanize();
@@ -152,8 +153,9 @@ namespace Angular2MultiSPA.Helpers
                     //     Represents a URL value.
                     var e = new TagBuilder("a");
                     e.TagRenderMode = TagRenderMode.StartTag;
-                    e.Attributes.Add("id", propertyName);
-                    e.Attributes.Add("mailto", "{{" + dataBindTo + "}}");
+                    e.Attributes.Add("id", idName);
+                    e.Attributes.Add("name", idName);
+                    e.Attributes.Add("href", "mailto:{{" + dataBindTo + "}}");
                     input.InnerHtml.AppendHtml(e);
                     break;
 
@@ -167,7 +169,8 @@ namespace Angular2MultiSPA.Helpers
                     //     Represents a URL value.
                     var u = new TagBuilder("a");
                     u.TagRenderMode = TagRenderMode.StartTag;
-                    u.Attributes.Add("id", propertyName);
+                    u.Attributes.Add("id", idName);
+                    u.Attributes.Add("name", idName);
                     u.Attributes.Add("href", "{{" + dataBindTo + "}}");
                     input.InnerHtml.AppendHtml(u);
                     break;

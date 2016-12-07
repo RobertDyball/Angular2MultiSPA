@@ -47,6 +47,9 @@ namespace Angular2MultiSPA.ViewModels
         public string MultilineText { get; set; }
 
         // Represents an e-mail address.
+        [Required, RegularExpression(@"([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})", ErrorMessage = "Please enter a valid email address.")]
+        [EmailAddress]
+        [Display(Name = "EmailAddress", ShortName = "Email", Prompt = "Email Address")]
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
 
