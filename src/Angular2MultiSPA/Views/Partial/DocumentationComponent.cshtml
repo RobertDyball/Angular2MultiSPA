@@ -4,36 +4,12 @@
 @addTagHelper "*,Angular2MultiSPA"
 @model SampleData
 
-<style>
-    table.compact {
-        border: 0px;
-        padding: 0px;
-        margin: 0px;
-    }
-
-        table.compact tr {
-            border: 0px;
-            padding: 0px;
-            margin: 0px;
-        }
-
-            table.compact tr td {
-                border: 0px;
-                padding: 0px;
-                margin: 0px;
-                line-height: 16px;
-                font-size: x-large;
-            }
-
-    pre.code {
-        border: 1px;
-        font-size: smaller;
-        line-height: 22px;
-        background-color: honeydew;
-    }
-</style>
-
 <div class="row">
+
+    <p class="small">
+        NOTE: Code below for illustration only. The left and right parentheses are active characters, used within angular 2. In code blocks below they have been represented as &quot;(&quot; and &quot;)&quot; instead of &quot;{{ '{' }}&quot; or &quot;{{ '}' }}&quot; to avoid being mishandled by Razor on the server or Angular on the client.<br />
+        Until the multiple levels of delimiting needed,are added, please copy any code directly from the source on <a href="https://github.com/RobertDyball/Angular2MultiSPA" target="_blank">GitHub here</a> instead.<br/>
+    </p>
 
     <!-- http://codepen.io/jek/pen/BoWNRy?css-preprocessor=sass  -->
     <ul class="nav nav-tabs" role="tablist">
@@ -44,182 +20,380 @@
             <a class="nav-link" href="#tagda" role="tab" data-toggle="tab">Data Input Tag Helpers</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#references" role="tab" data-toggle="tab">references</a>
+            <a class="nav-link" href="#references" role="tab" data-toggle="tab">References, Notes</a>
         </li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade in active" id="tagin">
-
-            <div class="row">
-                <div class="row">
-                    <div class="offset-md-1 col-md-4">
-                        <p>
-                            Snippet from C# data model,<br />
-                            containing optional data attributes:
-                        </p>
-                    </div>
-                    <div class="col-md-1"><h3>Server</h3></div>
-                    <div class="offset-md-1 col-md-5">
-                        <p>
-                            server-side .CSHTML view<br />
-                            using custom tag-helper markup:
-                        </p>
+            <div class="card">
+                <div class="card-block">
+                    <div class="col-md-2"><h4 class="card-title">Server</h4></div>
+                    <div class="col-md-10">
+                        <p class="small">(1) Define data model + Web API data services on server (not shown here), create a CSHTML page (instead of hard-coded HTML template) add markup using tag helpers + intellisense.</p>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="offset-md-5 col-md-2"><span><i style="font-size:x-large" class="icon ion-md-arrow-forward fadeIn"></i></span></div>
-                </div>
-
-                <div class="col-md-6">
-                    <pre class="code" title="snippet from server-side C# data model, containing optional data attributes:">
-                        @{
-                            Write(@"
+                <div class="card-block">
+                    <div class="col-md-5">
+                        <h6 class="card-subtitle text-muted">excerpt from C# data model, using optional data attributes</h6>
+                        <code>
+                            <pre>
+                            @{
+                                Write(@"
         [DataType(DataType.Time)]
         public DateTime TimeVar ( get; set; )
         public DateTime string ( get; set; )
 
+        [DataType(DataType.Currency)]
+        public decimal Currency ( get; set; )
+        public string Text ( get; set; )
+
         [DataType(DataType.EmailAddress)]
         public string EmailAddress ( get; set; )
-    ");
-                        }
-                    </pre>
-                </div>
+");
+                            }
+                        </pre>
+                        </code>
+                    </div>
 
-                <div class="col-md-6">
-                    <pre class="code" title="server-side .CSHTML view containing custom tag-helper markup:">
+                    <div class="col-md-1">
+                        <i style="font-size:x-large" class="icon ion-md-arrow-forward fadeIn"></i>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h6 class="card-subtitle text-muted">CSHTML markup using tag helpers</h6>
+                        <code>
+                            <pre>
                         @{
                             // NOTE: delimitered code here for literal display; 
                             // the following code is not executed here, actual code is further below.
                             Write(@"
         <div *ngIf=""sampleData != null"">
             <tag-da bind-pa=""sampleData"" for=""DateTimeVar""></tag-da >
+            <tag-da bind-pa=""sampleData"" for=""Currency""></tag-da>
             <tag-da bind-pa=""sampleData"" for=""Text""></tag-da>
             <tag-da bind-pa=""sampleData"" for=""EmailAddress""></tag-da>
-        </div>");
+        </div>
+");
                         }
                     </pre>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="offset-md-1 col-md-4"><p>Angular 2 generates this output into the client's browser:</p></div>
-                <div class="col-md-2"><h3>Browser</h3></div>
-                <div class="col-md-5"><p>Generated HTML sent to browser:</p></div>
-            </div>
-
-            <div class="row">
-                <div class="offset-md-5 col-md-2"><span><i style="font-size:x-large" class="icon ion-md-arrow-back fadeIn"></i></span></div>
-                <div class="offset-md-1 col-md-1"><i style="font-size:x-large" class="icon ion-md-arrow-down fadeIn"></i></div>
-            </div>
-
-            <div class="row">
-
-                <div class="offset-md-1 col-md-5">
-                    <div *ngIf="sampleData != null">
-                        <tag-da bind-pa="sampleData" for="DateTimeVar"></tag-da>
-                        <tag-da bind-pa="sampleData" for="Text"></tag-da>
-                        @*<tag-da bind-pa="sampleData" for="EmailAddress"></tag-da>*@
+                        </code>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-6">
-                    <pre class="code">
-                                            @{
-                        Write(@"
+            <div class="card">
+                <div class="card-block">
+                    <div class="col-md-2"><h4 class="card-title">Angular 2</h4></div>
+                    <div class="col-md-6">
+                        <p class="small">(2) Create angular data model, data services (manually or using NSwag) create angular component</p>
+                    </div>
+                    <div class="col-md-4"><i style="font-size:x-large" class="icon ion-md-arrow-down fadeIn"></i></div>
+                </div>
+                <div class="card-block">
+                    <div class="col-md-5">
+                        <h6 class="card-subtitle text-muted">typical angular service</h6>
+                        <code>
+                            <pre>
+                            @{
+                                Write(@"
+    import ( Injectable ) from '@angular/core';
+    import ( Http, Response, RequestOptions ) from '@angular/http';
+    import ( Observable ) from 'rxjs/Rx';
+    import 'rxjs/add/operator/map';
+    import 'rxjs/add/operator/catch';
+    import ( AuthService ) from './auth.service';
+    import ( SampleData ) from '../models/sampleData.ts';
+    @Injectable()
+    export class SampleDataService (
+        constructor(private http: Http, private authService: AuthService) ( )
+        getSampleData(): Observable<SampleData> (
+            return this.http.get('api/sampleData', ( headers: this.authService.jsonHeaders() ))
+                .map((resp: Response) => resp.json())
+                .catch(this.handleError);
+        )
+        handleError(error: any) (
+            console.error(error);
+            return Observable.throw(error.json().error || 'Server error');
+        )
+    )
+");
+                            }
+                        </pre>
+                        </code>
+
+                        <h6 class="card-subtitle text-muted">excerpt from angular data model</h6>
+                        <code>
+                            <pre>
+                                @{
+                                    Write(@"
+    import ( Component ) from '@angular/core';
+    export class SampleData (
+        dateTimeVar: Date;
+        currency: number;
+        text: string;
+        emailAddress: string;
+    )
+");
+                                }
+                            </pre>
+                        </code>
+                    </div>
+
+                    <div class="col-md-1">
+                        <i style="font-size:x-large" class="icon ion-md-arrow-forward fadeIn"></i>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h6 class="card-subtitle text-muted">Angular component; note use of C# partial view in plce of HTML template or template URL</h6>
+                        <code>
+                            <pre>
+                                @{
+                                    // NOTE: delimitered code here for literal display; 
+                                    // the following code is not executed here, actual code is further below.
+                                    Write(@"
+    import ( Component, OnInit ) from '@angular/core';
+    import ( DomSanitizer) from '@angular/platform-browser';
+    import ( SampleDataService ) from './services/SampleData.service';
+    import ( SampleData ) from './models/SampleData.ts';
+    @Component((
+        selector: 'my-content',
+        templateUrl: '/partial/documentationComponent'
+    ))
+    export class DocumentationComponent implements OnInit (
+        sampleData: SampleData = null;
+        constructor(
+            private _DomSanitizer: DomSanitizer,
+            private sampleDataService: SampleDataService
+        ) ( )
+        ngOnInit() (
+            this.sampleDataService.getSampleData()
+                .subscribe((data: SampleData) => this.sampleData = data);
+        )
+    )
+");
+                                }
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-block">
+                    <div class="col-md-7"><h4 class="card-title">Browser</h4></div>
+                    <div class="col-md-5"><i style="font-size:x-large" class="icon ion-md-arrow-down fadeIn"></i></div>
+                </div>
+                <div class="card-block">
+                    <div class="col-md-5">
+                        <h6 class="card-subtitle text-muted">Actual output, as seen in browser</h6>
+                        <br />
+                        <div *ngIf="sampleData != null">
+                            <tag-da bind-pa="sampleData" for="DateTimeVar"></tag-da>
+                            <tag-da bind-pa="sampleData" for="Text"></tag-da>
+                        </div>
+                    </div>
+
+                    <div class="col-md-1">
+                        <i style="font-size:x-large" class="icon ion-md-arrow-back fadeIn"></i>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h6 class="card-subtitle text-muted">HTML generated from above, sent from server to browser</h6>
+                        <code>
+                            <pre>
+                                @{
+                                    Write(@"
     <div *ngIf=""sampleData != null"">
         <div><span>((sampleData.dateTimeVar | date:'dd/MM/yyyy hh:mm:ss'))</span></div>
         <div><span>((sampleData.text))</span></div>
     </div>");
-                    }
-                </pre>
-
+                                }
+                            </pre>
+                        </code>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div role="tabpanel" class="tab-pane fade" id="tagda">
 
-            <div class="row">
-                <div class="row">
-                    <div class="offset-md-1 col-md-4">
-                        <p>
-                            Snippet from C# data model,<br />
-                            containing optional data attributes:
-                        </p>
-                    </div>
-                    <div class="col-md-1"><h3>Server</h3></div>
-                    <div class="offset-md-1 col-md-5">
-                        <p>
-                            server-side .CSHTML view<br />
-                            using custom tag-helper markup:
-                        </p>
+            <div class="card">
+                <div class="card-block">
+                    <div class="col-md-2"><h4 class="card-title">Server</h4></div>
+                    <div class="col-md-10">
+                        <p class="small">(1) Define data model + Web API data services on server (not shown here), create a CSHTML page (instead of hard-coded HTML template) add markup using tag helpers + intellisense.</p>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="offset-md-5 col-md-2"><span><i style="font-size:x-large" class="icon ion-md-arrow-forward fadeIn"></i></span></div>
-                </div>
-
-                <div class="col-md-6">
-                    <pre class="code" title="snippet from server-side C# data model, containing optional data attributes:">
-                        @{
-                            Write(@"
+                <div class="card-block">
+                    <div class="col-md-5">
+                        <h6 class="card-subtitle text-muted">excerpt from C# data model, using optional data attributes</h6>
+                        <code>
+                            <pre>
+                                @{
+                                    Write(@"
     [DataType(DataType.Currency)]
     public decimal Currency ( get; set; )
 
     [Required]
-    [StringLength(100, ErrorMessage = ""The (0) must be at least (2) characters long."", MinimumLength = 6)]
+    [StringLength(100, ErrorMessage = ""The (0) must be at least (2) characters long."",
+                       MinimumLength = 6)]
     [DataType(DataType.Password)]
     [Display(Name = ""Password"")]
     public string Password ( get; set; )");
-                    }
-                    </pre>
-                </div>
+                                }
+                            </pre>
+                        </code>
+                    </div>
 
-                <div class="col-md-6">
-                    <pre class="code" title="server-side .CSHTML view containing custom tag-helper markup:">
-                        @{
-                            // NOTE: delimitered code here for literal display; 
-                            // the following code is not executed here, actual code is further below.
-                            Write(@"
+                    <div class="col-md-1">
+                        <i style="font-size:x-large" class="icon ion-md-arrow-forward fadeIn"></i>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h6 class="card-subtitle text-muted">CSHTML markup using tag helpers</h6>
+                        <code>
+                            <pre>
+                                @{
+                                    // NOTE: delimitered code here for literal display; 
+                                    // the following code is not executed here, actual code is further below.
+                                    Write(@"
     <div *ngIf=""sampleData != null"">
         <tag-in bind-pa=""sampleData"" for=""Currency""></tag-da >
         <tag-in bind-pa=""sampleData"" for=""Password""></tag-da>
     </div>");
-                        }
-                    </pre>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="offset-md-1 col-md-4"><p>Angular 2 generates this output into the client's browser:</p></div>
-                <div class="col-md-2"><h3>Browser</h3></div>
-                <div class="col-md-5"><p>Generated HTML sent to browser:</p></div>
-            </div>
-
-            <div class="row">
-                <div class="offset-md-5 col-md-2"><span><i style="font-size:x-large" class="icon ion-md-arrow-back fadeIn"></i></span></div>
-                <div class="offset-md-1 col-md-1"><i style="font-size:x-large" class="icon ion-md-arrow-down fadeIn"></i></div>
-            </div>
-
-            <div class="row">
-
-                <div class="offset-md-1 col-md-5">
-                    <div *ngIf="sampleData != null">
-                        <tag-in bind-pa="sampleData" for="Currency"></tag-in>
-                        <tag-in bind-pa="sampleData" for="Password"></tag-in>
+                                    }
+                            </pre>
+                        </code>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-6">
-                    <pre class="code">
-                        @{
-                            // NOTE: delimitered code here for literal display; 
-                            // the following code is not executed here, actual code is further below.
-                            Write(@"
+            <div class="card">
+                <div class="card-block">
+                    <div class="col-md-2"><h4 class="card-title">Angular 2</h4></div>
+                    <div class="col-md-6">
+                        <p class="small">(2) Create angular data model, data services (manually or using NSwag) create angular component</p>
+                    </div>
+                    <div class="col-md-4"><i style="font-size:x-large" class="icon ion-md-arrow-down fadeIn"></i></div>
+                </div>
+                <div class="card-block">
+                    <div class="col-md-5">
+                        <h6 class="card-subtitle text-muted">typical angular service</h6>
+                        <code>
+                            <pre>
+                            @{
+                                Write(@"
+    import ( Injectable ) from '@angular/core';
+    import ( Http, Response, RequestOptions ) from '@angular/http';
+    import ( Observable ) from 'rxjs/Rx';
+    import 'rxjs/add/operator/map';
+    import 'rxjs/add/operator/catch';
+    import ( AuthService ) from './auth.service';
+    import ( SampleData ) from '../models/sampleData.ts';
+    @Injectable()
+    export class SampleDataService (
+        constructor(private http: Http, private authService: AuthService) ( )
+        getSampleData(): Observable<SampleData> (
+            return this.http.get('api/sampleData', ( headers: this.authService.jsonHeaders() ))
+                .map((resp: Response) => resp.json())
+                .catch(this.handleError);
+        )
+        handleError(error: any) (
+            console.error(error);
+            return Observable.throw(error.json().error || 'Server error');
+        )
+    )
+");
+                            }
+                        </pre>
+                        </code>
+
+                        <h6 class="card-subtitle text-muted">excerpt from angular data model</h6>
+                        <code>
+                            <pre>
+                                @{
+                                    Write(@"
+    import ( Component ) from '@angular/core';
+    export class SampleData (
+        dateTimeVar: Date;
+        currency: number;
+        text: string;
+        emailAddress: string;
+    )
+");
+                                }
+                            </pre>
+                        </code>
+                    </div>
+
+                    <div class="col-md-1">
+                        <i style="font-size:x-large" class="icon ion-md-arrow-forward fadeIn"></i>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h6 class="card-subtitle text-muted">Angular component; note use of C# partial view in plce of HTML template or template URL</h6>
+                        <code>
+                            <pre>
+                                @{
+                                    // NOTE: delimitered code here for literal display; 
+                                    // the following code is not executed here, actual code is further below.
+                                    Write(@"
+    import ( Component, OnInit ) from '@angular/core';
+    import ( DomSanitizer) from '@angular/platform-browser';
+    import ( SampleDataService ) from './services/SampleData.service';
+    import ( SampleData ) from './models/SampleData.ts';
+    @Component((
+        selector: 'my-content',
+        templateUrl: '/partial/documentationComponent'
+    ))
+    export class DocumentationComponent implements OnInit (
+        sampleData: SampleData = null;
+        constructor(
+            private _DomSanitizer: DomSanitizer,
+            private sampleDataService: SampleDataService
+        ) ( )
+        ngOnInit() (
+            this.sampleDataService.getSampleData()
+                .subscribe((data: SampleData) => this.sampleData = data);
+        )
+    )
+");
+                                }
+                            </pre>
+                        </code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-block">
+                    <div class="col-md-7"><h4 class="card-title">Browser</h4></div>
+                    <div class="col-md-5"><i style="font-size:x-large" class="icon ion-md-arrow-down fadeIn"></i></div>
+                </div>
+                <div class="card-block">
+                    <div class="col-md-5">
+                        <h6 class="card-subtitle text-muted">Actual output, as seen in browser</h6>
+                        <br />
+                        <div *ngIf="sampleData != null">
+                            <tag-in bind-pa="sampleData" for="Currency"></tag-in>
+                            <tag-in bind-pa="sampleData" for="Password"></tag-in>
+                        </div>
+                    </div>
+
+                    <div class="col-md-1">
+                        <i style="font-size:x-large" class="icon ion-md-arrow-back fadeIn"></i>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h6 class="card-subtitle text-muted">HTML generated from above, sent from server to browser</h6>
+                        <code>
+                            <pre>
+                                @{
+                                    // NOTE: delimitered code here for literal display; 
+                                    // the following code is not executed here, actual code is further below.
+                                    Write(@"
     <div *ngIf=""sampleData != null"">
         <div class=""form-group"">
             <div class=""input-group"">
@@ -233,10 +407,13 @@
                     maxLength=""100"" minLength=""6"" placeholder=""Password"" required=""required"" type=""Password"">
         </div>
     </div>");
-                        }
-                    </pre>
+                                }
+                            </pre>
+                        </code>
+                    </div>
                 </div>
             </div>
+
         </div>
 
         <div role="tabpanel" class="tab-pane fade" id="references">
