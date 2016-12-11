@@ -1,53 +1,24 @@
 # Angular 2 ASP.NetCore Multi-SPA framework
 
-This repository holds the source of a framework in progress. 
+SPA or SinglePage Application frameworks provide users a great experience, the page feels responsive, but using 'traditional' techniques you will usually end up using 'flat' HTML templates, duplicate some aspects of your code between the server side and client side, and either end up in spaghetti- lots of bad coupling, or find yourself wanting to get data somewhere it is not.
 
-Currently it uses an ASP.Net Core backend, Angular 2.0.0 front end, and will be styled with the latest Bootstrap 4.0.
-Soon to be added tag helpers and code generation from the data model.
+This framework provides a platform you can use for your SPA solution, but uses ASP.Net Core MVC to provide the backend, this in turn allows you to inject server side config details and data during composition of the template using Razor and Tag Helpers.
+At the same time the HTML generated can have much of the Angular 2 code injected, simplifying and centralising your code.
 
+You have less keystrokes to type as a small command entered becomes expanded and dehydrated at the server and client into much more - tags, script and labels.
+
+You can get you project developed more quickly as you have a framework that keeps essential code generation blocks in one place - want a different date picker? here you change the date picker in one place, in the tag helper, and your whole site is updated.
+
+Undernean ASP.Net Core backend, Angular 2 front end, and will be styled with the latest Bootstrap 4.0.
 
 For further background details, see the Github Wiki here: https://github.com/RobertDyball/Angular2MultiSPA/wiki
 or follow the blog posts here: http://dyball.wordpress.com
 
-#### Done so far: 
+Note: this is open source, if something doesn't work, someone will try and help if they can,but if you want support, get in and be a part of this project.
 
-- Switched from standard Angular HTML template to a template created with an ASP.Net Core partial view 
-  This allows use of razor syntax, since the templates are served from CSHTML files, and anything else ASP.Net / MVC programmers are used to including tag helpers
-  i.e., inject server side smarts into otherwise plain flat-HTML client-side markup.
-  (more CSHTML/HTML templates to come when Angular 2 routing is added)
-- Switched from Bootstrap 3 to Bootstrap 4
-- Add initial cut of Angular 2 routing, re-implemented Bootstrap navbar / menu
-- Added EF Core, and a SQL backend (using Northwind) to demonstrate data model generation using database-first
-- Main data model now separated into a separate project
-- Set up an intial, separate View Model, and simple fetch of data and images from Web API through to an Angular 2 service
-- Added Code first, to create database now, go to Package Manager console, type: Update-Database
-  (note no sample data this drop, get the SQL data insert if needed from Northwind.sql for now until seeding is added)
-- Added OpenIdDict using password flow, basic authentication using JWT tokens, in memory database
-  (thanks to password flow sample from https://github.com/openiddict/openiddict-samples )
-- Added client side and server side authentication.
-- Added initial Tag Helpers to automatically create boiler-plate client code based on view models, attributes decorating view model properties will generate code directly, from one place in the code.
-- Added required field and regular expression validation to Tag Helpers, dynamically added from view model
-- Added minlength, maxlength validation to Tag Helpers, dynamically added from view model
-- Added required (tag attribute or data annotation attribute) and hidden (tag attribute)
-- Expanded available Web Api methods for Category, Employee; added Products
-- Added simple hierarchical categoryproduct selection. 
-- Started refactoring tag helpers; now one for form entry fields (tag-in) and another for read-only display of data (tag-da)
-- Boolean read-only data may be rendered true/false, yes/no or as checkboxes
-- Added order, order detail & customer services (cut down from original, to demonstrate tag helpers + ASP.Net Core, not Northwind)
+The project is purposely not opinionated about the data layer; if you wantto use EFnative methods, CQRS, or someother data layer- that's up to you.
 
-#### Work in progress 
-- Add further validation, error handling, toasts/messages for signup or login fail.
-- Refactor tag helper code to bring out common blocks; add support for other data types eg. date -> date picker, etc.
-- Expand tag helpers to include Angular validation code generation
-
-#### TODO 
-- Add accessibility,screen reader support into the tag helpers 
-- Add multi-lingual support
-- Add multi-tenant support (multiple sites using one code base, reskinned according to URL)
-- Complete SQL seeding and database creation from code for WebAPI sample data (currently part manual)
-- Add Swagger (probably NSwag) to create a map of Web API calls, and be able to auto generate Typescript code for Angular 2 services + data classes
-- Add native Angular 2 Bootstrap library; Perhaps ng-bootstrap or ng2-bootstrap.  
-- Add Chuck Norris Roundhouse to create versioned SQL scripts generated by EF
+Similarly, while the project is currently using OpenIdDict, it is not forcing you into this, you can use another authorisation/authentication framwork (or none at all) if you wish.
 
 #### Prerequisites
 
@@ -73,7 +44,7 @@ Dependencies can be installed manually, using the command:
 
 dotnet restore
 
-this command will also automatically inostall any outstanding NPM packages, saving you the need of typing
+this command will also automatically install any outstanding NPM packages, saving you the need of typing
 
 npm install
 npm install --save-dev
@@ -82,20 +53,6 @@ If you have any issues, try running both of these commands, in an admin command 
 
 So after you build and run, browse to: http://localhost:7010/ to see the Angular 2 using an ASP.Net partial page, with CSHTML running razor into the Angular template.
 
-#### Background
+#### Want to help? 
 
-Here's a brief explanation of what happens, and a little of why.
-
-All of us have seen code turn to spaghetti and think we're going to avoid it next time.
-
-Ideally we're hoping to get a useful integration of the best of an ASP.Net Core backend with an Angular 2 front end, and not lose the strengths of both platforms. 
-
-Some people use an ASP.Net or ASP.Net Core or other) back end platform to serve up their Angular scripts and views and provide data using Web API, however these tend to ignore tag helpers or many of the other benefits of ASP.Net core.
-
-Others go the other way, making the server fulfil a complex range of tasks, often setting up pre-loaded data into views, but this can create quite a complex code base with a very steep learning curve.
-
-Here we hope to experiment in collaboration and produce a framework that provides a starting point for many business scenarios.
-
-We'll try and keep things using cross platform features of ASP.Net Core that is capable of being deployed to Windows or Linux servers or makeuse of Docker containers.
-
-Initially MS SQL will be used, later we'll add SQLLite and other options.
+There's still a few data types which need to be handled, for data display and data input. Send me a message email is my firstname dot lastname (see the github repo name) at gmail.com, I'll add you as a collaborator.

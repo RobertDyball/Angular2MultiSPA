@@ -8,7 +8,7 @@
 
     <p class="small">
         NOTE: Code below for illustration only. The left and right parentheses are active characters, used within angular 2. In code blocks below they have been represented as &quot;(&quot; and &quot;)&quot; instead of &quot;{{ '{' }}&quot; or &quot;{{ '}' }}&quot; to avoid being mishandled by Razor on the server or Angular on the client.<br />
-        Until the multiple levels of delimiting needed,are added, please copy any code directly from the source on <a href="https://github.com/RobertDyball/Angular2MultiSPA" target="_blank">GitHub here</a> instead.<br/>
+        Until the multiple levels of delimiting needed,are added, please copy any code directly from the source on <a href="https://github.com/RobertDyball/Angular2MultiSPA" target="_blank">GitHub here</a> instead.<br />
     </p>
 
     <!-- http://codepen.io/jek/pen/BoWNRy?css-preprocessor=sass  -->
@@ -44,11 +44,9 @@
         [DataType(DataType.Time)]
         public DateTime TimeVar ( get; set; )
         public DateTime string ( get; set; )
-
         [DataType(DataType.Currency)]
         public decimal Currency ( get; set; )
         public string Text ( get; set; )
-
         [DataType(DataType.EmailAddress)]
         public string EmailAddress ( get; set; )
 ");
@@ -235,7 +233,6 @@
                                     Write(@"
     [DataType(DataType.Currency)]
     public decimal Currency ( get; set; )
-
     [Required]
     [StringLength(100, ErrorMessage = ""The (0) must be at least (2) characters long."",
                        MinimumLength = 6)]
@@ -413,11 +410,113 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div role="tabpanel" class="tab-pane fade" id="references">
-            <p>TODO: add links to docs</p>
+            <br />
+            <div class="card-deck">
+                <div class="row">
+                    <div class="card col-md-4">
+                        <div class="card-title">
+                            <h3>ASP.Net Core</h3>
+                        </div>
+                        <div class="card-block">
+                            <p>
+                                ASP.NET Core is a new open-source and cross-platform framework for building modern cloud based internet connected applications, such as web apps, IoT apps and mobile backends.
+                                ASP.NET Core apps can run on <a href="https://www.microsoft.com/net/core/platform" target="_blank">.NET Core</a> or on the full .NET Framework.
+                                It was architected to provide an optimized development framework for apps that are deployed to the cloud or run on-premises. It consists of modular components with minimal overhead, so you retain flexibility while constructing your solutions. You can develop and run your ASP.NET Core apps cross-platform on Windows, Mac and Linux. ASP.NET Core is open source at GitHub.
+                            </p>
+                            <p>
+                                <a href="https://dot.net">Downloads</a><br />
+                                <a href="https://www.asp.net/core">Training</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card col-md-4">
+                        <div class="card-title">
+                            <h3>ASP.Net Core MVC</h3>
+                        </div>
+                        <div class="card-block">
+                            <p>ASP.NET Core MVC is a rich framework for building web apps and APIs using the Model-View-Controller design pattern.</p>
+                            <p>The ASP.NET Core MVC framework is a lightweight, open source, highly testable presentation framework optimized for use with ASP.NET Core.
+                            <p>ASP.NET Core MVC provides a patterns-based way to build dynamic websites that enables a clean separation of concerns. It gives you full control over markup, supports TDD-friendly development and uses the latest web standards.</p>
+                            <p>
+                                <a href="https://docs.microsoft.com/en-gb/aspnet/core/mvc/overview" target="_blank">Overview</a><br />
+                                <a href="https://dot.net">Documentation, Download links</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card col-md-4">
+                        <div class="card-title">
+                            <h3>Tag Helpers</h3>
+                        </div>
+                        <div class="card-block">
+                            <p>
+                                .NET Core tag helpers allow you to create custom HTML tags that executed and rendered on the server prior to sending across the wire to the client browser.<br />
+                                This allows you access to the rich Razor syntax, ability to read data from config. files, or query databases, call custom server side components or web services.<br />
+                                The HTML generated can include standard HTML, embedded javascript, added CSS styles - and again, all of these are customisable before being sent to the client.<br />
+                                <a href="httpshttps://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro">Introduction to Tag Helpers, Documentation</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="card col-md-4">
+                        <div class="card-title">
+                            <h3>Angular 2</h3>
+                        </div>
+                        <div class="card-block">
+                            <p>
+                                .NET Core and ASP.NET Core give you a blazing fast and modular platform for creating server applications that run on Windows, Linux and Mac.<br />
+                                <a href="https://www.infoq.com/articles/Angular2-TypeScript-High-Level-Overview" target="_blank">InfoQ's High level overview</a><br />
+                                <a href="https://angular.io/docs/ts/latest/">Documentation, Quickstart, Downloads</a><br />
+                                <a href="https://angular.io/docs/ts/latest/api/">API Documentation</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-md-4">
+                        <div class="card-title">
+                            <h3>Bootstrap 4</h3>
+                        </div>
+                        <div class="card-block">
+                            <p>Bootstrap is the world's most popular framework for building responsive, mobile-first sites and applications.</p>
+                            <p>Inside you'll find high quality HTML, CSS, and JavaScript to make starting any project easier than ever.</p>
+                            <p>Bootstrap employs a handful of important global styles and settings that you'll need to be aware of when using it, all of which are almost exclusively geared towards the normalization of cross browser styles.</p>
+                            <p>
+                                <a href="https://v4-alpha.getbootstrap.com/getting-started/introduction/" target="_blank">Introduction</a><br />
+                                <a href="https://v4-alpha.getbootstrap.com/layout/overview" target="_blank">Documentation</a><br />
+                                <a href="http://v4-alpha.getbootstrap.com/examples/" target="_blank">Examples</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-md-4">
+                        <div class="card-title">
+                            <h3>this project, where to start</h3>
+                        </div>
+                        <div class="card-block">
+                            <p>Download from GitHub or clone this project from GitHub <a href="https://github.com/RobertDyball/Angular2MultiSPA" target="_blank">here.</a></p>
+                            <p>Get the ASP.Net Core framework for your PC, Mac, workstation.</p>
+                            <p>Download and install latest ASP.Net Core to suit your platform, see ASP.Net Core downloads here: http://asp.net ( currently latest version is 1.0.0-preview2-003133 )</p>
+                            <p>If using Windows, use Visual Studio 2015 Update 3, with ASP.Net core tooling updates, or alternately use Visual Studio code.</p>
+                            <p>Node.js and npm are essential to Angular 2 development and used by Visual Studio.</p>
+                            <p>Install Typescript and Typings globally, as these will be used by the application.</p>
+                            <code>
+                                <pre>
+                                npm install -g typescript 
+                                npm install -g typings
+                                dotnet restore
+                            </pre>
+                            </code>
+                            <p>Alternately, open the solution Visual Studio 2015, Visual Studio Code which will (if setup correctly) restore dependencies for you.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
