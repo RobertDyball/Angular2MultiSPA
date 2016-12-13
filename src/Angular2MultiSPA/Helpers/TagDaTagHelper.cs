@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Text.RegularExpressions;
+using System;
 
 namespace Angular2MultiSPA.Helpers
 {
@@ -34,9 +35,16 @@ namespace Angular2MultiSPA.Helpers
         /// Option: use HTML disabled attribute, alters how boolean values should be rendered on page;
         /// </summary>
         ///<remarks>Using this sets the HTML Disabled attribute but may result in rendering an HTML control that is too grey to be distinguished.
-        /// This is as option, defaults is set to off.</remarks>
+        /// This is as option, default is off.</remarks>
         [HtmlAttributeName("disabled")]
         public string Disabled { get; set; } = null;
+
+        /// <summary>
+        /// Option: use show password icon, provide users a way to see password optionally;
+        /// </summary>
+        ///<remarks>This is as option, default is off.</remarks>
+        [HtmlAttributeName("show")]
+        public string Show { get; set; } = null;
 
         /// <summary>
         /// Option: how boolean values should be rendered
@@ -161,8 +169,8 @@ namespace Angular2MultiSPA.Helpers
 
                 case "Password":
                     //     Represent a password value.
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
-                    input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
+                    input.InnerHtml.AppendHtml("********");
+
                     break;
 
                 case "Url":
