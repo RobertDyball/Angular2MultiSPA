@@ -31,6 +31,12 @@ namespace Angular2MultiSPA.Helpers
         [HtmlAttributeName("readonly")]
         public string Readonly { get; set; } = null;
 
+        /// <summary>
+        /// Row count attribute (for textarea)
+        /// </summary>
+        [HtmlAttributeName("rows")]
+        public int? Rows { get; set; } = null;
+
 
         /// <summary>
         /// Alternate name to set angular data-binding to
@@ -53,11 +59,8 @@ namespace Angular2MultiSPA.Helpers
         {
             var propertyName = For.Name.Camelize();
             var dataBindTo = propertyName.GetDataBindVariableName(BindPa, BindTo);
-
-            string textClass = "form-control"; //TextBoxClass;
             var labelName = ((DefaultModelMetadata)For.Metadata).Placeholder ?? ((DefaultModelMetadata)For.Metadata).DisplayName ?? For.Name.Humanize();
             var dataType = ((DefaultModelMetadata)For.Metadata).DataTypeName;
-            var inputType = dataType == "Password" ? "Password" : "Text";
 
             // HTML5 input type="" to be supported
             //color
@@ -69,9 +72,9 @@ namespace Angular2MultiSPA.Helpers
             //number
             //range
             //search
-            //tel
-            //time
-            //url
+            //*tel
+            //*time
+            //*url
             //week
 
             output.TagName = "div";
@@ -82,13 +85,75 @@ namespace Angular2MultiSPA.Helpers
             label.InnerHtml.AppendHtml(labelName);
             output.PostContent.SetHtmlContent(label);
 
-            var input = new TagBuilder("input");
-            input.MergeAttribute("id", dataBindTo);
-            input.MergeAttribute("type", dataType);
-            if (!string.IsNullOrEmpty(textClass))
+            TagBuilder input = null;
+
+            switch (dataType)
             {
-                input.AddCssClass(textClass);
+                case "Custom":
+                case "DateTime":
+                case "Date":
+                case "Time":
+                case "Duration":
+                    input = new TagBuilder("input");
+                    input.MergeAttribute("type", dataType);
+                    input.TagRenderMode = TagRenderMode.StartTag;
+                    break;
+
+                case "PhoneNumber":
+                    input = new TagBuilder("input");
+                    input.MergeAttribute("type", "tel");
+                    input.TagRenderMode = TagRenderMode.StartTag;
+                    break;
+
+                case "Currency":
+                case "Text":
+                case "Html":
+                    input = new TagBuilder("input");
+                    input.MergeAttribute("type", dataType);
+                    input.TagRenderMode = TagRenderMode.StartTag;
+                    break;
+
+                case "MultilineText":
+                    input = new TagBuilder("textarea");
+                    if (Rows != null)
+                    {
+                        input.Attributes.Add("rows", Rows.Value.ToString());
+                    }
+                    input.TagRenderMode = TagRenderMode.Normal;
+                    break;
+
+                case "EmailAddress":
+                    input = new TagBuilder("input");
+                    input.MergeAttribute("type", "email");
+                    input.TagRenderMode = TagRenderMode.StartTag;
+                    break;
+
+                case "Url":
+                    input = new TagBuilder("input");
+                    input.MergeAttribute("type", "url");
+                    input.TagRenderMode = TagRenderMode.StartTag;
+                    break;
+
+                case "Password":
+                case "ImageUrl":
+                case "CreditCard":
+                case "PostalCode":
+                case "Upload":
+                case "System.String":
+                    input = new TagBuilder("input");
+                    input.TagRenderMode = TagRenderMode.StartTag;
+                    break;
+
+                default:
+                    input = new TagBuilder("input");
+                    input.TagRenderMode = TagRenderMode.StartTag;
+                    break;
             }
+
+
+
+            input.MergeAttribute("id", dataBindTo);
+            input.AddCssClass(TextBoxClass);
 
             if (!string.IsNullOrEmpty(Hidden))
             {
@@ -125,26 +190,49 @@ namespace Angular2MultiSPA.Helpers
 
             input.Attributes.Add("placeholder", labelName);
 
-            input.TagRenderMode = TagRenderMode.StartTag;
-
-            if (dataType == "Currency")
+            switch (dataType)
             {
-                //<div class="input-group">
-                var divInputGroup = new TagBuilder("div");
-                divInputGroup.MergeAttribute("class", "input-group");
+                case "Custom":
+                case "DateTime":
+                case "Date":
+                case "Time":
+                case "Duration":
+                case "PhoneNumber":
+                    output.PostContent.SetHtmlContent(input);
+                    break;
 
-                // <span class="input-group-addon">$</span>
-                var spanInputGroupAddon = new TagBuilder("span");
-                spanInputGroupAddon.MergeAttribute("class", "input-group-addon");
-                spanInputGroupAddon.InnerHtml.Append("$");
-                divInputGroup.InnerHtml.AppendHtml(spanInputGroupAddon);
-                divInputGroup.InnerHtml.AppendHtml(input);
+                case "Currency":
+                    // <div class="input-group">
+                    var divInputGroup = new TagBuilder("div");
+                    divInputGroup.MergeAttribute("class", "input-group");
 
-                output.PostContent.SetHtmlContent(divInputGroup);
-            }
-            else
-            {
-                output.PostContent.SetHtmlContent(input);
+                    // <span class="input-group-addon">$</span>
+                    var spanInputGroupAddon = new TagBuilder("span");
+                    spanInputGroupAddon.MergeAttribute("class", "input-group-addon");
+                    spanInputGroupAddon.InnerHtml.Append("$");
+                    divInputGroup.InnerHtml.AppendHtml(spanInputGroupAddon);
+                    divInputGroup.InnerHtml.AppendHtml(input);
+
+                    output.PostContent.SetHtmlContent(divInputGroup);
+                    break;
+
+                case "Text":
+                case "Html":
+                case "MultilineText":
+                case "EmailAddress":
+                case "Url":
+                case "Password":
+                case "ImageUrl":
+                case "CreditCard":
+                case "PostalCode":
+                case "Upload":
+                case "System.String":
+                    output.PostContent.SetHtmlContent(input);
+                    break;
+
+                default:
+                    output.PostContent.SetHtmlContent(input);
+                    break;
             }
 
             var childContent = output.PostContent.GetContent();
