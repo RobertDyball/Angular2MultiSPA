@@ -1,15 +1,13 @@
 # Angular 2 ASP.NetCore Multi-SPA framework
 
-SPA or SinglePage Application frameworks provide users a great experience, the page feels responsive, but using 'traditional' techniques you will usually end up using 'flat' HTML templates, duplicate some aspects of your code between the server side and client side, and either end up in spaghetti- lots of bad coupling, or find yourself wanting to get data somewhere it is not.
+SPA or SinglePage Application frameworks provide users a great experience, pages feel responsive, but these often use 'flat' HTML client-side templates.
+And if using forms, from simple labels + text boxes through to date pickers, you still repeat large parts of your HTML and javascript validation code.
 
-This framework provides a platform you can use for your SPA solution, but uses ASP.Net Core MVC to provide the backend, this in turn allows you to inject server side config details and data during composition of the template using Razor and Tag Helpers.
-At the same time the HTML generated can have much of the Angular 2 code injected, simplifying and centralising your code.
+This framework uses ASP.Net MVC to generate the HTML templates, this allows you use of ASP.Net Tag Helpers and Razor syntax, C# backend code as well as your own Custom Tag Helpers.
 
-You have less keystrokes to type as a small command entered becomes expanded and dehydrated at the server and client into much more - tags, script and labels.
+By creating tags using Custom Tag Helpers you minimizing what needs to be used on the page itself, as much HTML, CSS and script will be injected as possible using conventions or attributes.
 
-You can get you project developed more quickly as you have a framework that keeps essential code generation blocks in one place - want a different date picker? here you change the date picker in one place, in the tag helper, and your whole site is updated.
-
-Undernean ASP.Net Core backend, Angular 2 front end, and will be styled with the latest Bootstrap 4.0.
+In addition to the ASP.Net Core backend, the front end uses Angular 2 and Bootstrap 4.0.
 
 For further background details, see the Github Wiki here: https://github.com/RobertDyball/Angular2MultiSPA/wiki
 or follow the blog posts here: http://dyball.wordpress.com

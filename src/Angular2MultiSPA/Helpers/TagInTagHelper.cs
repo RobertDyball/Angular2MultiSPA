@@ -135,17 +135,24 @@ namespace Angular2MultiSPA.Helpers
                     break;
 
                 case "Password":
+                    input = new TagBuilder("input");
+                    input.MergeAttribute("type", "password");
+                    input.TagRenderMode = TagRenderMode.StartTag;
+                    break;
+
                 case "ImageUrl":
                 case "CreditCard":
                 case "PostalCode":
                 case "Upload":
                 case "System.String":
                     input = new TagBuilder("input");
+                    input.MergeAttribute("type", "text");
                     input.TagRenderMode = TagRenderMode.StartTag;
                     break;
 
                 default:
                     input = new TagBuilder("input");
+                    input.MergeAttribute("type", "text");
                     input.TagRenderMode = TagRenderMode.StartTag;
                     break;
             }
