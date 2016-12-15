@@ -1,5 +1,8 @@
 
 @using Angular2MultiSPA.ViewModels
+@using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
+@using System.Collections.Generic
+@using System.Reflection
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper "*,Angular2MultiSPA"
 @model SampleData
@@ -20,7 +23,7 @@
             <a class="nav-link" href="#tagda" role="tab" data-toggle="tab">Data Input Tag Helpers</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#references" role="tab" data-toggle="tab">References, Notes</a>
+            <a class="nav-link" href="#references" role="tab" data-toggle="tab">Supported data types</a>
         </li>
     </ul>
 
@@ -414,109 +417,204 @@
 
         <div role="tabpanel" class="tab-pane fade" id="references">
             <br />
-            <div class="card-deck">
-                <div class="row">
-                    <div class="card col-md-4">
-                        <div class="card-title">
-                            <h3>ASP.Net Core</h3>
-                        </div>
-                        <div class="card-block">
-                            <p>
-                                ASP.NET Core is a new open-source and cross-platform framework for building modern cloud based internet connected applications, such as web apps, IoT apps and mobile backends.
-                                ASP.NET Core apps can run on <a href="https://www.microsoft.com/net/core/platform" target="_blank">.NET Core</a> or on the full .NET Framework.
-                                It was architected to provide an optimized development framework for apps that are deployed to the cloud or run on-premises. It consists of modular components with minimal overhead, so you retain flexibility while constructing your solutions. You can develop and run your ASP.NET Core apps cross-platform on Windows, Mac and Linux. ASP.NET Core is open source at GitHub.
-                            </p>
-                            <p>
-                                <a href="https://dot.net">Downloads</a><br />
-                                <a href="https://www.asp.net/core">Training</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card col-md-4">
-                        <div class="card-title">
-                            <h3>ASP.Net Core MVC</h3>
-                        </div>
-                        <div class="card-block">
-                            <p>ASP.NET Core MVC is a rich framework for building web apps and APIs using the Model-View-Controller design pattern.</p>
-                            <p>The ASP.NET Core MVC framework is a lightweight, open source, highly testable presentation framework optimized for use with ASP.NET Core.
-                            <p>ASP.NET Core MVC provides a patterns-based way to build dynamic websites that enables a clean separation of concerns. It gives you full control over markup, supports TDD-friendly development and uses the latest web standards.</p>
-                            <p>
-                                <a href="https://docs.microsoft.com/en-gb/aspnet/core/mvc/overview" target="_blank">Overview</a><br />
-                                <a href="https://dot.net">Documentation, Download links</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card col-md-4">
-                        <div class="card-title">
-                            <h3>Tag Helpers</h3>
-                        </div>
-                        <div class="card-block">
-                            <p>
-                                .NET Core tag helpers allow you to create custom HTML tags that executed and rendered on the server prior to sending across the wire to the client browser.<br />
-                                This allows you access to the rich Razor syntax, ability to read data from config. files, or query databases, call custom server side components or web services.<br />
-                                The HTML generated can include standard HTML, embedded javascript, added CSS styles - and again, all of these are customisable before being sent to the client.<br />
-                                <a href="httpshttps://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro">Introduction to Tag Helpers, Documentation</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="card col-md-4">
-                        <div class="card-title">
-                            <h3>Angular 2</h3>
-                        </div>
-                        <div class="card-block">
-                            <p>
-                                .NET Core and ASP.NET Core give you a blazing fast and modular platform for creating server applications that run on Windows, Linux and Mac.<br />
-                                <a href="https://www.infoq.com/articles/Angular2-TypeScript-High-Level-Overview" target="_blank">InfoQ's High level overview</a><br />
-                                <a href="https://angular.io/docs/ts/latest/">Documentation, Quickstart, Downloads</a><br />
-                                <a href="https://angular.io/docs/ts/latest/api/">API Documentation</a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="card col-md-4">
-                        <div class="card-title">
-                            <h3>Bootstrap 4</h3>
-                        </div>
-                        <div class="card-block">
-                            <p>Bootstrap is the world's most popular framework for building responsive, mobile-first sites and applications.</p>
-                            <p>Inside you'll find high quality HTML, CSS, and JavaScript to make starting any project easier than ever.</p>
-                            <p>Bootstrap employs a handful of important global styles and settings that you'll need to be aware of when using it, all of which are almost exclusively geared towards the normalization of cross browser styles.</p>
-                            <p>
-                                <a href="https://v4-alpha.getbootstrap.com/getting-started/introduction/" target="_blank">Introduction</a><br />
-                                <a href="https://v4-alpha.getbootstrap.com/layout/overview" target="_blank">Documentation</a><br />
-                                <a href="http://v4-alpha.getbootstrap.com/examples/" target="_blank">Examples</a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="card col-md-4">
-                        <div class="card-title">
-                            <h3>this project, where to start</h3>
-                        </div>
-                        <div class="card-block">
-                            <p>Download from GitHub or clone this project from GitHub <a href="https://github.com/RobertDyball/Angular2MultiSPA" target="_blank">here.</a></p>
-                            <p>Get the ASP.Net Core framework for your PC, Mac, workstation.</p>
-                            <p>Download and install latest ASP.Net Core to suit your platform, see ASP.Net Core downloads here: http://asp.net ( currently latest version is 1.0.0-preview2-003133 )</p>
-                            <p>If using Windows, use Visual Studio 2015 Update 3, with ASP.Net core tooling updates, or alternately use Visual Studio code.</p>
-                            <p>Node.js and npm are essential to Angular 2 development and used by Visual Studio.</p>
-                            <p>Install Typescript and Typings globally, as these will be used by the application.</p>
-                            <code>
-                                <pre>
-                                npm install -g typescript 
-                                npm install -g typings
-                                dotnet restore
-                            </pre>
-                            </code>
-                            <p>Alternately, open the solution Visual Studio 2015, Visual Studio Code which will (if setup correctly) restore dependencies for you.</p>
-                        </div>
-                    </div>
-
-                </div>
+            <br />
+            <div *ngIf="sampleData != null">
+                <table style="width:90%" class="table-sm">
+                    <tr>
+                        <th>Data Type</th>
+                        <th>DataType Attribute</th>
+                        <th>Data Display</th>
+                        <th>Done?</th>
+                        <th>i18n?</th>
+                        <th>Comments</th>
+                        <th>Data Input</th>
+                        <th>Done?</th>
+                        <th>i18n?</th>
+                        <th>Comments</th>
+                    </tr>
+                    <tr>
+                        <td>DateTime</td>
+                        <td>DataType(DataType.DateTime)</td>
+                        <td><tag-da bind-pa="sampleData" for="DateTimeVar"></tag-da></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td><tag-in bind-pa="sampleData" for="DateTimeVar"></tag-in></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td>DataType(DataType.Date)</td>
+                        <td><tag-da bind-pa="sampleData" for="DateVar"></tag-da></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td><tag-in bind-pa="sampleData" for="DateVar"></tag-in></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Time</td>
+                        <td>DataType(DataType.Time)</td>
+                        <td><tag-da bind-pa="sampleData" for="TimeVar"></tag-da></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td><tag-in bind-pa="sampleData" for="TimeVar"></tag-in></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Duration</td>
+                        <td>DataType(DataType.Duration)</td>
+                        <td><tag-da bind-pa="sampleData" for="Duration"></tag-da></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td><tag-in bind-pa="sampleData" for="Duration"></tag-in></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>PhoneNumber</td>
+                        <td>DataType(DataType.PhoneNumber)</td>
+                        <td><tag-da bind-pa="sampleData" for="PhoneNumber"></tag-da></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td><tag-in bind-pa="sampleData" for="PhoneNumber"></tag-in></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Currency</td>
+                        <td>DataType(DataType.Currency)</td>
+                        <td><tag-da bind-pa="sampleData" for="Currency"></tag-da></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td><tag-in bind-pa="sampleData" for="Currency"></tag-in></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Text</td>
+                        <td>DataType(DataType.Text)</td>
+                        <td><tag-da bind-pa="sampleData" for="Text"></tag-da></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td><tag-in bind-pa="sampleData" for="Text"></tag-in></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Html</td>
+                        <td>DataType(DataType.Html)</td>
+                        <td><tag-da bind-pa="sampleData" for="Html"></tag-da></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td><tag-in bind-pa="sampleData" for="Html"></tag-in></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>MultilineText</td>
+                        <td>DataType(DataType.MultilineText)</td>
+                        <td><tag-da bind-pa="sampleData" for="MultilineText"></tag-da></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td><tag-in bind-pa="sampleData" for="MultilineText"></tag-in></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>EmailAddress</td>
+                        <td>DataType(DataType.EmailAddress)</td>
+                        <td>@*<tag-da bind-pa="sampleData" for="EmailAddress"></tag-da>*@</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td>@*<tag-in bind-pa="sampleData" for="EmailAddress"></tag-in>*@</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>DataType(DataType.Password)</td>
+                        <td><tag-da bind-pa="sampleData" for="Password"></tag-da></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td><tag-in bind-pa="sampleData" for="Password"></tag-in></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Url</td>
+                        <td>DataType(DataType.Url)</td>
+                        <td>@*<tag-da bind-pa="sampleData" for="Url"></tag-da>*@</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td>@*<tag-in bind-pa="sampleData" for="Url"></tag-in>*@</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>ImageUrl</td>
+                        <td>DataType(DataType.ImageUrl)</td>
+                        <td>@*<tag-da bind-pa="sampleData" for="ImageUrl"></tag-da>*@</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td>@*<tag-in bind-pa="sampleData" for="ImageUrl"></tag-in>*@</td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>CreditCard</td>
+                        <td>DataType(DataType.CreditCard)</td>
+                        <td><tag-da bind-pa="sampleData" for="CreditCard"></tag-da></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td><tag-in bind-pa="sampleData" for="CreditCard"></tag-in></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>PostalCode</td>
+                        <td>DataType(DataType.PostalCode)</td>
+                        <td><tag-da bind-pa="sampleData" for="PostalCode"></tag-da></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                        <td><tag-in bind-pa="sampleData" for="PostalCode"></tag-in></td>
+                        <td>N</td>
+                        <td>N</td>
+                        <td></td>
+                    </tr>
+                </table>
             </div>
-
         </div>
     </div>
 </div>
