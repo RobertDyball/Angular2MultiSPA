@@ -32,6 +32,19 @@ namespace Angular2MultiSPA.Helpers
         public string BindPa { get; set; } = null;
 
         /// <summary>
+        /// Option: set display format, alters appearance of date, time, date/time and currency values
+        /// </summary>
+        ///<remarks>If not used, the default format will be ef.
+        /// 'none' = let angular determine format on client side, using whatever is angular/browser default
+        /// the following formats will be used following a pipe based on the data type; if data type is date, 
+        /// then result will be in the form: " | date:'xxx'" where the valid options are:
+        /// 'server' = set pipe format 'xxx' using server defaults for that data type,
+        /// 'code' = set pipe format 'xxx' using the DisplayFormat attribute on data entity, if none, revert to server default
+        /// 'xxx' = set format to a specific pipe format 'xxx'</remarks>
+        [HtmlAttributeName("format")]
+        public string Format { get; set; } = null;
+
+        /// <summary>
         /// Option: use HTML disabled attribute, alters how boolean values should be rendered on page;
         /// </summary>
         ///<remarks>Using this sets the HTML Disabled attribute but may result in rendering an HTML control that is too grey to be distinguished.
@@ -94,71 +107,66 @@ namespace Angular2MultiSPA.Helpers
             switch (dataType)
             {
                 case "Custom":
-                    //     Represents a custom data type.
+                    // Represents a custom data type. NOTE: not yet implemented
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
-                    // TODO: remove or set in compiler directive, for debugging
-                    input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
                     break;
 
                 case "DateTime":
-                    //     Represents an instant in time, expressed as a date and time of day.
-                    // TODO: add smarter handling of formats; choices: localize to server, browser, or attributes/config
-                    // input.InnerHtml.AppendHtml("{{" + dataBindTo + " | date:'MM/dd/yyyy hh:mm:ss'}}");
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + " | date:'dd/MM/yyyy hh:mm:ss'}}");
+                    // Represents an instant in time, expressed as a date and time of day.
+                    var datetimeFormat = Format.GetFormat(dataType);
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + datetimeFormat + "}}");
                     break;
 
                 case "Date":
-                    //     Represents a date value.
-                    // TODO: add smarter handling of formats; choices: localize to server, browser, or attributes/config
-                    // input.InnerHtml.AppendHtml("{{" + dataBindTo + " | date:'MM/dd/yyyy'}}");
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + " | date:'dd/MM/yyyy'}}");
+                    // Represents a date value.
+                    var dateFormat = Format.GetFormat(dataType);
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + dateFormat + "}}");
                     break;
 
                 case "Time":
-                    //     Represents a time value.
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + " | date:'hh:mm:ss'}}");
+                    // Represents a time value.
+                    var timeFormat = Format.GetFormat(dataType);
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + timeFormat + "}}");
                     break;
 
                 case "Duration":
-                    //     Represents a continuous time during which an object exists.
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
-                    // TODO: remove or set in compiler directive, for debugging
-                    input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
+                    // Represents a continuous time during which an object exists.
+                    var durationFormat = Format.GetFormat(dataType);
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + durationFormat + "}}");
                     break;
 
                 case "PhoneNumber":
-                    //     Represents a phone number value.
+                    // Represents a phone number value.
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
                     input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
                     break;
 
                 case "Currency":
-                    //     Represents a currency value.
-                    // TODO: add smarter handling of formats; choices: localize to server, browser, or attributes/config
-                    // input.InnerHtml.AppendHtml("{{" + dataBindTo + " | currency:'AUD':true:'1.2-2'}}");
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + " | currency:'USD':true:'1.2-2'}}");
+                    // Represents a currency value.
+                    var currencyFormat = Format.GetFormat(dataType);
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + currencyFormat + "}}");
                     break;
 
                 case "Text":
-                    //     Represents text that is displayed.
+                    // Represents text that is displayed.
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
                     break;
 
                 case "Html":
-                    //     Represents an HTML file.
+                    // Represents an HTML file.
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
                     input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
                     break;
 
                 case "MultilineText":
-                    //     Represents multi-line text.
+                    // Represents multi-line text.
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
                     input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
                     break;
 
                 case "EmailAddress":
-                    //     Represents an e-mail address.
-                    //     Represents a URL value.
+                    // Represents an e-mail address.
+                    // Represents a URL value.
                     var e = new TagBuilder("a");
                     e.TagRenderMode = TagRenderMode.StartTag;
                     e.Attributes.Add("id", idName);
@@ -168,13 +176,12 @@ namespace Angular2MultiSPA.Helpers
                     break;
 
                 case "Password":
-                    //     Represent a password value.
+                    // Represent a password value.
                     input.InnerHtml.AppendHtml("********");
-
                     break;
 
                 case "Url":
-                    //     Represents a URL value.
+                    // Represents a URL value.
                     var u = new TagBuilder("a");
                     u.TagRenderMode = TagRenderMode.StartTag;
                     u.Attributes.Add("id", idName);
@@ -184,27 +191,23 @@ namespace Angular2MultiSPA.Helpers
                     break;
 
                 case "ImageUrl":
-                    //     Represents a URL to an image.
+                    // Represents a URL to an image.
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
-                    input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
                     break;
 
                 case "CreditCard":
                     //     Represents a credit card number.
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
-                    input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
                     break;
 
                 case "PostalCode":
-                    //     Represents a postal code.
+                    // Represents a postal code.
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
-                    input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
                     break;
 
                 case "Upload":
-                    //     Represents file upload data type.
+                    // Represents file upload data type.
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
-                    input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
                     break;
 
                 case "System.String":
