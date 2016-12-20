@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.Text.RegularExpressions;
 using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Angular2MultiSPA.Helpers
 {
@@ -32,17 +35,46 @@ namespace Angular2MultiSPA.Helpers
         public string BindPa { get; set; } = null;
 
         /// <summary>
-        /// Option: set display format, alters appearance of date, time, date/time and currency values
+        /// Option: sets display formats for common data types using Angular 2 pipes; can be used for date, time, date/time, number and currency values
         /// </summary>
-        ///<remarks>If not used, the default format will be ef.
-        /// 'none' = let angular determine format on client side, using whatever is angular/browser default
-        /// the following formats will be used following a pipe based on the data type; if data type is date, 
-        /// then result will be in the form: " | date:'xxx'" where the valid options are:
-        /// 'server' = set pipe format 'xxx' using server defaults for that data type,
-        /// 'code' = set pipe format 'xxx' using the DisplayFormat attribute on data entity, if none, revert to server default
-        /// 'xxx' = set format to a specific pipe format 'xxx'</remarks>
+        ///<remarks>If not specified, a default pipe format will created based on (supported) data type and on Angular 2 and browser defaults.
+        /// To prevent this default format, use: format="none"
+        /// Note that the pipe format should be surrounded within single quotes; further options are:
+        /// 'server' = set pipe format 'xxx' using server defaults for that data type, or
+        /// 'code' = set pipe format 'xxx' using the DisplayFormat attribute on data entity in server side code, if none specified, reverts to server default
+        /// 'xxx' = set format to a specific pipe format 'xxx'. 
+        /// For percentages or more direct access to pipe and pipe options <seealso cref="Pipe"/> </remarks>
+        /// <example>
+        /// Valid date, time and date/time formats are:
+        /// 'medium': equivalent to 'yMMMdjms' (e.g. Sep 3, 2010, 12:05:08 PM for en-US)
+        /// 'short': equivalent to 'yMdjm' (e.g. 9/3/2010, 12:05 PM for en-US)
+        /// 'fullDate': equivalent to 'yMMMMEEEEd' (e.g.Friday, September 3, 2010 for en-US)
+        /// 'longDate': equivalent to 'yMMMMd' (e.g.September 3, 2010 for en-US)
+        /// 'mediumDate': equivalent to 'yMMMd' (e.g.Sep 3, 2010 for en-US)
+        /// 'shortDate': equivalent to 'yMd' (e.g. 9/3/2010 for en-US)
+        /// 'mediumTime': equivalent to 'jms' (e.g. 12:05:08 PM for en-US)
+        /// 'shortTime': equivalent to 'jm' (e.g. 12:05 PM for en-US)
+        /// </example>
         [HtmlAttributeName("format")]
         public string Format { get; set; } = null;
+
+        /// <summary>
+        /// Option: directly set display format using Angular 2 pipe and pipe format values
+        /// </summary>
+        ///<remarks>This attribute sets both pipe type and the pipe filter parameters.
+        /// For simple formatting of common data types <seealso cref="Format"/>.
+        /// Numeric formats for decimal or percent in Angular use a string with the following format: 
+        /// a.b-c where:
+        ///     a = minIntegerDigits is the minimum number of integer digits to use.Defaults to 1.
+        ///     b = minFractionDigits is the minimum number of digits after fraction.Defaults to 0.
+        ///     c = maxFractionDigits is the maximum number of digits after fraction.Defaults to 3.
+        /// </remarks>
+        /// <example>
+        /// to format a decimal value as a percentage use "|percent" for the default Angular
+        /// or for a custom percentage value eg. "| percent:'1:3-5' 
+        /// </example>
+        [HtmlAttributeName("pipe")]
+        public string Pipe { get; set; } = null;
 
         /// <summary>
         /// Option: use HTML disabled attribute, alters how boolean values should be rendered on page;
@@ -84,55 +116,40 @@ namespace Angular2MultiSPA.Helpers
                             ?? ((DefaultModelMetadata)For.Metadata).UnderlyingOrModelType.ToString();
             var isNullable = ((DefaultModelMetadata)For.Metadata).ModelType.ToString().Contains("System.Nullable");
 
-            // HTML5 input type="" to be supported
-            //color
-            //date
-            //datetime
-            //datetime-local
-            //email
-            //month
-            //number
-            //range
-            //search
-            //tel
-            //time
-            //url
-            //week
-
-
             output.TagName = "div";
-
+            var pipe = string.IsNullOrEmpty(Pipe) ? string.Empty : Pipe;
             var input = new TagBuilder("span");
 
             switch (dataType)
             {
                 case "Custom":
                     // Represents a custom data type. NOTE: not yet implemented
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + pipe + "}}");
                     break;
 
                 case "DateTime":
                     // Represents an instant in time, expressed as a date and time of day.
                     var datetimeFormat = Format.GetFormat(dataType);
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + datetimeFormat + "}}");
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + datetimeFormat + pipe + "}}");
                     break;
 
                 case "Date":
                     // Represents a date value.
+                    // see: https://angular.io/docs/ts/latest/api/common/index/DatePipe-pipe.html
                     var dateFormat = Format.GetFormat(dataType);
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + dateFormat + "}}");
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + dateFormat + pipe + "}}");
                     break;
 
                 case "Time":
                     // Represents a time value.
+                    // see: https://angular.io/docs/ts/latest/api/common/index/DatePipe-pipe.html
                     var timeFormat = Format.GetFormat(dataType);
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + timeFormat + "}}");
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + timeFormat + pipe + "}}");
                     break;
 
                 case "Duration":
                     // Represents a continuous time during which an object exists.
-                    var durationFormat = Format.GetFormat(dataType);
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + durationFormat + "}}");
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + pipe + "}}");
                     break;
 
                 case "PhoneNumber":
@@ -144,12 +161,12 @@ namespace Angular2MultiSPA.Helpers
                 case "Currency":
                     // Represents a currency value.
                     var currencyFormat = Format.GetFormat(dataType);
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + currencyFormat + "}}");
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + currencyFormat + pipe + "}}");
                     break;
 
                 case "Text":
                     // Represents text that is displayed.
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + pipe + "}}");
                     break;
 
                 case "Html":
@@ -160,7 +177,7 @@ namespace Angular2MultiSPA.Helpers
 
                 case "MultilineText":
                     // Represents multi-line text.
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + pipe + "}}");
                     input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
                     break;
 
@@ -196,7 +213,7 @@ namespace Angular2MultiSPA.Helpers
                     break;
 
                 case "CreditCard":
-                    //     Represents a credit card number.
+                    // Represents a credit card number.
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
                     break;
 
@@ -210,13 +227,16 @@ namespace Angular2MultiSPA.Helpers
                     input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
                     break;
 
-                case "System.String":
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
-                    break;
-
                 case "System.Int16":
                 case "System.Int32":
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
+                case "System.String":
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + pipe + "}}");
+                    break;
+
+                case "System.Decimal":
+                case "decimal":
+                    var numberFormat = Format.GetFormat(dataType);
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + numberFormat + pipe + "}}");
                     break;
 
                 case "System.Boolean":
@@ -229,6 +249,7 @@ namespace Angular2MultiSPA.Helpers
                             cb.Attributes.Add("id", propertyName);
                             cb.Attributes.Add("readonly", "true");
                             cb.Attributes.Add("onclick", "return false");
+
                             if (Disabled != null && "True true Disabled disabled".Contains(Disabled))
                             {
                                 cb.Attributes.Add("disabled", "true");
@@ -248,13 +269,12 @@ namespace Angular2MultiSPA.Helpers
                             input.InnerHtml.AppendHtml("{{" + dataBindTo + " }}");
                             break;
                     }
-                    // TODO: remove or set in compiler directive, for debugging
+
                     input.Attributes.Add("title", string.Format("object name: {0}", dataBindTo));
-                    //input.Attributes.Add("title", string.Format("render bool as: {0}", RendBool));
                     break;
 
                 default:
-                    input.InnerHtml.AppendHtml("{{" + dataBindTo + "}}");
+                    input.InnerHtml.AppendHtml("{{" + dataBindTo + pipe + "}}");
                     // TODO: remove or set in compiler directive, for debugging
                     input.Attributes.Add("title", string.Format("unhandled datatype: {0}, nullable:{1}", dataType, isNullable));
                     break;

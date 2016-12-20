@@ -76,6 +76,21 @@ namespace Angular2MultiSPA.ViewModels
         [DataType(DataType.PostalCode)]
         public string PostalCode { get; set; }
 
+        // an integer
+        public int IntVar { get; set; }
+
+        // an Int16 value
+        public Int16 Int16Var { get; set; }
+
+        // an Int32 value
+        public Int32 Int32Var { get; set; }
+
+        // a decimal value
+        public decimal DecimalVar { get; set; }
+        
+        // a float value
+        public float FloatVar { get; set; }
+
         // Represents file upload data type.
         // NOTE: not implemented
         // [DataType(DataType.Upload)]
