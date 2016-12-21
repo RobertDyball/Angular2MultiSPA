@@ -3,11 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using System;
-using System.Diagnostics;
-using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Threading;
 
 namespace Angular2MultiSPA.Helpers
 {
