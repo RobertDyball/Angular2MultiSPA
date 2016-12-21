@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-
-namespace Angular2MultiSPA.Helpers
+﻿namespace Angular2MultiSPA.Helpers
 {
     public static class CountryCultureInfo
     {
@@ -16,28 +13,6 @@ namespace Angular2MultiSPA.Helpers
                 return string.Empty;
             }
 
-            // dddd, d MMMM yyyy
-            Debug.WriteLine(System.Globalization.DateTimeFormatInfo.CurrentInfo.LongDatePattern.ToString());
-
-            Debug.WriteLine(System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalDigits.ToString());
-            Debug.WriteLine(System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator.ToString());
-            Debug.WriteLine(System.Globalization.NumberFormatInfo.CurrentInfo.NumberGroupSeparator.ToString());
-            Debug.WriteLine(System.Globalization.NumberFormatInfo.CurrentInfo.NumberGroupSizes.ToString());
-            Debug.WriteLine(System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalDigits.ToString());
-            Debug.WriteLine(System.Globalization.NumberFormatInfo.CurrentInfo.NumberNegativePattern.ToString());
-            Debug.WriteLine(System.Globalization.NumberFormatInfo.CurrentInfo.CurrencySymbol.ToString());
-            Debug.WriteLine(System.Globalization.NumberFormatInfo.CurrentInfo.CurrencyPositivePattern.ToString());
-            Debug.WriteLine(System.Globalization.NumberFormatInfo.CurrentInfo.CurrencyNegativePattern.ToString());
-
-            //Debug.WriteLine("The DateTime Format is {0}", CultureInfo.CurrentCulture.DateTimeFormat);
-            //Debug.WriteLine("The Number Format is {0}", CultureInfo.CurrentCulture.NumberFormat);
-            //Debug.WriteLine("The DisplayName is {0}", CultureInfo.CurrentCulture.DisplayName);
-            //Debug.WriteLine("The TwoLetterISOLanguageName is {0}", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
-
-
-
-
-            // TODO: add smarter handling of formats; choices: localize to server, browser, or attributes/config
             switch (dataType)
             {
                 case "DateTime":
@@ -89,6 +64,8 @@ namespace Angular2MultiSPA.Helpers
 
                 case "Currency":
                     // Angular 2 format specs see: https://angular.io/docs/ts/latest/api/common/index/CurrencyPipe-pipe.html
+                    // NOTE: if required add your own ISO 4217 lookup here, 
+                    // to translate from System.Globalization.NumberFormatInfo.CurrentInfo.CurrencySymbol etc.
                     pipeFilter = "currency";
                     pipeFormat = (string.IsNullOrEmpty(format)) ? "'USD':false:'1.2-2'" : string.Format("{0}", format);
                     break;
@@ -110,47 +87,25 @@ namespace Angular2MultiSPA.Helpers
             return string.Format(" | {0}:{1} ", pipeFilter, pipeFormat);
         }
 
+        /// <summary>
+        /// Translates ASP.Net Core date time info format codes into Angular 2 format codes
+        /// </summary>
+        /// <param name="dateTimeInfoPattern">ASPNet.core date time format string</param>
+        /// <returns>Angular 2 date time format string</returns>
+        /// <remarks>
+        /// ASP.Net Core represents weekday as "ddd" (Sun) or "dddd" (Sunday) whereas Angular uses "EEE" (Sun) or "EEEE" (Sunday)
+        /// Use this method to translate, or adjust defaults as needed
+        /// </remarks>
         private static string DateTimeFormatInfoToAngular(this string dateTimeInfoPattern)
         {
-            var format = dateTimeInfoPattern.Replace("dddd", "EEE")      // long day 'Sunday'
-                        .Replace("ddd", "EEE")                           // abbreviated day 'Sun'
-                        .Replace("tt", "a")                             // AM/PM
-                        .Replace("GMT", "z")                            // time zone
+            var format = dateTimeInfoPattern.Replace("dddd", "EEE")
+                        .Replace("ddd", "EEE")
+                        .Replace("tt", "a")
+                        .Replace("GMT", "z")
                         .Replace(",", string.Empty)
                         .Replace("'", string.Empty);
 
             return string.Format("'{0}'", format);
         }
-
-        // need to add helper methods to extract country/culture info from http context
-        // perhaps: http://madskristensen.net/post/get-language-and-country-from-a-browser-in-aspnet
-        // or https://weblog.west-wind.com/posts/2014/mar/27/auto-selecting-cultures-for-localization-in-aspnet
-        // and https://docs.microsoft.com/en-us/aspnet/core/#localization-middleware
-
-        //public static CultureInfo ResolveCulture()
-        //{
-        //    string[] languages = HttpContext.Current.Request.UserLanguages;
-
-        //    if (languages == null || languages.Length == 0)
-        //        return null;
-
-        //    try
-        //    {
-        //        string language = languages[0].ToLowerInvariant().Trim();
-        //        return CultureInfo.CreateSpecificCulture(language);
-        //    }
-        //    catch (ArgumentException)
-        //    {
-        //        return null;
-        //    }
-        //}
-        //public static RegionInfo ResolveCountry()
-        //{
-        //    CultureInfo culture = ResolveCulture();
-        //    if (culture != null)
-        //        return new RegionInfo(culture.LCID);
-
-        //    return null;
-        //}
     }
 }
