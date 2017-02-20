@@ -1,5 +1,12 @@
 # Angular 2 ASP.NetCore Multi-SPA framework
 
+---------------------------------------------------
+2017-02-21 
+NOTE: I am retiring this in favour of work here: https://github.com/RobertDyball/A2SPA
+There's been a number of ASP.Net Core and Angular changes since I created this, and you're welcome to use it if you wish,
+but it is not going to see much attention from here on.
+---------------------------------------------------
+
 SPA or SinglePage Application frameworks provide users a great experience, pages feel responsive, but these often use 'flat' HTML client-side templates.
 And if using forms, from simple labels + text boxes through to date pickers, you still repeat large parts of your HTML and javascript validation code.
 
